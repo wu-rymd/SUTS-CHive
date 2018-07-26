@@ -1,0 +1,6 @@
+# MacOS folder info
+.DS_Store
+
+# Temporary files
+*~
+*#*

@@ -1,0 +1,107 @@
+body {
+    overflow: hidden;
+}
+
+#splashScreen, #logoutSearch {
+    height: 100vh;
+}
+
+
+#container-center {
+    height: 50vh;
+    width: 50%;
+    display: block;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%) translateX(50%);
+}
+
+
+
+#logo-message {
+    display: block;
+    height: 60%;
+}
+
+
+
+#button-message {
+    display: block;
+    height: 40%;
+}
+
+
+
+#logo{
+    height: 83%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+#container-buttons{
+    display: flex;
+    height: 83%;
+}
+
+
+
+#container-welcome-message, #container-alt-action-message {
+    height: 17%;
+    position: relative;
+    display: auto;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+.btn {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#signIn {
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#signUp {
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+#welcome-message, #alt-action-message {
+    display: inline;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 150%;
+}
+
+
+
+#scrollDown {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+}
+
+
+#scrollUp {
+    width: 100%;
+    text-align: center;
+}
+
+p {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: auto;
+    margin-bottom: auto;
+}
