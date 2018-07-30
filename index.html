@@ -10,130 +10,138 @@
     <script src="js/jquery-3.3.1.js"></script>
     <script src="js/bootstrap.js"> </script>
     <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
+    <link rel="manifest" href="icon/site.webmanifest">
+    <link rel="mask-icon" href="icon/safari-pinned-tab.svg" color="#0029a3">
+    <link rel="shortcut icon" href="icon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-config" content="icon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
   </head>
 
 
   <body>
 
-    
-    <div id="splashScreen">
 
+    <div class="screen splash">
       
-	<div id="container-center">
+      <div id="container-center">
+	
+	<div class="top-half">
 
-
-	  
-	  <div id="logo-message">
-	    
-	    <img id="logo" src="img/logo.png" alt="C-Hive Logo">
-	    
-	    <div id="container-welcome-message">
-	      <p id="welcome-message">Welcome to C-Hive!</p>
-	    </div>
-	    
+	  <div class="logo" id="main-logo">
+	    <img src="img/logo.png">
 	  </div>
-	  
-
-
-	  
-	  <div id="button-message">
-	    
-	    <div id="container-buttons" class="btn-group-vertical">
-	      <button id="signIn" type="button" class="btn btn-outline-primary">Sign in</button>
-	      <button id="signUp" type="button" class="btn btn-outline-primary">Sign up</button>
-	    </div>
-	    
-	    <div id="container-alt-action-message">
-	      <p id="alt-action-message">or swipe down to search!</p>
-	    </div>
-	    
-	  </div>
-
+	  <p id="welcome-message"> Welcome to C-Hive! </p>
 	  
 	</div>
 
+	<div class="bottom-half">
 
-	
-	<div id="scrollDown" onclick="toScroll('#logoutSearch')">
-	  <i class="fa fa-chevron-down fa-2x"></i>
+	  <div id="buttons">
+	    <button id="signIn" type="button" class="btn btn-outline-primary">Sign in</button>
+	    <button id="signUp" type="button" class="btn btn-outline-primary">Sign up</button>
+	  </div>
+	  <p id="swipe-message"> or search below! </p>
+
 	</div>
-
 	
+      </div>
+
+      <div class="swipe" id="zero-to-one" onclick="toScroll('.high-school-search')">
+	<i class="fa fa-chevron-down fa-2x"></i>
+      </div>
+      
       
     </div>
 
 
-    
-    
-    <div id="logoutSearch">
-
+    <div class="screen high-school-search">
       
-      <div id="scrollUp" onclick="toScroll('#splashScreen')">
+      <div class="swipe" id="one-to-zero" onclick="toScroll('.splash')">
 	<i class="fa fa-chevron-up fa-2x"></i>
       </div>
 
       
-      
-      <div id="container-header">
 
+      <div class="container-search-logo">
 	
-	<span id="container-search-bars">
+	<div class="search" id="search-high-school">
 	  
-	  <div id="school-search">
-	    <!-- UNIMPLEMENTED -->
-	    <!-- FontAwesome for icon -->
-	    <!-- Bootstrap for search -->	    
-	  </div>
-
-	  
-	  <div id="club-search">
-	    <!-- UNIMPLEMENTED -->
-	    <!-- FontAwesome for icon -->
-	    <!-- Bootstrap for search -->
+	  <div class="input-group mb-3">
+	    <input type="text" class="form-control" id="searchbar-high-school" placeholder="Search for your high school...">
+	    <div class="input-group-append" onclick="populateHighSchools()">
+	      <span class="input-group-text"><i id="icon" class="fa fa-search"> </i></span>
+	    </div>
 	  </div>
 	  
-	</span>
-	
-
-	<span id="smallLogo">
-	  <!-- UNIMPLEMENTED -->
-	  <!-- should just be an img tag here -->
-	</span>
-
-	
-      </div>
-
-
-      <div id="container-alt-heading">
-	<div id="alt-heading">
-	  <!-- UNIMPLEMENTED -->
-	  <!-- use inner div to position within container -->
 	</div>
+
+	<div class="logo">
+	  <img src="img/logo.png">
+	</div>
+
+      </div>
+
+      
+      <div class="container-results" id="highSchoolResults">
+	
       </div>
 
       
 
-      <div id="container-suggestions">
-	<!-- UNIMPLEMENTED -->
-	<!-- Bootstrap GOES HERE -->
-      </div>
-      
-      
-
-      <div id="container-footer">
-	<!-- UNIMPLEMENTED -->
-	<!-- "or Sign In first" text only -->
-	<!-- no arrow like in wireframe -->
-      </div>
-      
- 
-      
+     
     </div>
 
 
-
     
-     <script src="js/script.js"> </script>
+
+    <div class="screen club-search">
+
+
+
+
+
+
+     
+      <div class="swipe" id="one-to-zero" onclick="toScroll('.high-school-search')">
+	<i class="fa fa-chevron-up fa-2x"></i>
+      </div>
+
+      
+
+      <div class="container-search-logo">
+	
+	<div class="search" id="search-club">
+	  
+	  <div class="input-group mb-3">
+	    <input type="text" class="form-control" id="searchbar-club" placeholder="Search for a club...">
+	    <div class="input-group-append" onclick="populateClubs()">
+	      <span class="input-group-text"><i id="icon" class="fa fa-search"> </i></span>
+	    </div>
+	  </div>
+	  
+	</div>
+
+	<div class="logo">
+	  <img src="img/logo.png">
+	</div>
+
+      </div>
+
+      
+      <div class="container-results" id="clubResults">
+
+      </div>
+
+
+    </div>
+   
+    
+    <script src="js/script.js"> </script>
   </body>
 
 </html>

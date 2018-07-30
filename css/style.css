@@ -1,107 +1,285 @@
+/* 0. All screens */
+
+
+:root {
+    --margin-size: 1%;
+    
+    --C-Hive-Black: #000000;
+    --C-Hive-Blue: #0241FE;
+    --C-Hive-Red: #FF3E3F;
+    --C-Hive-White: #FFFFFF;
+    --C-Hive-Yellow: #F4FF3E;
+}
+
+.screen {
+    height: 100vh;
+    display: grid;
+}
+
+
+.swipe {
+    place-self: center;
+}
+
+
+.logo {
+    place-self: center;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+
+p {
+    font-family: Montserrat, Helvetica, sans-serif;
+}
+
 body {
     overflow: hidden;
 }
 
-#splashScreen, #logoutSearch {
-    height: 100vh;
+
+
+/* 0a. Individual screens */
+
+.splash {
+    /* background-color: pink; */
+    
+    grid-template-columns: auto 50% auto;
+    grid-template-rows: auto 60% auto 3%;
 }
 
+.high-school-search {
+    /* background-color: lightblue; */
+    
+    grid-template-columns: 1% 98% 1%;
+    grid-template-rows: 3% 1% 8% 1% 83% 1% 3%;
+}
+
+.club-search {
+    /* background-color: gold; */
+
+    grid-template-columns: 1% 98% 1%;
+    grid-template-rows: 3% 1% 8% 1% 83% 1% 3%;
+}
+
+
+
+
+/* 1. Items in splash screen */
 
 #container-center {
-    height: 50vh;
-    width: 50%;
-    display: block;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%) translateX(50%);
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    display: grid;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 100%;
 }
 
 
 
-#logo-message {
+
+
+.top-half {
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+    display: grid;
+    justify-items: center;
+    grid-template-rows: 70% 30%;
+    grid-template-columns: 100%;
+    grid-row-gap: 30px;
+}
+
+#main-logo {
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+    justify-items: center;
+}
+
+img {
     display: block;
-    height: 60%;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 
 
-#button-message {
-    display: block;
-    height: 40%;
+
+#welcome-message {
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    justify-self: center;
+    font-size: 30px;
 }
 
 
 
-#logo{
-    height: 83%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+
+.bottom-half {
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    display: grid;
+    grid-template-rows: 17.5% 35% 30% 17.5%;
+    grid-template-columns: 100%;
 }
 
 
-
-#container-buttons{
-    display: flex;
-    height: 83%;
-}
-
-
-
-#container-welcome-message, #container-alt-action-message {
-    height: 17%;
-    position: relative;
-    display: auto;
-    display: block;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-
-.btn {
-    display: block;
-    margin-bottom: 10px;
+#buttons {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    
+    display: grid;
+    justify-items: center;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 100%;
+    grid-row-gap: 15px;
 }
 
 #signIn {
-    width: 30%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 50%;
 }
 
 #signUp {
-    width: 25%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
-#welcome-message, #alt-action-message {
-    display: inline;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    font-size: 150%;
+    width: 40%;
 }
 
 
 
-#scrollDown {
+
+#swipe-message {
+    justify-self: center;
+    margin-top: 30px;
+    
+    grid-row-start: 3;
+    grid-row-end: 4;
+
+    font-size: 20px;
+}
+
+
+
+
+#zero-to-one {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+}
+
+
+
+
+
+/* 2. Items in high school search screen */
+
+#one-to-zero {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+}
+
+
+#one-to-two {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 7;
+    grid-row-end: 8;
+}
+
+
+
+
+.container-search-logo {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+
+    display: grid;
+    align-items: center;
+    grid-template-rows: 100%;
+    grid-template-columns: 90% 10%;
+}
+
+.input-group {
+    padding-top: 15px;
+    width: 98%;
+}
+
+
+.container-results {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 5;
+    grid-row-end: 6;
+
+    height: 100%;
     width: 100%;
-    text-align: center;
-    position: absolute;
-    bottom: 0;
+
+    padding: 15px;
+
+    overflow: scroll !important;
+
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}
+
+.card-text {
+    padding: 10px;
+}
+
+.card-block {
+    margin: 5px;
 }
 
 
-#scrollUp {
-    width: 100%;
-    text-align: center;
+
+
+
+/* 3. Items in club search screen */
+
+#two-to-one {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+
 }
 
-p {
-    font-family: 'Montserrat', sans-serif;
-    margin-top: auto;
-    margin-bottom: auto;
+.container-suggestion {
+    display: grid;
+    height: 100%;
+    grid-template-columns: auto 60% auto;
+    grid-template-rows: auto 25% auto 25% auto 25% auto;
+}
+
+
+#all-clubs {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+#newest-clubs {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+}
+
+#most-popular {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 6;
+    grid-row-end: 7;
 }
