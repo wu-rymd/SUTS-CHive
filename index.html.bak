@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <title> C-Hive | Your Club Beehive </title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,500i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/bootstrap.js"> </script>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
+    <link rel="manifest" href="icon/site.webmanifest">
+    <link rel="mask-icon" href="icon/safari-pinned-tab.svg" color="#0029a3">
+    <link rel="shortcut icon" href="icon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-config" content="icon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+
+  <body>
+
+
+    <div class="screen splash">
+      
+      <div id="container-center">
+	
+	<div class="top-half">
+
+	  <div class="logo" id="main-logo">
+	    <img src="img/logo.png">
+	  </div>
+	  <p id="welcome-message"> Welcome to C-Hive! </p>
+	  
+	</div>
+
+	<div class="bottom-half">
+
+	  <div id="buttons">
+	    <button id="signIn" type="button" class="btn btn-outline-primary">Sign in</button>
+	    <button id="signUp" type="button" class="btn btn-outline-primary">Sign up</button>
+	  </div>
+	  <p id="swipe-message"> or search below! </p>
+
+	</div>
+	
+      </div>
+
+      <div class="swipe" id="zero-to-one" onclick="toScroll('.high-school-search')">
+	<i class="fa fa-chevron-down fa-2x"></i>
+      </div>
+      
+      
+    </div>
+
+
+    <div class="screen high-school-search">
+      
+      <div class="swipe" id="one-to-zero" onclick="toScroll('.splash')">
+	<i class="fa fa-chevron-up fa-2x"></i>
+      </div>
+
+      
+
+      <div class="container-search-logo">
+	
+	<div class="search" id="search-high-school">
+	  
+	  <div class="input-group mb-3">
+	    <input type="text" class="form-control" id="searchbar-high-school" placeholder="Search for your high school...">
+	    <div class="input-group-append" onclick="populateHighSchools()">
+	      <span class="input-group-text"><i id="icon" class="fa fa-search"> </i></span>
+	    </div>
+	  </div>
+	  
+	</div>
+
+	<div class="logo">
+	  <img src="img/logo.png">
+	</div>
+
+      </div>
+
+      
+      <div class="container-results" id="highSchoolResults">
+	
+      </div>
+
+      
+
+     
+    </div>
+
+
+    
+
+    <div class="screen club-search">
+
+
+
+
+
+
+     
+      <div class="swipe" id="one-to-zero" onclick="toScroll('.high-school-search')">
+	<i class="fa fa-chevron-up fa-2x"></i>
+      </div>
+
+      
+
+      <div class="container-search-logo">
+	
+	<div class="search" id="search-club">
+	  
+	  <div class="input-group mb-3">
+	    <input type="text" class="form-control" id="searchbar-club" placeholder="Search for a club...">
+	    <div class="input-group-append" onclick="populateClubs()">
+	      <span class="input-group-text"><i id="icon" class="fa fa-search"> </i></span>
+	    </div>
+	  </div>
+	  
+	</div>
+
+	<div class="logo">
+	  <img src="img/logo.png">
+	</div>
+
+      </div>
+
+      
+      <div class="container-results" id="clubResults">
+
+      </div>
+
+
+    </div>
+   
+    
+    <script src="js/script.js"> </script>
+  </body>
+
+</html>
