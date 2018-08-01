@@ -66,7 +66,7 @@ function testHighSchool() {
             <div class="card card-block card-outline-primary">
 
               <p class="card-text" id="0123"> <b>${data[i].name}</b> <br> ${data[i].address} &nbsp;
-                    <span class="btn btn-outline-primary float-right" onclick="highSchoolSelect('0123')">Select</span>
+                    <span class="btn btn-outline-primary float-right" onclick="highSchoolSelect('${data[i].id}')">Select</span>
               </p>
 
             </div>
@@ -111,33 +111,27 @@ function highSchoolSelect(highSchool) {
 
 
 function testClub() {
-    var container = document.getElementById('clubResults');
-    html = "";
 
-    for (var i = 0; i < 10; i++) {
-	html += `
-
-	<div class="card card-block card-outline-primary">
-
-	  <p class="card-text" id="0123"> <b>Lettuce club</b> <br> We eat a lot of lettuce or something.&nbsp;
-            <span class="btn btn-outline-primary float-right" onclick="goTo('http://google.com/')">Select</span>
-	  </p>
-
-	</div>
+    $.getJSON('http://localhost:5000/club?school_id=1', function(data){
 
 
-	<div class="card card-block card-outline-primary">
-	  <p class="card-text" id="1234"> <b>Chocolate Club</b> <br> Who needs lettuce when you have chocolate? &nbsp;
-            <span class="btn btn-outline-primary float-right" onclick="goTo('http://google.com/')">Select</span>
-	  </p>
-	</div>
+	var container = document.getElementById('clubResults');
+        html = "";
+        for (var i=0;i<data.length;i++){
+            console.log(data[i]);
+            html += `
+            <div class="card card-block card-outline-primary">
 
+              <p class="card-text" id="0123"> <b>${data[i].name}</b> <br> ${data[i].description} &nbsp;
+                    <span class="btn btn-outline-primary float-right" onclick="highSchoolSelect('0123')">Select</span>
+              </p>
 
-
-`
-    }
-
-    container.innerHTML = html;
+            </div>
+            `
+        }
+        container.innerHTML = html;
+    });
+    
 }
 
 

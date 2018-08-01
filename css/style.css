@@ -12,6 +12,9 @@
 }
 
 .screen {
+
+    /* takes full height of current window size */
+    
     height: 100vh;
     display: grid;
 }
@@ -34,6 +37,9 @@ p {
 }
 
 body {
+
+    /* cannot scroll */
+    /* not on all browsers atm */
     overflow: hidden;
 }
 

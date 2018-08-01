@@ -20,8 +20,8 @@ def get_or_create_school(session, school_name, address):
 @app.route('/user', methods=['GET'])
 def get_user():
     username = request.args.get('username')
-    Sesson, engine = dbconnect(db_options)
-    session = Sesson()
+    Session, engine = dbconnect(db_options)
+    session = Session()
     users = session.query(User).filter(User.username == username).all()
     ret_users = []
     for u in users:
@@ -42,8 +42,8 @@ def create_user():
     if request.mimetype != 'application/json':
         raise Exception('Content-Type is not "application/json".')
     j = request.get_json()
-    Sesson, engine = dbconnect(db_options)
-    session = Sesson()
+    Session, engine = dbconnect(db_options)
+    session = Session()
     user = User(
         first_name=j.get('first_name'),
         last_name=j.get('last_name'),
@@ -73,20 +73,25 @@ def delete_user():
 
 @app.route('/club', methods=['GET'])
 def get_club():
-    name = request.args.get('name')
-    Sesson, engine = dbconnect(db_options)
-    session = Sesson()
-    clubs = session.query(Club).filter(Club.name == name).all()
+    
+    schoolID = request.args.get('school_id')
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    clubs = session.query(Club).filter(Club.school_id == schoolID).all()
     ret_clubs = []
     for c in clubs:
         ret_clubs.append(
             {
                 'id': c.id,
-                'username': c.name,
-                'school': c.school_id,
+                'name': c.name,
+                'description': c.description,
+                'school_id': c.school_id,
             }
         )
-    return jsonify(ret_clubs)
+
+    response = jsonify(ret_clubs)
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 
 
 @app.route('/club', methods=['POST'])
@@ -94,11 +99,12 @@ def create_club():
     if request.mimetype != 'application/json':
         raise Exception('Content-Type is not "application/json".')
     j = request.get_json()
-    Sesson, engine = dbconnect(db_options)
-    session = Sesson()
+    Session, engine = dbconnect(db_options)
+    session = Session()
     club = Club(
         name=j.get('name'),
-        school_id=get_or_create_school(session, j.get('school'))
+        school_id=j.get('school_id'),
+        description=j.get('description'),
     )
     session.add(club)
     session.flush()

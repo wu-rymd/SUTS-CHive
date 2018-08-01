@@ -47,6 +47,7 @@ class Club(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
     school_id = Column(Integer, ForeignKey('school.id'))
+    description = Column(String(1024), nullable=False)
     created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
 
     school = relationship(School)
