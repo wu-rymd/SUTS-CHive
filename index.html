@@ -27,20 +27,23 @@
     <div ng-app="chiveApp">
       <div ng-controller="chiveCtrl">
         <div class="screen splash">
-          <div id="container-center">
-            <div class="top-half">
-              <div class="logo" id="main-logo">
-                <img src="img/logo.png">
+          <div id="container-center" >
+              <div class="top-half">
+                <div class="logo" id="main-logo">
+                  <img src="img/logo.png">
+                </div>
+                <p id="welcome-message"> Welcome to C-Hive! </p>
               </div>
-              <p id="welcome-message"> Welcome to C-Hive! </p>
-            </div>
-            <div class="bottom-half">
-              <div id="buttons">
-                <button id="signIn" type="button" class="btn btn-outline-primary">Sign in</button>
-                <button id="signUp" type="button" class="btn btn-outline-primary">Sign up</button>
+              <div class="bottom-half" ng-show="!loggedIn">
+                <div id="buttons" >
+                  <button id="signIn" type="button" ng-click="login(blah, lbah)" class="btn btn-outline-primary">Sign in</button>
+                  <button id="signUp" type="button" class="btn btn-outline-primary">Sign up</button>
+                </div>
+                <p id="swipe-message"> or search below! </p>
               </div>
-              <p id="swipe-message"> or search below! </p>
-            </div>
+              <div>
+                <p id="swipe-message" ng-show="loggedIn"> this will be the sign in page </p>
+              </div>
           </div>
           <div class="swipe" id="zero-to-one" ng-click="scrollTo('.high-school-search')">
             <i class="fa fa-chevron-down fa-2x"></i>
