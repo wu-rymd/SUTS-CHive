@@ -37,12 +37,67 @@
               <div class="bottom-half" ng-show="!loggedIn">
                 <div id="buttons" >
                   <button id="signIn" type="button" ng-click="login(blah, lbah)" class="btn btn-outline-primary">Sign in</button>
-                  <button id="signUp" type="button" class="btn btn-outline-primary">Sign up</button>
+                  <button id="signUp" type="button" ng-click="signUp()" class="btn btn-outline-primary">Sign up</button>
                 </div>
                 <p id="swipe-message"> or search below! </p>
               </div>
-              <div>
+              <!--<div>
                 <p id="swipe-message" ng-show="loggedIn"> this will be the sign in page </p>
+              </div>-->
+			  <div>
+				<div id="textBoxes" ng-show="signingUp">
+				<div class="panel-body" >
+							
+						<form class="form-horizontal" role="form">
+							
+							<!-- Username -->
+							<div class="input-group input-username">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input type="text" class="form-control" name="username" placeholder="username" autofocus>
+							</div>
+								
+							<!-- Email -->
+							<div class="input-group input-password">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span><input type="password" class="form-control" name="password" placeholder="password">
+							</div>
+
+							<!-- Password -->
+							<div class="input-group input-password">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span><input type="password" class="form-control" name="password" placeholder="password">
+							</div>
+							
+							<!-- Reenter Password -->
+							<div class="input-group input-password">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span><input type="password" class="form-control" name="password" placeholder="password">
+							</div>
+							
+							<!-- School -->
+							<div class="input-group input-password">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span><input type="password" class="form-control" name="password" placeholder="password">
+							</div>
+
+							<div class="form-group login-button">
+								<div class="col-sm-12 controls">
+									<a href="#" class="btn btn-success">Sign up</a>
+								</div>
+							</div>
+
+						</form><!-- ENd form -->     
+				</div>
+				  <!--<form action="/action_page.php">
+					<input type="text" name="name" value="username">
+					<br>
+					<input type="text" name="email" value="email">
+					<br>
+					<input type="text" name="password" value="enter password">
+					<br>
+					<input type="text" name="password2" value="reenter password">
+					<br>
+					<input type="text" name="school" value="choose school">
+					<br><br>
+					<input id="buttons" type="button" ng-click="register(blah, blah, blah, blah, blah)" value="Submit">
+				  </form> -->
+				</div>
+				<p id="swipe-message" ng-show="signedUp"> this will be the sign up page </p>
               </div>
           </div>
           <div class="swipe" id="zero-to-one" ng-click="scrollTo('.high-school-search')">

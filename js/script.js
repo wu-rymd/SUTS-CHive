@@ -2,6 +2,8 @@ var app = angular.module('chiveApp', []);
 app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
   $scope.highSchools = [];
   $scope.loggedIn = false;
+  $scope.signedUp = false;
+  $scope.signingUp = false;
   $scope.clubs = [];
   $scope.currentHighSchoolID = null;
   $scope.scrollTo = function(selectorString) {
@@ -50,5 +52,12 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
   }
   $scope.login = function(username, password) {
     $scope.loggedIn = true;
+  }
+  $scope.signUp = function() {
+    $scope.loggedIn = true;
+	$scope.signingUp = true;
+  }
+  $scope.register = function() {
+    $scope.signedUp = true;
   }
 });
