@@ -57,7 +57,7 @@ def create_user():
         first_name=j.get('first_name'),
         last_name=j.get('last_name'),
         username=j.get('username'),
-        school_id=get_or_create_school(session, j.get('school'), j.get('address')),
+        school_id=j.get('school_id'),
         email=j.get('email')
     )
     session.add(user)
@@ -327,6 +327,13 @@ def get_admins():
                     'school_id' = u.school_id,
                     'email' = u.email
                     })
+                    'user_id': u.user_id,
+                    'first_name': u.first_name,
+                    'last_name': u.last_name,
+                    'username': u.username,
+                    'school_id': u.school_id,
+                    'email': u.email
+        })
     response = Response(json.dumps(formatted_admins))
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
