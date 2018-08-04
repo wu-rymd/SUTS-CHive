@@ -1,6 +1,7 @@
 var app = angular.module('chiveApp', []);
 app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
   $scope.highSchools = [];
+  $scope.loggedIn = false;
   $scope.clubs = [];
   $scope.currentHighSchoolID = null;
   $scope.scrollTo = function(selectorString) {
@@ -64,5 +65,8 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     $scope.scrollTo('.club-search')
     // TODO load all available clubs here instead
     $scope.currentHighSchoolID = schoolId;
+  }
+  $scope.login = function(username, password) {
+    $scope.loggedIn = true;
   }
 });
