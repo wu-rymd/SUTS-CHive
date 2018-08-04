@@ -118,12 +118,36 @@ def create_club():
 
 @app.route('/club', methods=['PUT'])
 def modify_club():
-    return 'UNIMPLEMENTED'
+    if request.mimetype != 'application/json':
+        raise Exception('Content-Type is not "application/json".')
+    j = request.get_json()
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    clubID = j.get('id')
+    matchingClubs = session.query(Club).filter(Club.id == clubID).all()
+    for club in matchingClubs:
+        club.name=j.get('name')
+        club.school_id=j.get('school_id')
+        club.description=j.get('description')
+    session.flush()
+    session.commit()
+    return "Club ID " + str(clubID) + " modified"
 
 
 @app.route('/club', methods=['DELETE'])
 def delete_club():
-    return 'UNIMPLEMENTED'
+    if request.mimetype != 'application/json':
+        raise Exception('Content-Type is not "application/json".')
+    j = request.get_json()
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    clubID = j.get('id')
+    matchingClub = session.query(Club).filter(Club.id == clubID).one_or_none()
+    if matchingClub:
+        session.delete(matchingClub)
+    session.flush()
+    session.commit()
+    return "Club ID " + str(clubID) + " deleted"
 
 
 @app.route('/schools', methods=['POST'])
