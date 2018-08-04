@@ -63,12 +63,38 @@ def create_user():
 
 @app.route('/user', methods=['PUT'])
 def modify_user():
-    return 'UNIMPLEMENTED'
+    if request.mimetype != 'application/json':
+        raise Exception('Content-Type is not "application/json".')
+    j = request.get_json()
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    userID = j.get('id')
+    matchingUser = session.query(User).filter(User.id == userID).one_or_none()
+    if matchingUser:
+        matchingUser.first_name=j.get('first_name')
+        matchingUser.last_name=j.get('last_name')
+        matchingUser.username=j.get('username')
+        matchingUser.school_id=j.get('school_id')
+        matchingUser.email=j.get('email')
+    session.flush()
+    session.commit()
+    return "Club ID " + str(clubID) + " modified"
 
 
 @app.route('/user', methods=['DELETE'])
 def delete_user():
-    return 'UNIMPLEMENTED'
+    if request.mimetype != 'application/json':
+        raise Exception('Content-Type is not "application/json".')
+    j = request.get_json()
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    userID = j.get('id')
+    matchingUser = session.query(User).filter(User.id == userID).one_or_none()
+    if matchingUser:
+        session.delete(matchingUser)
+    session.flush()
+    session.commit()
+    return "User ID " + str(userID) + " deleted"
 
 
 @app.route('/club', methods=['GET'])
@@ -118,12 +144,36 @@ def create_club():
 
 @app.route('/club', methods=['PUT'])
 def modify_club():
-    return 'UNIMPLEMENTED'
+    if request.mimetype != 'application/json':
+        raise Exception('Content-Type is not "application/json".')
+    j = request.get_json()
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    clubID = j.get('id')
+    matchingClub = session.query(Club).filter(Club.id == clubID).one_or_none()
+    if matchingClub:
+        matchingClub.name=j.get('name')
+        matchingClub.school_id=j.get('school_id')
+        matchingClub.description=j.get('description')
+    session.flush()
+    session.commit()
+    return "Club ID " + str(clubID) + " modified"
 
 
 @app.route('/club', methods=['DELETE'])
 def delete_club():
-    return 'UNIMPLEMENTED'
+    if request.mimetype != 'application/json':
+        raise Exception('Content-Type is not "application/json".')
+    j = request.get_json()
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    clubID = j.get('id')
+    matchingClub = session.query(Club).filter(Club.id == clubID).one_or_none()
+    if matchingClub:
+        session.delete(matchingClub)
+    session.flush()
+    session.commit()
+    return "Club ID " + str(clubID) + " deleted"
 
 
 @app.route('/schools', methods=['POST'])
