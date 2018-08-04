@@ -76,9 +76,18 @@ def modify_user():
         matchingUser.username=j.get('username')
         matchingUser.school_id=j.get('school_id')
         matchingUser.email=j.get('email')
-    session.flush()
-    session.commit()
-    return "Club ID " + str(clubID) + " modified"
+        session.flush()
+        session.commit()
+        return jsonify(
+            {
+                'id': matchingUser.id
+            }
+        )
+    else:
+        response = jsonify( {'code': 404,
+                             'message': 'User with specified ID not found'} )
+        response.status_code = 404
+        return response
 
 
 @app.route('/user', methods=['DELETE'])
@@ -92,9 +101,18 @@ def delete_user():
     matchingUser = session.query(User).filter(User.id == userID).one_or_none()
     if matchingUser:
         session.delete(matchingUser)
-    session.flush()
-    session.commit()
-    return "User ID " + str(userID) + " deleted"
+        session.flush()
+        session.commit()
+        return jsonify(
+            {
+                'id': matchingUser.id
+            }
+        )
+    else:
+        response = jsonify( {'code': 404,
+                             'message': 'User with specified ID not found'} )
+        response.status_code = 404
+        return response
 
 
 @app.route('/club', methods=['GET'])
@@ -150,14 +168,23 @@ def modify_club():
     Session, engine = dbconnect(db_options)
     session = Session()
     clubID = j.get('id')
-    matchingClub = session.query(Club).filter(Club.id == clubID).one_or_none()
+    matchingClubs = session.query(Club).filter(Club.id == clubID).one_or_none()
     if matchingClub:
         matchingClub.name=j.get('name')
         matchingClub.school_id=j.get('school_id')
         matchingClub.description=j.get('description')
-    session.flush()
-    session.commit()
-    return "Club ID " + str(clubID) + " modified"
+        session.flush()
+        session.commit()
+        return jsonify(
+            {
+                'id': clubID
+            }
+        )
+    else:
+        response = jsonify( {'code': 404,
+                             'message': 'Club with specified ID not found'} )
+        response.status_code = 404
+        return response
 
 
 @app.route('/club', methods=['DELETE'])
@@ -171,9 +198,18 @@ def delete_club():
     matchingClub = session.query(Club).filter(Club.id == clubID).one_or_none()
     if matchingClub:
         session.delete(matchingClub)
-    session.flush()
-    session.commit()
-    return "Club ID " + str(clubID) + " deleted"
+        session.flush()
+        session.commit()
+        return jsonify(
+            {
+                'id': clubID
+            }
+        )
+    else:
+        response = jsonify( {'code': 404,
+                             'message': 'Club with specified ID not found'} )
+        response.status_code = 404
+        return response
 
 
 @app.route('/schools', methods=['POST'])
