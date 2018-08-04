@@ -62,3 +62,14 @@ class UserToClubMapping(Base):
 
     user = relationship(User)
     club = relationship(Club)
+
+    
+class SchoolToClubMapping(Base):
+    __tablename__ = 'school_to_club_mapping'
+    id = Column(Integer, primary_key=True)
+    school_id = Column(Integer, ForeignKey('school.id'))
+    club_id = Column(Integer, ForeignKey('club.id'))
+    created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
+
+    school = relationship(School)
+    club = relationship(Club)
