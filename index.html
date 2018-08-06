@@ -46,8 +46,7 @@
               </div>-->
 			  <div>
 				<div id="textBoxes" ng-show="signingUp">
-				<div class="panel-body" >
-							
+					<div class="panel-body" >
 						<form class="form-horizontal" role="form">
 							
 							<!-- Username -->
@@ -57,7 +56,7 @@
 								
 							<!-- Email -->
 							<div class="input-group input-password">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span><input type="password" class="form-control" name="password" placeholder="password">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span><input type="text" class="form-control" name="email" placeholder="email">
 							</div>
 
 							<!-- Password -->
@@ -67,37 +66,27 @@
 							
 							<!-- Reenter Password -->
 							<div class="input-group input-password">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span><input type="password" class="form-control" name="password" placeholder="password">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span><input type="password" class="form-control" name="password2" placeholder="reenter password">
 							</div>
 							
 							<!-- School -->
 							<div class="input-group input-password">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span><input type="password" class="form-control" name="password" placeholder="password">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span><input type="text" class="form-control" name="school" placeholder="school">
 							</div>
 
+							<br>
+							
 							<div class="form-group login-button">
-								<div class="col-sm-12 controls">
-									<a href="#" class="btn btn-success">Sign up</a>
-								</div>
+								<!--<div class="col-sm-12 controls">
+									<a href="#" class="btn btn-success" >Sign up</a>
+								</div>-->
+								<input id="buttons" type="button" ng-click="register(blah, blah, blah, blah)" value="Submit">
 							</div>
 
 						</form><!-- ENd form -->     
+					</div>
 				</div>
-				  <!--<form action="/action_page.php">
-					<input type="text" name="name" value="username">
-					<br>
-					<input type="text" name="email" value="email">
-					<br>
-					<input type="text" name="password" value="enter password">
-					<br>
-					<input type="text" name="password2" value="reenter password">
-					<br>
-					<input type="text" name="school" value="choose school">
-					<br><br>
-					<input id="buttons" type="button" ng-click="register(blah, blah, blah, blah, blah)" value="Submit">
-				  </form> -->
-				</div>
-				<p id="swipe-message" ng-show="signedUp"> this will be the sign up page </p>
+				<p id="swipe-message" ng-show="signedUp"> this will be the registered page </p>
               </div>
           </div>
           <div class="swipe" id="zero-to-one" ng-click="scrollTo('.high-school-search')">

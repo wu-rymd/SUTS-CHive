@@ -57,7 +57,9 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     $scope.loggedIn = true;
 	$scope.signingUp = true;
   }
-  $scope.register = function() {
+  $scope.register = function(name, email, password, school) {
+	$scope.loggedIn = false;
+	$scope.loggedIn = true;
     $scope.signedUp = true;
   }
 });
