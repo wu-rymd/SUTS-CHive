@@ -9,16 +9,12 @@ app = Flask(__name__)
 db_options = {'db_file': 'my.db'}
 
 
-# for login authentication
-def hashString(string):
-    return hashlib.sha256(string).hexdigest()
+def get_or_create_school(session, school_name, address, email, phone):
 
-
-def get_or_create_school(session, school_name, address):
     school = session.query(School).filter(School.name == school_name).one_or_none()
     if school:
         return school
-    school = School(name=school_name, address=address)
+    school = School(name=school_name, address=address, email = email, phone = phone)
     session.add(school)
     session.flush()
     return school.id
@@ -234,11 +230,16 @@ def create_school():
     j = request.get_json()
     Session, engine = dbconnect(db_options)
     session = Session()
-    school_id = get_or_create_school(session, j['name'], j['address'])
+    school_id = get_or_create_school(session, j['name'], j['address'], j['email'], j['address'])
     session.commit()
     return jsonify(
         {
-            'id': school_id
+            'id': school_id,
+            'name': j.get('school_name'),
+            'address': j.get('address'),
+            'email': j.get('email'),
+            'phone': j.get('phone')
+
         }
     )
 
@@ -252,7 +253,9 @@ def get_schools():
     for s in schools:
         formatted_schools.append({
             'name': s.name,
-            'address': s.address
+            'address': s.address,
+            'email': s.email,
+            'phone': s.phone
         })
     response = Response(json.dumps(formatted_schools))
     response.headers['Access-Control-Allow-Origin'] = '*'
