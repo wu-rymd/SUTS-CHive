@@ -320,13 +320,6 @@ def get_admins():
         for u in users:
             if (a.user_id == u.user_id):
                 formatted_admins.append({
-                    'user_id' = u.user_id,
-                    'first_name' = u.first_name,
-                    'last_name' = u.last_name,
-                    'username' = u.username,
-                    'school_id' = u.school_id,
-                    'email' = u.email
-                    })
                     'user_id': u.user_id,
                     'first_name': u.first_name,
                     'last_name': u.last_name,
