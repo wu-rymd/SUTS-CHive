@@ -63,12 +63,59 @@ def create_user():
 
 @app.route('/user', methods=['PUT'])
 def modify_user():
-    return 'UNIMPLEMENTED'
+    if request.mimetype != 'application/json':
+        raise Exception('Content-Type is not "application/json".')
+    j = request.get_json()
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    userID = j.get('id')
+    matchingUser = session.query(User).filter(User.id == userID).one_or_none()
+    if matchingUser:
+        if j.get('first_name') != None:
+            matchingUser.first_name=j.get('first_name')
+        if j.get('last_name') != None:
+            matchingUser.last_name=j.get('last_name')
+        if j.get('username') != None:
+            matchingUser.username=j.get('username')
+        if j.get('school_id') != None:
+            matchingUser.school_id=j.get('school_id')
+        if j.get('email') != None:
+            matchingUser.email=j.get('email')
+        session.flush()
+        session.commit()
+        return jsonify(
+            {
+                'id': matchingUser.id
+            }
+        )
+    else:
+        response = jsonify( {'message': 'User not found'} )
+        response.status_code = 404
+        return response
 
 
 @app.route('/user', methods=['DELETE'])
 def delete_user():
-    return 'UNIMPLEMENTED'
+    if request.mimetype != 'application/json':
+        raise Exception('Content-Type is not "application/json".')
+    j = request.get_json()
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    userID = j.get('id')
+    matchingUser = session.query(User).filter(User.id == userID).one_or_none()
+    if matchingUser:
+        session.delete(matchingUser)
+        session.flush()
+        session.commit()
+        return jsonify(
+            {
+                'id': matchingUser.id
+            }
+        )
+    else:
+        response = jsonify( {'message': 'User not found'} )
+        response.status_code = 404
+        return response
 
 
 @app.route('/club', methods=['GET'])
@@ -118,12 +165,56 @@ def create_club():
 
 @app.route('/club', methods=['PUT'])
 def modify_club():
-    return 'UNIMPLEMENTED'
+    if request.mimetype != 'application/json':
+        raise Exception('Content-Type is not "application/json".')
+    j = request.get_json()
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    clubID = j.get('id')
+    matchingClub = session.query(Club).filter(Club.id == clubID).one_or_none()
+    if matchingClub:
+        if j.get('name') != None:
+            matchingClub.name=j.get('name')
+        if j.get('school_id') != None:
+            matchingClub.school_id=j.get('school_id')
+        if j.get('description') != None:
+            matchingClub.description=j.get('description')
+        
+        session.flush()
+        session.commit()
+        return jsonify(
+            {
+                'id': clubID
+            }
+        )
+    else:
+        response = jsonify( {'message': 'Club not found'} )
+        response.status_code = 404
+        return response
 
 
 @app.route('/club', methods=['DELETE'])
 def delete_club():
-    return 'UNIMPLEMENTED'
+    if request.mimetype != 'application/json':
+        raise Exception('Content-Type is not "application/json".')
+    j = request.get_json()
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    clubID = j.get('id')
+    matchingClub = session.query(Club).filter(Club.id == clubID).one_or_none()
+    if matchingClub:
+        session.delete(matchingClub)
+        session.flush()
+        session.commit()
+        return jsonify(
+            {
+                'id': clubID
+            }
+        )
+    else:
+        response = jsonify( {'message': 'Club not found'} )
+        response.status_code = 404
+        return response
 
 
 @app.route('/schools', methods=['POST'])
