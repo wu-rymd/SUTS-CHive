@@ -26,7 +26,7 @@
     <script src="/static/script.js"> </script>
     <div ng-app="chiveApp">
       <div ng-controller="chiveCtrl">
-        <div class="screen splash">
+        <div class="screen splash" ng-show="!inExperience">
           <div id="container-center" >
               <div class="top-half">
                 <div class="logo" id="main-logo">
@@ -41,12 +41,43 @@
                 </div>
                 <p id="swipe-message"> or search below! </p>
               </div>
-              <div>
-                <p id="swipe-message" ng-show="loggedIn"> this will be the sign in page </p>
+                <div id = "sign-in-pg" ng-show="loggedIn">
+                  <p id="swipe-message" ng-show="loggedIn" ></p>
+  						    <form class="form-horizontal" role="form">
+                  <div class="panel-body">
+
+    							<!-- Username -->
+    							<div class="username">
+    								<span class="icon" ><img src="img/email.png"></span><input type="text" name="username" placeholder="username" autofocus>
+    							</div>
+
+    							<!-- Password -->
+    							<div class="password">
+    								<span class="icon"> <img src="img/lock.png"></span><input type="password" name="password" placeholder="password">
+    							</div>
+
+    							<div class="remember">
+
+    							</div>
+
+    							<div class="signin">
+
+    									<button id="signIn" type="button" class="btn btn-outline-primary button-blk" ng-click="successLogin(blah, lbah)">Sign in</button>
+
+    							</div>
+
+				        </div>
+                </form>
               </div>
           </div>
           <div class="swipe" id="zero-to-one" ng-click="scrollTo('.high-school-search')">
             <i class="fa fa-chevron-down fa-2x"></i>
+          </div>
+        </div>
+        <div class="screen clubs">
+          <div class="clubForm">
+            <div class="heading">New Club</div>
+            <div class="subhead">add your club to ClubHub today</div>
           </div>
         </div>
         <div class="screen high-school-search">

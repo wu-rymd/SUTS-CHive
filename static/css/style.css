@@ -3,7 +3,7 @@
 
 :root {
     --margin-size: 1%;
-    
+
     --C-Hive-Black: #000000;
     --C-Hive-Blue: #0241FE;
     --C-Hive-Red: #FF3E3F;
@@ -14,7 +14,7 @@
 .screen {
 
     /* takes full height of current window size */
-    
+
     height: 100vh;
     display: grid;
 }
@@ -49,14 +49,14 @@ body {
 
 .splash {
     /* background-color: pink; */
-    
+
     grid-template-columns: auto 50% auto;
     grid-template-rows: auto 60% auto 3%;
 }
 
 .high-school-search {
     /* background-color: lightblue; */
-    
+
     grid-template-columns: 1% 98% 1%;
     grid-template-rows: 3% 1% 8% 1% 83% 1% 3%;
 }
@@ -140,7 +140,7 @@ img {
 #buttons {
     grid-row-start: 2;
     grid-row-end: 3;
-    
+
     display: grid;
     justify-items: center;
     grid-template-rows: 50% 50%;
@@ -162,7 +162,7 @@ img {
 #swipe-message {
     justify-self: center;
     margin-top: 30px;
-    
+
     grid-row-start: 3;
     grid-row-end: 4;
 
@@ -288,4 +288,92 @@ img {
     grid-column-end: 3;
     grid-row-start: 6;
     grid-row-end: 7;
+}
+
+
+.panel-body{
+  display:grid;
+  grid-template-rows: auto auto auto auto;
+  grid-row-gap: 10px;
+  grid-template-columns: 100%;
+  align-items:center;
+  margin:auto;
+}
+
+.username{
+    /*border-top: 0;
+    border-left:0;
+    border-right: 0;
+    color:grey;
+    */
+    /*padding-left: 3%;
+    padding-top:3%;
+    padding-bottom:2%;*/
+    grid-row-start: 1;
+    grid-row-end:2;
+    display:grid;
+    grid-template-columns: 10% 90%;
+    grid-column-gap:2%;
+}
+
+.password{
+  grid-row-start: 2;
+  grid-row-end:3;
+  display:grid;
+  grid-template-columns: 10% 90%;
+  grid-column-gap:2%;
+}
+
+.remember{
+  grid-row-start: 3;
+  grid-row-end:4;
+  display:grid;
+  justify-items: center;
+  color:grey;
+}
+
+.button-blk{
+  text-align: center;
+  border-style:solid;
+  border-color:#0241FE;
+  border-width: 1px;
+  border-radius:25px;
+  padding-top:2%;
+  padding-bottom: 2%;
+  padding-left:5%;
+  padding-right:5%;
+}
+
+.button-click:hover{
+  text-decoration:none;
+}
+
+a{
+
+}
+
+.signin{
+  display:grid;
+  justify-items: center;
+  grid-row-start: 4;
+  grid-row-end: 5;
+  place-center:center;
+  font-family:Montserrat, Helvetica, sans-serif;
+}
+
+input{
+  font-family:Montserrat, Helvetica, sans-serif;
+  border-top: 0;
+  border-left:0;
+  border-right: 0;
+  color:grey;
+  padding-left: 3%;
+  padding-top:3%;
+  padding-bottom:2%;
+}
+
+.clubForm{
+  display:grid;
+  grid-template-rows:5% 3% 5% 3% 14% 5% 5% 5% 5% auto;
+  grid-template-columns: auto 50% auto;
 }
