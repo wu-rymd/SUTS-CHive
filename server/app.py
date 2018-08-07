@@ -9,7 +9,7 @@ db_options = {'db_file': 'my.db'}
 
 
 # for login authentication
-def hash(string):
+def hashString(string):
     return hashlib.sha256(string).hexdigest()
 
 
@@ -54,7 +54,7 @@ def create_user():
         first_name=j.get('first_name'),
         last_name=j.get('last_name'),
         username=j.get('username'),
-        password=hashlib.sha256(j.get('password')).hexdigest(),
+        password=hashString(j.get('password')),
         school_id=get_or_create_school(session, j.get('school')),
         email=j.get('email')
     )
@@ -85,7 +85,7 @@ def modify_user():
         if j.get('username') != None:
             matchingUser.username=j.get('username')
         if j.get('password') != None:
-            matchingUser.password=hashlib.sha256(j.get('password')).hexdigest()
+            matchingUser.password=hashString(j.get('password'))
         if j.get('school_id') != None:
             matchingUser.school_id=j.get('school_id')
         if j.get('email') != None:
