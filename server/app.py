@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template, Response
 from lib.db import dbconnect, db_create, School, User, Club, UserToClubMapping, Position, UserClubPositionMapping
 import json
 import hashlib
+import logging
 
 app = Flask(__name__)
 
@@ -63,7 +64,7 @@ def create_user():
         last_name=j.get('last_name'),
         username=j.get('username'),
         password=hashString(j.get('password')),
-        school_id=get_or_create_school(session, j.get('school'), j.get('address')),
+        school_id=j.get('school_id'),
         email=j.get('email')
     )
     session.add(user)
@@ -254,7 +255,7 @@ def get_schools():
     Session, engine = dbconnect(db_options)
     session = Session()
     schools = session.query(School).all()
-    print (schools)
+    app.logger.info(schools)
     formatted_schools = []
     for s in schools:
         formatted_schools.append({
@@ -285,7 +286,7 @@ def get_positions():
     Session, engine = dbconnect(db_options)
     session = Session()
     positions = session.query(Position).all()
-    print (positions)
+    app.logger.info(positions)
     formatted_positions = []
     for p in positions:
         formatted_positions.append({
@@ -321,13 +322,19 @@ def get_admins():
     Session, engine = dbconnect(db_options)
     session = Session()
     admins = session.query(UserClubPositionMapping).all()
-    print (admins)
+    users = session.query(User).all()
+    app.logger.info(admins)
     formatted_admins = []
     for a in admins:
-        formatted_admins.append({
-            'user_id': a.user_id,
-            'club_id': a.club_id,
-            'position_id': a.position_id
+        for u in users:
+            if (a.user_id == u.user_id):
+                formatted_admins.append({
+                    'user_id': u.user_id,
+                    'first_name': u.first_name,
+                    'last_name': u.last_name,
+                    'username': u.username,
+                    'school_id': u.school_id,
+                    'email': u.email
         })
     response = Response(json.dumps(formatted_admins))
     response.headers['Access-Control-Allow-Origin'] = '*'
