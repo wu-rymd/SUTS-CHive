@@ -1,7 +1,8 @@
-from flask import Flask, request, jsonify, render_template, Response
+from flask import Flask, request, jsonify, render_template, Response, send_from_directory
 from lib.db import dbconnect, db_create, School, User, Club, UserToClubMapping
 import json
 import hashlib
+import os
 
 app = Flask(__name__)
 
@@ -129,7 +130,7 @@ def delete_user():
 
 @app.route('/club', methods=['GET'])
 def get_club():
-    
+
     schoolID = request.args.get('school_id')
     Session, engine = dbconnect(db_options)
     session = Session()
@@ -188,7 +189,7 @@ def modify_club():
             matchingClub.school_id=j.get('school_id')
         if j.get('description') != None:
             matchingClub.description=j.get('description')
-        
+
         session.flush()
         session.commit()
         return jsonify(
@@ -260,7 +261,10 @@ def get_schools():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return send_from_directory(
+        os.path.join(os.path.abspath(os.path.dirname(__file__)), 'static'),
+        'index.html'
+    )
 
 
 if __name__ == '__main__':
