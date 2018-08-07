@@ -33,9 +33,10 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     first_name = Column(String(250), nullable=False)
     last_name = Column(String(250), nullable=False)
-    username = Column(String(250), nullable=False)
+    username = Column(String(250), nullable=False, unique=True)
+    password = Column(String(250), nullable=False)
     school_id = Column(Integer, ForeignKey('school.id'))
-    email = Column(String(250), nullable=False)
+    email = Column(String(250), nullable=False, unique=True)
     created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
 
     school = relationship(School)

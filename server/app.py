@@ -1,10 +1,16 @@
 from flask import Flask, request, jsonify, render_template, Response
 from lib.db import dbconnect, db_create, School, User, Club, UserToClubMapping
 import json
+import hashlib
 
 app = Flask(__name__)
 
 db_options = {'db_file': 'my.db'}
+
+
+# for login authentication
+def hashString(string):
+    return hashlib.sha256(string).hexdigest()
 
 
 def get_or_create_school(session, school_name, address):
@@ -48,6 +54,7 @@ def create_user():
         first_name=j.get('first_name'),
         last_name=j.get('last_name'),
         username=j.get('username'),
+        password=hashString(j.get('password')),
         school_id=get_or_create_school(session, j.get('school')),
         email=j.get('email')
     )
@@ -77,6 +84,8 @@ def modify_user():
             matchingUser.last_name=j.get('last_name')
         if j.get('username') != None:
             matchingUser.username=j.get('username')
+        if j.get('password') != None:
+            matchingUser.password=hashString(j.get('password'))
         if j.get('school_id') != None:
             matchingUser.school_id=j.get('school_id')
         if j.get('email') != None:
