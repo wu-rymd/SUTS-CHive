@@ -284,7 +284,7 @@ def get_message():
     Session, engine = dbconnect(db_options)
     session = Session()
     messages = session.query(Message).filter(Message.club_id == club_id).all()
-    print (messages)
+    #print (messages)
     ret_messages = []
     for m in messages:
         ret_messages.append(
