@@ -5,7 +5,7 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     $scope.signingUp = false;
     $scope.clubs = [];
     $scope.currentHighSchoolID = null;
-    $scope.formmsg = "Welcome to C-Hive!wdhuhlhgusadfs";
+    $scope.formmsg = "Welcome to C-Hive!";
 
 
     $scope.scrollTo = function(selectorString) {
