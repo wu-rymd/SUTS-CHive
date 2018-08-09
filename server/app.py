@@ -2,10 +2,16 @@ from flask import Flask, request, jsonify, render_template, Response
 from lib.db import dbconnect, db_create, School, User, Club, UserToClubMapping, Position, UserClubPositionMapping
 import json
 import logging
+import hashlib
 
 app = Flask(__name__)
 
 db_options = {'db_file': 'my.db'}
+
+
+# for login authentication
+def hashString(string):
+    return hashlib.sha256(string).hexdigest()
 
 
 def get_or_create_school(session, school_name, address):
@@ -15,7 +21,7 @@ def get_or_create_school(session, school_name, address):
     school = School(name=school_name, address=address)
     session.add(school)
     session.flush()
-    return school.id
+    return school
 
 def get_or_create_position(session, admin_position):
     position = session.query(Position).filter(Position.position_type == admin_position).one_or_none()
@@ -57,7 +63,8 @@ def create_user():
         first_name=j.get('first_name'),
         last_name=j.get('last_name'),
         username=j.get('username'),
-        school_id=j.get('school_id'),
+        password=hashString(j.get('password')),
+        school_id=get_or_create_school(session, j.get('school')).id,
         email=j.get('email')
     )
     session.add(user)
@@ -86,6 +93,8 @@ def modify_user():
             matchingUser.last_name=j.get('last_name')
         if j.get('username') != None:
             matchingUser.username=j.get('username')
+        if j.get('password') != None:
+            matchingUser.password=hashString(j.get('password'))
         if j.get('school_id') != None:
             matchingUser.school_id=j.get('school_id')
         if j.get('email') != None:
@@ -233,7 +242,7 @@ def create_school():
     j = request.get_json()
     Session, engine = dbconnect(db_options)
     session = Session()
-    school_id = get_or_create_school(session, j['name'], j['address'])
+    school_id = get_or_create_school(session, j['name'], j['address']).id
     session.commit()
     return jsonify(
         {
