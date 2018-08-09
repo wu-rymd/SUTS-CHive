@@ -24,6 +24,8 @@ class School(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False, unique=True)
     address = Column(String(500), nullable=False)
+    email = Column(String(100), nullable=False)
+    phone = Column(String(11), nullable=False)
     created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
 
 
