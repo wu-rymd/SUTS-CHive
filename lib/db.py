@@ -91,3 +91,11 @@ class SchoolToClubMapping(Base):
     school = relationship(School)
     club = relationship(Club)
 
+class Message(Base):
+    __tablename__ = 'message'
+    id = Column(Integer, primary_key=True)
+    club_id = Column(Integer, ForeignKey('club.id'))
+    message = Column(String(1024), nullable=False)
+    created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
+
+    club = relationship(Club)

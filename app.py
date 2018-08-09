@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template, Response, send_from_directory
-from lib.db import dbconnect, db_create, School, User, Club, UserToClubMapping, Position, UserClubPositionMapping
+from lib.db import dbconnect, db_create, School, User, Club, UserToClubMapping, Message, Position, UserClubPositionMapping
+
 import json
 import logging
 import hashlib
@@ -267,6 +268,46 @@ def get_schools():
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
+@app.route('/message', methods=['POST'])
+def create_message():
+  if request.mimetype != 'application/json':
+        raise Exception('Content-Type is not "application/json".')
+    j = request.get_json()
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    message = Message(
+        club_id=j.get('club_id'),
+        message=j.get('message')
+    )
+    session.add(message)
+    session.flush()
+    session.commit()
+    return jsonify(
+        {
+            'id': message.id
+        }
+    )
+    
+@app.route('/message', methods=['GET'])
+def get_message():
+    club_id = request.args.get('club_id')
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    messages = session.query(Message).filter(Message.club_id == club_id).all()
+    #print (messages)
+    ret_messages = []
+    for m in messages:
+        ret_messages.append(
+            {
+                'id': m.id,
+                'club_id': m.club_id,
+                'message': m.message
+            }
+        )
+    response = Response(json.dumps(ret_messages))
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
+  
 @app.route('/position', methods=['POST'])
 def create_position():
     if request.mimetype != 'application/json':
