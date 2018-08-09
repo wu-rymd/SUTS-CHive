@@ -5,6 +5,9 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     $scope.clubs = [];
     $scope.currentHighSchoolID = null;
     $scope.scrollTo = function(selectorString) {
+	
+	console.log(selectorString);
+	
 	$('html,body').animate({
 	    scrollTop: $(selectorString).offset().top
 	}, 'slow');
@@ -13,13 +16,13 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 	  $("#searchbar-high-school").val('');
 	  $("#highSchoolResults").html('');
 
-	  } 
+	  }
 	  if (selectorString != ".club-search") {
 	  //$("#searchbar-club").val('');
 	  //$("#clubResults").html('');
 	  //$("#clubResults").fadeOut(500);
 	  } */
-    } 
+    }
 
     $scope.populateHighSchools = function() {
 	console.log('TODO');
@@ -32,9 +35,9 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 	    }
 	    $scope.$apply();
 	})
-	
+
 	$('#highSchoolResults').css('display', 'none').fadeIn(500);
-	
+
 	// TODO move the high school code from the script.js.bak file here
 	//$scope.highSchools.push({name: 'other school', address: '456 other street', id: 2});
     }
@@ -55,7 +58,7 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 		}
 	    }
 	    $scope.$apply();
-	    
+
 	} )
 	//$scope.clubs.push({name: 'my lame club', description: 'this is a lame club', id: 2});
 
@@ -67,19 +70,24 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     }
 
     $scope.highSchoolSelect = function(schoolId) {
-		console.log(schoolId);
-		console.log('TODO')
-	$scope.scrollTo('.club-search')
-	// TODO load all available clubs here instead
-	$scope.currentHighSchoolID = schoolId;
-    }
-    $scope.login = function(username, password) {
-	$scope.loggedIn = true;
-	}
+	console.log(schoolId);
+	console.log('TODO')
+	 $scope.scrollTo('.club-search')
+	 // TODO load all available clubs here instead
+	 $scope.currentHighSchoolID = schoolId;
+   }
+    
+  $scope.login = function(username, password) {
+	  $scope.loggedIn = true;
+	 }
 	
-	$scope.populateFeed = function(userID) {
-		$scope.feed = [];
-		$.getJSON('http://localhost:5000/')
-	}
+	//$scope.populateFeed = function(userID) {
+		//$scope.feed = [];
+		//$.getJSON('http://localhost:5000/')
+   //}
+
+    $scope.successLogin = function(username, password){
+      $scope.inExperience= true;
+    }
 
 });
