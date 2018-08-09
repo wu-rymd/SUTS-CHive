@@ -273,7 +273,7 @@ def get_schools():
 
 @app.route('/message', methods=['POST'])
 def create_message():
-  if request.mimetype != 'application/json':
+    if request.mimetype != 'application/json':
         raise Exception('Content-Type is not "application/json".')
     j = request.get_json()
     Session, engine = dbconnect(db_options)
