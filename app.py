@@ -30,11 +30,15 @@ def get_or_create_position(session, admin_position):
     session.flush()
     return position.id
 
+def userClubs(session, user_id):
+    club_ids = session.query(UserToClubMapping).filter(UserToClubMapping.user_id == user_id).all()
+    return club_ids
+
 @app.route('/user', methods=['GET'])
 def get_user():
 
     username = request.args.get('username', "")
-    
+
     Session, engine = dbconnect(db_options)
     session = Session()
 
@@ -42,7 +46,7 @@ def get_user():
         users = session.query(User).filter(User.username == username).all()
     else:
         users = session.query(User).all()
-    
+
     ret_users = []
     for u in users:
         ret_users.append(
@@ -313,23 +317,48 @@ def create_message():
 
 @app.route('/message', methods=['GET'])
 def get_message():
-    club_id = request.args.get('club_id')
-    Session, engine = dbconnect(db_options)
-    session = Session()
-    messages = session.query(Message).filter(Message.club_id == club_id).all()
-    #print (messages)
-    ret_messages = []
-    for m in messages:
-        ret_messages.append(
-            {
-                'id': m.id,
-                'club_id': m.club_id,
-                'message': m.message
-            }
-        )
-    response = Response(json.dumps(ret_messages))
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    return response
+    if (request.arg.get('club_id')):
+        club_id = request.args.get('club_id')
+        Session, engine = dbconnect(db_options)
+        session = Session()
+        messages = session.query(Message).filter(Message.club_id == club_id).all()
+        #print (messages)
+        ret_messages = []
+        for m in messages:
+            ret_messages.append(
+                {
+                    'id': m.id,
+                    'club_id': m.club_id,
+                    'message': m.message
+                }
+            )
+        response = Response(json.dumps(ret_messages))
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        return response
+    elif (request.arg.get('user_id')):
+        Session, engine = dbconnect(db_options)
+        session = Session()
+        messages = session.query(Message).all()
+        print (messages)
+        user_id = request.args.get('user_id')
+        print (user_id)
+        ret_messages = []
+        allClubs = userClubs(user_id)
+        print (allClubs)
+        for c in allClubs:
+            for m in messages:
+                if (c == m.club_id):
+                    ret_messages.append(
+                        {
+                            'id': m.id,
+                            'club_id': m.club_id,
+                            'message': m.message
+                        }
+                    )
+        response = Response(json.dumps(ret_messages))
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        return response
+
 
 @app.route('/position', methods=['POST'])
 def create_position():
