@@ -7,10 +7,15 @@ app = Flask(__name__)
 db_options = {'db_file': 'my.db'}
 
 
+# TODO change CORS/Access-Control-Allow-Origin so not everyone can access db
+
 def get_or_create_school(session, school_name, address):
+    # TODO ensure not case sensitive
+    # so new school won't be created for carelessness
+    school_name = school_name
     school = session.query(School).filter(School.name == school_name).one_or_none()
     if school:
-        return school
+        return school.id
     school = School(name=school_name, address=address)
     session.add(school)
     session.flush()
@@ -34,31 +39,43 @@ def get_user():
             }
         )
     #users = map(lambda u: dict(u), users)
-    return jsonify(ret_users)
+    response = jsonify(ret_users)
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
+
+
+
 
 
 @app.route('/user', methods=['POST'])
 def create_user():
-    if request.mimetype != 'application/json':
-        raise Exception('Content-Type is not "application/json".')
-    j = request.get_json()
+    firstName = request.args.get('first_name')
+    lastName = request.args.get('last_name')
+    userName = request.args.get('username')
+    eMail = request.args.get('email')
+    schoolName = request.args.get('schoolName')
+    schoolAddress = request.args.get('schoolAddress')
+
     Session, engine = dbconnect(db_options)
     session = Session()
     user = User(
-        first_name=j.get('first_name'),
-        last_name=j.get('last_name'),
-        username=j.get('username'),
-        school_id=get_or_create_school(session, j.get('school')),
-        email=j.get('email')
+        first_name=firstName,
+        last_name=lastName,
+        username=userName,
+        email=eMail,
+        school_id=get_or_create_school(session, schoolName, schoolAddress),
     )
     session.add(user)
     session.flush()
     session.commit()
-    return jsonify(
+    response = jsonify(
         {
             'id': user.id
         }
     )
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
+
 
 
 @app.route('/user', methods=['PUT'])
@@ -109,11 +126,13 @@ def create_club():
     session.add(club)
     session.flush()
     session.commit()
-    return jsonify(
+    response = jsonify(
         {
             'id': club.id
         }
     )
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 
 
 @app.route('/club', methods=['PUT'])
@@ -133,13 +152,16 @@ def create_school():
     j = request.get_json()
     Session, engine = dbconnect(db_options)
     session = Session()
-    school_id = get_or_create_school(session, j['name'], j['address'])
+    school = get_or_create_school(session, j['name'], j['address'])
     session.commit()
-    return jsonify(
+    response = jsonify(
         {
-            'id': school_id
+            'id': school.id
         }
     )
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
+    
 
 @app.route('/schools', methods=['GET'])
 def get_schools():
@@ -150,12 +172,14 @@ def get_schools():
     formatted_schools = []
     for s in schools:
         formatted_schools.append({
+            'id': s.id,
             'name': s.name,
             'address': s.address
         })
     response = Response(json.dumps(formatted_schools))
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
+
 
 
 @app.route('/')

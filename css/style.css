@@ -171,6 +171,11 @@ img {
 
 
 
+#form-msg {
+    text-align: center;
+}
+
+
 
 #zero-to-one {
     grid-column-start: 2;

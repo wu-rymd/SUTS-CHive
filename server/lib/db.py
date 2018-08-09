@@ -22,8 +22,8 @@ def db_create(options):
 class School(Base):
     __tablename__ = 'school'
     id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False, unique=True)
-    address = Column(String(500), nullable=False)
+    name = Column(String(250), nullable=False)
+    address = Column(String(500), nullable=False, unique=True)
     created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
 
 
@@ -33,9 +33,9 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     first_name = Column(String(250), nullable=False)
     last_name = Column(String(250), nullable=False)
-    username = Column(String(250), nullable=False)
+    username = Column(String(250), nullable=False, unique=True)
     school_id = Column(Integer, ForeignKey('school.id'))
-    email = Column(String(250), nullable=False)
+    email = Column(String(250), nullable=False, unique=True)
     created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
 
     school = relationship(School)
@@ -62,3 +62,14 @@ class UserToClubMapping(Base):
 
     user = relationship(User)
     club = relationship(Club)
+
+
+class UserToSchoolMapping(Base):
+    __tablename__ = 'user_to_school_mapping'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    school_id = Column(Integer, ForeignKey('school.id'))
+    created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
+
+    user = relationship(User)
+    school = relationship(School)
