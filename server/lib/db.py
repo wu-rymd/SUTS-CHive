@@ -90,3 +90,4 @@ class SchoolToClubMapping(Base):
 
     school = relationship(School)
     club = relationship(Club)
+
