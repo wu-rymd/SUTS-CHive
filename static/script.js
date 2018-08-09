@@ -5,6 +5,9 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     $scope.clubs = [];
     $scope.currentHighSchoolID = null;
     $scope.scrollTo = function(selectorString) {
+	
+	console.log(selectorString);
+	
 	$('html,body').animate({
 	    scrollTop: $(selectorString).offset().top
 	}, 'slow');
