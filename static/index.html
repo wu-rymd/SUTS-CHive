@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> C-Hive | Your Club Beehive </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular.min.js" type="text/javascript"></script>
+	 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js" type="text/javascript"></script> -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,500i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese" rel="stylesheet">
+    <script src="vendor/jquery-3.3.1.js"></script>
+    <script src="vendor/bootstrap.js"> </script>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
+    <link rel="manifest" href="icon/site.webmanifest">
+    <link rel="mask-icon" href="icon/safari-pinned-tab.svg" color="#0029a3">
+    <link rel="shortcut icon" href="icon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-config" content="icon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+  <body>
+    <script src="script.js"> </script>
+    <div ng-app="chiveApp">
+      <div ng-controller="chiveCtrl">
+        <div class="screen splash" ng-show="!inExperience">
+          <div id="container-center" >
+            <div class="top-half">
+              <div class="logo" id="main-logo">
+                <img src="img/logo.png">
+              </div>
+              <p id="welcome-message" ng-model="formmsg"> Welcome to C-Hive! </p>
+            </div>
+            <div class="bottom-half" ng-show="!loggedIn && !signingUp">
+              <div id="buttons" >
+                <button id="signIn" type="button" ng-click="login(blah, lbah)" class="btn btn-outline-primary">Sign in</button>
+                <button id="signUp" type="button" ng-click="signUp()" class="btn btn-outline-primary">Sign up</button>
+              </div>
+              <p id="swipe-message"> or search below! </p>
+            </div>
+            <div id = "sign-in-pg" ng-show="loggedIn">
+              <p id="swipe-message" ng-show="loggedIn" ></p>
+  	      <form class="form-horizontal" role="form">
+                <div class="panel-body">
+
+    		  <!-- Username -->
+    		  <div class="username">
+    		    <span class="icon" ><img src="img/email.png" style="width:80%;"></span><input type="text" name="username" placeholder="username" autofocus>
+    		  </div>
+
+    		  <!-- Password -->
+    		  <div class="password">
+    		    <span class="icon"> <img src="img/lock.png" style="width:80%;"></span><input type="password" name="password" placeholder="password">
+    		  </div>
+
+    		  <div class="remember">
+
+    		  </div>
+
+    		  <div class="signin">
+
+    		    <button id="signIn" type="button" class="btn btn-outline-primary button-blk" ng-click="successLogin(blah, lbah)">Sign in</button> <br>
+		    <button  class="btn btn-outline-primary button-blk" onclick="window.location.href=''">Back</button>
+
+    		  </div>
+
+		</div>
+              </form>
+            </div>
+
+
+
+
+	  <div id="textBoxes" ng-show="signingUp">
+	    <form class="form-horizontal" role="form">
+	      <div class="panel-body">
+
+
+		
+		<!-- First -->
+		<div class="input-group input-username">
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+		  <input type="text" class="form-control" name="firstName" placeholder="First name" ng-model="regfirst"  autofocus>
+		</div>
+
+
+		<!-- Last -->
+		<div class="input-group input-username">
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+		  <input type="text" class="form-control" name="lastName" placeholder="Last name" ng-model="reglast">
+		</div>
+		
+		
+		<!-- Username -->
+		<div class="input-group input-username">
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+		  <input type="text" class="form-control" name="username" placeholder="Username" ng-model="regusername" >
+		</div>
+		
+		<!-- Email -->
+		<div class="input-group input-password">
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+		  <input type="text" class="form-control" name="email" placeholder="E-mail" ng-model="regemail" >
+		</div>
+
+		<!-- Password -->
+		<div class="input-group input-password">
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+		  <input type="password" class="form-control" name="password" placeholder="Password" ng-model="regpassword" >
+		</div>
+		
+		<!-- Reenter Password -->
+		<div class="input-group input-password">
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+		  <input type="password" class="form-control" name="password2" placeholder="Re-enter password" ng-model="regpassword2" >
+		</div>
+		
+		<!-- School -->
+		<div class="input-group input-password">
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+		  <input type="text" class="form-control" name="school" placeholder="School name" ng-model="regschool" >
+		</div>
+
+		<div class="input-group input-password">
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+		  <input type="text" class="form-control" name="schoolAddress" placeholder="School address" ng-model="regschooladdress" >
+		</div>
+
+		<br>
+		
+		<div class="form-group login-button">
+		  <!--<div class="col-sm-12 controls">
+		      <a href="#" class="btn btn-success" >Sign up</a>
+		  </div>-->
+		  <input id="buttons" type="button" ng-click="register(regfirst, reglast, regusername, regemail, regpassword, regpassword2, regschool, regschooladdress)" value="Submit">
+		  <button onclick="window.location.href=''">Back</button>
+		</div>
+		
+	      </div>
+	    </form><!-- ENd form -->     
+	  </div>
+	  </div>
+
+
+
+	  
+          <div class="swipe" id="zero-to-one" ng-click="scrollTo('.high-school-search')">
+            <i class="fa fa-chevron-down fa-2x"></i>
+          </div>
+        </div>
+        <div class="screen clubs" ng-show="inExperience">
+          <div class="clubProfile">
+            <div class="sideLogo"><img src="img/logo.png" style="height:70%;"></div>
+            <div class="stateCategory">
+              Insert Category
+            </div>
+            <div class="clubPfp">
+              <img src="img/photoUpload.png" style="height:100%;">
+            </div>
+            <div class="line1">
+              <img src="img/line.png" style="width:100%;">
+            </div>
+            <div class="line2">
+              <img src="img/line.png" style="width:100%;">
+            </div>
+
+            <button type = "button" class="btn btn-outline-primary button-blk subClk" style="font-size:30px;height:100%;">
+              <div class="subCheck">
+                <img src="img/check.png" style="width:20%;float:left;padding-left:6%;display:grid;align-content:center;">
+              </div>
+              <div class="subClk">Admin</div>
+            </button>
+
+            <div class="createDate">
+              Created 20XX
+            </div>
+            <div class="clubName">
+              Club Name
+            </div>
+            <div class="highSchool">
+              Club at ______ High School
+            </div>
+
+            <div class="faqbtn">
+              <button type = "button" class="btn btn-outline-primary button-blk faqtrans" style="font-size:30px;height:100%;">
+                FAQ Of Our Club
+              </button>
+            </div>
+            <div class="clubDes">
+              Club Description
+            </div>
+
+            <div class="clubRoom">
+              Room number &amp; Location
+            </div>
+            <div class="rmPic"> <img src="img/pin.png" style="width:60%;"></div>
+            <div class="actualRm"> Place</div>
+            <div class="photos">Photos</div>
+            <div class="leader">Club Lead Positions</div>
+            <div class="pres"> <img src="img/pres.png" style="width:100%;"></div>
+            <div class="vicepres"><img src="img/vicepres.png" style="width:140%;"></div>
+            <div class="sample"></div>
+            <div class="members">Members (#)</div>
+            <div class="createPost"> <img src="img/pressCreate.png" style="width:100%;"></div>
+            <div class="edit">Edit</div>
+          </div>
+          <div class="clubForm" style="display:none;">
+            <div class="heading">New Club</div>
+            <div class="subhead">add your club to ClubHub today</div>
+            <div class="enterClub">
+              <div class="formLogo">
+		<span class="icon fIcon"> <img src="img/book.png" style="width:75%;"> </span>
+              </div>
+              <input type="text" name="clubname" placeholder="Club name">
+            </div>
+            <div class="cInfo">Club Information</div>
+            <div class="addPhoto">
+              <div class="picture"><img src="img/photoUpload.png" style="width:100%;"></div>
+              <div class="upload">
+		<button type = "button" class="btn btn-outline-primary button-blk" style="height:150%;font-size:25px;">Upload club photo</button>
+              </div>
+            </div>
+            <div class="clubCategory">
+              <div class="formLogo">
+		<span class="icon fIcon"> <img src="img/bullets.png" style="width:80%;"> </span>
+              </div>
+              <div class="selectCategory">
+                <select>
+                  <option value="c0">Club category</option>
+                  <option value="c1">Category 1</option>
+                  <option value="c2">Category 2</option>
+                  <option value="c3">Category 3</option>
+                  <option value="c4">Category 4</option>
+                </select>
+              </div>
+            </div>
+            <div class="roomNum">
+              <div class="formLogo">
+		<span class="icon fIcon"> <img src="img/signpost.png" style="width:80%;"> </span>
+              </div>
+              <input type="text" name="location" placeholder="Room number/location">
+            </div>
+            <div class="description">
+              <div class="formLogo">
+		<span class="icon fIcon"> <img src="img/notepad.png" style="width:80%;"> </span>
+              </div>
+              <input type="text" name="details" placeholder="Add description...">
+            </div>
+            <div class="leadPsn">
+              <div class="firstHead">Club Leaders</div>
+              <div class="picture"> <img src="img/grprofiles.png" style="width:80%;"></div>
+            </div>
+            <div class="leadOptions">
+              <div class="addLeader"> <button type = "button" class="btn btn-outline-primary button-blk" style="height:100%;font-size:25px;">+ Add President</button> </div>
+              <div class="addVice"> <button type = "button" class="btn btn-outline-primary button-blk" style="height:100%;font-size:25px;">+ Add Vice President </button></div>
+            </div>
+            <div class="create">
+              <div class="toBeSubmitted">
+		<button type = "button" class="btn btn-outline-primary button-blk" style="width:100%;height:100%;font-size:25px;">Create</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="screen high-school-search">
+          <div class="swipe" id="one-to-zero" ng-click="scrollTo('.splash')">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </div>
+          <div class="container-search-logo">
+            <div class="search" id="search-high-school">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="searchbar-high-school" placeholder="Search for your high school...">
+                <div class="input-group-append" ng-click="populateHighSchools()">
+                  <span class="input-group-text"><i id="icon" class="fa fa-search"> </i></span>
+                </div>
+              </div>
+            </div>
+            <div class="logo">
+              <img src="img/logo.png">
+            </div>
+          </div>
+          <div class="container-results" id="highSchoolResults" >
+            <div ng-repeat="school in highSchools">
+              <div class="card card-block card-outline-primary" >
+		<p class="card-text" > <b>{{ school.name }}</b> <br> {{ school.address }} &nbsp;
+                  <span class="btn btn-outline-primary float-right" ng-click="highSchoolSelect(school.id)">Select</span>
+		</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="screen club-search">
+          <div class="swipe" id="one-to-zero" ng-click="scrollTo('.high-school-search')">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </div>
+          <div class="container-search-logo">
+            <div class="search" id="search-club">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="searchbar-club" placeholder="Search for a club...">
+                <div class="input-group-append" ng-click="populateClubs()">
+                  <span class="input-group-text"><i id="icon" class="fa fa-search"> </i></span>
+                </div>
+              </div>
+            </div>
+            <div class="logo">
+              <img src="img/logo.png">
+            </div>
+          </div>
+          <div class="container-results" id="clubResults">
+            <div ng-repeat="club in clubs">
+              <div class="card card-block card-outline-primary">
+		<p class="card-text" id="123"> <b>{{ club.name }}</b> <br> {{ club.description }} &nbsp;
+                  <span class="btn btn-outline-primary float-right" ng-click="goToClub(club.id)">Select</span>
+		</p>
+              </div>
+            </div>
+          </div>
+	</div>
+      </div>
+    </div>
+</div>
+</body>
+</html>

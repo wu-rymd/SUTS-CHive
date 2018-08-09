@@ -1,16 +1,16 @@
-
 var app = angular.module('chiveApp', []);
 app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     $scope.highSchools = [];
     $scope.loggedIn = false;
+    $scope.signingUp = false;
     $scope.clubs = [];
     $scope.currentHighSchoolID = null;
-    $scope.formmsg = "Welcome to C-Hive!";
+    $scope.formmsg = "Welcome to C-Hive!wdhuhlhgusadfs";
 
 
-    
-    
     $scope.scrollTo = function(selectorString) {
+	
+	
 	$('html,body').animate({
 	    scrollTop: $(selectorString).offset().top
 	}, 'slow');
@@ -19,14 +19,13 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 	  $("#searchbar-high-school").val('');
 	  $("#highSchoolResults").html('');
 
-	  } 
+	  }
 	  if (selectorString != ".club-search") {
 	  //$("#searchbar-club").val('');
 	  //$("#clubResults").html('');
 	  //$("#clubResults").fadeOut(500);
 	  } */
     }
-
 
     $scope.populateHighSchools = function() {
 	console.log('TODO');
@@ -37,11 +36,10 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 		console.log(data[i]);
 		$scope.highSchools.push({name: data[i].name, address: data[i].address, id: i});
 	    }
-	    $scope.$apply();
 	})
-	
+
 	$('#highSchoolResults').css('display', 'none').fadeIn(500);
-	
+
 	// TODO move the high school code from the script.js.bak file here
 	//$scope.highSchools.push({name: 'other school', address: '456 other street', id: 2});
     }
@@ -61,8 +59,7 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 		    $scope.clubs.push({name: data[i].name, description: data[i].description, id: i});
 		}
 	    }
-	    $scope.$apply();
-	    
+
 	} )
 	//$scope.clubs.push({name: 'my lame club', description: 'this is a lame club', id: 2});
 
@@ -72,27 +69,35 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     $scope.goToClub = function(clubId) {
 	console.log('TODO');
     }
-0
+
     $scope.highSchoolSelect = function(schoolId) {
 	console.log(schoolId);
 	console.log('TODO')
-	$scope.scrollTo('.club-search')
-	// TODO load all available clubs here instead
-	$scope.currentHighSchoolID = schoolId;
+	 $scope.scrollTo('.club-search')
+	 // TODO load all available clubs here instead
+	 $scope.currentHighSchoolID = schoolId;
     }
+
+
+    $scope.signUp = function() {
+	$scope.signingUp = true;
+    }
+    
     $scope.login = function(username, password) {
 	$scope.loggedIn = true;
     }
-
-
-
-
-
     
-    $scope.signUp = function() {
-	$scope.loggedIn = true;
-	$scope.signingUp = true;
+    //$scope.populateFeed = function(userID) {
+    //$scope.feed = [];
+    //$.getJSON('http://localhost:5000/')
+    //}
+
+    $scope.successLogin = function(username, password){
+	$scope.inExperience= true;
     }
+
+
+
 
 
     $scope.register = function(firstName, lastName, username, email, password, password2, school, schoolAddress) {
@@ -114,18 +119,15 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 	    school == "") {
 	    
 	    $scope.formmsg = "All fields required."
-	    $scope.$apply();
 	}
 
 	
 	else if (email.indexOf('@') == -1) {
 	    $scope.formmsg = "Invalid e-mail."
-	    $scope.$apply();
 	}
 
 	else if (password != password2) {
 	    $scope.formmsg = "Passwords do not match."
-	    $scope.$apply();
 	}
 	
 	// form fields seem good from the surface...
@@ -144,17 +146,15 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 		    if (data[i].email == email) {
 			console.log("email match found");
 			$scope.formmsg = "E-mail already registered."
-			$scope.$apply();
 			return;
 		    }
 
 		    else if (data[i].username == username) {
 			console.log("username match found");
 			$scope.formmsg = "That username already exists."
-			$scope.$apply();
 			return;
 		    }
-		     
+		    
 		} // end for loop
 
 
@@ -171,7 +171,6 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 
 		
 		$scope.formmsg = "Account successfully created!";
-		$scope.$apply();
 		
 		
 		
@@ -188,5 +187,10 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 	
     } // end register
     
-}); // end controller
-	       
+
+
+    setTimeout(function(){
+	$scope.$apply();
+    }, 50);
+
+});
