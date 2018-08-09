@@ -67,13 +67,19 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     }
 
     $scope.highSchoolSelect = function(schoolId) {
-	console.log(schoolId);
-	console.log('TODO')
+		console.log(schoolId);
+		console.log('TODO')
 	$scope.scrollTo('.club-search')
 	// TODO load all available clubs here instead
 	$scope.currentHighSchoolID = schoolId;
     }
     $scope.login = function(username, password) {
 	$scope.loggedIn = true;
-    }
+	}
+	
+	$scope.populateFeed = function(userID) {
+		$scope.feed = [];
+		$.getJSON('http://localhost:5000/')
+	}
+
 });
