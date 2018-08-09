@@ -51,6 +51,7 @@ class Club(Base):
     school_id = Column(Integer, ForeignKey('school.id'))
     description = Column(String(1024), nullable=False)
     img_type = Column(String(100), nullable=False)
+    calendar_id = Column(String(100), nullable=False)
     created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
 
     school = relationship(School)
