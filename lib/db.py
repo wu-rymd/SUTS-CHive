@@ -36,7 +36,6 @@ class User(Base):
     first_name = Column(String(250), nullable=False)
     last_name = Column(String(250), nullable=False)
     username = Column(String(250), nullable=False, unique=True)
-    password = Column(String(250), nullable=False)
     school_id = Column(Integer, ForeignKey('school.id'))
     email = Column(String(250), nullable=False, unique=True)
     created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
@@ -70,6 +69,17 @@ class UserToClubMapping(Base):
 
     user = relationship(User)
     club = relationship(Club)
+
+
+class UserToSchoolMapping(Base):
+    __tablename__ = 'user_to_school_mapping'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    school_id = Column(Integer, ForeignKey('school.id'))
+    created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
+
+    user = relationship(User)
+    school = relationship(School)
 
 class UserClubPositionMapping(Base):
     __tablename__ = 'user_to_club_to_position_mapping'

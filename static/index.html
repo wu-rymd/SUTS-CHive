@@ -32,12 +32,12 @@
               <div class="logo" id="main-logo">
                 <img src="img/logo.png">
               </div>
-              <p id="welcome-message"> Welcome to C-Hive! </p>
+              <p id="welcome-message" ng-bind="formmsg"> Welcome to C-Hive! </p>
             </div>
-            <div class="bottom-half" ng-show="!loggedIn">
+            <div class="bottom-half" ng-show="!loggedIn && !signingUp">
               <div id="buttons" >
                 <button id="signIn" type="button" ng-click="login(blah, lbah)" class="btn btn-outline-primary">Sign in</button>
-                <button id="signUp" type="button" class="btn btn-outline-primary">Sign up</button>
+                <button id="signUp" type="button" ng-click="signUp()" class="btn btn-outline-primary">Sign up</button>
               </div>
               <p id="swipe-message"> or search below! </p>
             </div>
@@ -62,14 +62,91 @@
 
     		  <div class="signin">
 
-    		    <button id="signIn" type="button" class="btn btn-outline-primary button-blk" ng-click="successLogin(blah, lbah)">Sign in</button>
+    		    <button id="signIn" type="button" class="btn btn-outline-primary button-blk" ng-click="successLogin(blah, lbah)">Sign in</button> <br>
+		    <button  class="btn btn-outline-primary button-blk" onclick="window.location.href=''">Back</button>
 
     		  </div>
 
 		</div>
               </form>
             </div>
-          </div>
+
+
+
+
+	  <div id="textBoxes" ng-show="signingUp">
+	    <form class="form-horizontal" role="form">
+	      <div class="panel-body">
+
+
+		
+		<!-- First -->
+		<div class="input-group input-username">
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+		  <input type="text" class="form-control" name="firstName" placeholder="First name" ng-model="regfirst"  autofocus>
+		</div>
+
+
+		<!-- Last -->
+		<div class="input-group input-username">
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+		  <input type="text" class="form-control" name="lastName" placeholder="Last name" ng-model="reglast">
+		</div>
+		
+		
+		<!-- Username -->
+		<div class="input-group input-username">
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+		  <input type="text" class="form-control" name="username" placeholder="Username" ng-model="regusername" >
+		</div>
+		
+		<!-- Email -->
+		<div class="input-group input-password">
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+		  <input type="text" class="form-control" name="email" placeholder="E-mail" ng-model="regemail" >
+		</div>
+
+		<!-- Password -->
+		<div class="input-group input-password">
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+		  <input type="password" class="form-control" name="password" placeholder="Password" ng-model="regpassword" >
+		</div>
+		
+		<!-- Reenter Password -->
+		<div class="input-group input-password">
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+		  <input type="password" class="form-control" name="password2" placeholder="Re-enter password" ng-model="regpassword2" >
+		</div>
+		
+		<!-- School -->
+		<div class="input-group input-password">
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+		  <input type="text" class="form-control" name="school" placeholder="School name" ng-model="regschool" >
+		</div>
+
+		<div class="input-group input-password">
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+		  <input type="text" class="form-control" name="schoolAddress" placeholder="School address" ng-model="regschooladdress" >
+		</div>
+
+		<br>
+		
+		<div class="form-group login-button">
+		  <!--<div class="col-sm-12 controls">
+		      <a href="#" class="btn btn-success" >Sign up</a>
+		  </div>-->
+		  <input id="buttons" type="button" ng-click="register(regfirst, reglast, regusername, regemail, regpassword, regpassword2, regschool, regschooladdress)" value="Submit">
+		  <button onclick="window.location.href=''">Back</button>
+		</div>
+		
+	      </div>
+	    </form><!-- ENd form -->     
+	  </div>
+	  </div>
+
+
+
+	  
           <div class="swipe" id="zero-to-one" ng-click="scrollTo('.high-school-search')">
             <i class="fa fa-chevron-down fa-2x"></i>
           </div>

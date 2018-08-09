@@ -290,7 +290,7 @@ def create_message():
             'id': message.id
         }
     )
-    
+
 @app.route('/message', methods=['GET'])
 def get_message():
     club_id = request.args.get('club_id')

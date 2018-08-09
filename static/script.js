@@ -2,11 +2,14 @@ var app = angular.module('chiveApp', []);
 app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     $scope.highSchools = [];
     $scope.loggedIn = false;
+    $scope.signingUp = false;
     $scope.clubs = [];
     $scope.currentHighSchoolID = null;
+    $scope.formmsg = "Welcome to C-Hive!";
+
+
     $scope.scrollTo = function(selectorString) {
 	
-	console.log(selectorString);
 	
 	$('html,body').animate({
 	    scrollTop: $(selectorString).offset().top
@@ -33,7 +36,6 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 		console.log(data[i]);
 		$scope.highSchools.push({name: data[i].name, address: data[i].address, id: i});
 	    }
-	    $scope.$apply();
 	})
 
 	$('#highSchoolResults').css('display', 'none').fadeIn(500);
@@ -57,7 +59,6 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 		    $scope.clubs.push({name: data[i].name, description: data[i].description, id: i});
 		}
 	    }
-	    $scope.$apply();
 
 	} )
 	//$scope.clubs.push({name: 'my lame club', description: 'this is a lame club', id: 2});
@@ -75,19 +76,121 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 	 $scope.scrollTo('.club-search')
 	 // TODO load all available clubs here instead
 	 $scope.currentHighSchoolID = schoolId;
-   }
+    }
+
+
+    $scope.signUp = function() {
+	$scope.signingUp = true;
+    }
     
-  $scope.login = function(username, password) {
-	  $scope.loggedIn = true;
-	 }
-	
-	//$scope.populateFeed = function(userID) {
-		//$scope.feed = [];
-		//$.getJSON('http://localhost:5000/')
-   //}
+    $scope.login = function(username, password) {
+	$scope.loggedIn = true;
+    }
+    
+    //$scope.populateFeed = function(userID) {
+    //$scope.feed = [];
+    //$.getJSON('http://localhost:5000/')
+    //}
 
     $scope.successLogin = function(username, password){
-      $scope.inExperience= true;
+	$scope.inExperience= true;
     }
+
+
+
+
+
+    $scope.register = function(firstName, lastName, username, email, password, password2, school, schoolAddress) {
+
+	// are all fields filled in?
+	if (firstName == undefined ||
+	    firstName == "" ||
+	    lastName == undefined ||
+	    lastName == "" ||
+	    username == undefined ||
+	    username == "" ||
+	    email == undefined ||
+	    email == "" ||
+	    password == undefined ||
+	    password == "" ||
+	    password2 == undefined ||
+	    password2 == "" || 
+	    school == undefined ||
+	    school == "") {
+	    
+	    $scope.formmsg = "All fields required."
+	}
+
+	
+	else if (email.indexOf('@') == -1) {
+	    $scope.formmsg = "Invalid e-mail."
+	}
+
+	else if (password != password2) {
+	    $scope.formmsg = "Passwords do not match."
+	}
+	
+	// form fields seem good from the surface...
+	// check w/ database to see if valid registration...
+	else {
+	    
+
+	    
+	    // bug: this first part does not work
+
+	    
+	    $.getJSON('http://localhost:5000/user', function(data) {
+		for (var i=0;i<data.length;i++){
+
+		    
+		    if (data[i].email == email) {
+			console.log("email match found");
+			$scope.formmsg = "E-mail already registered."
+			return;
+		    }
+
+		    else if (data[i].username == username) {
+			console.log("username match found");
+			$scope.formmsg = "That username already exists."
+			return;
+		    }
+		    
+		} // end for loop
+
+
+		
+		// end bug
+		
+
+		
+		$.ajax({
+		    url: 'http://localhost:5000/user?first_name=' + firstName + '&last_name=' + lastName + '&username=' + username + '&email=' + email + '&schoolName=' + school + '&schoolAddress=' + schoolAddress,
+		    type: 'POST',
+		    crossDomain: true,
+		});
+
+		
+		$scope.formmsg = "Account successfully created!";
+		
+		
+		
+		// TODO create entry in UserToSchoolMapping
+		
+
+		
+
+	    }); // end getJSON call
+
+	    
+	} // end else
+
+	
+    } // end register
+    
+
+
+    setTimeout(function(){
+	$scope.$apply();
+    }, 50);
 
 });
