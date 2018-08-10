@@ -11,7 +11,7 @@ app = Flask(__name__)
 db_options = {'db_file': 'my.db'}
 
 
-def get_or_create_school(session, school_name, address, email="", phone=""):
+def get_or_create_school(session, school_name, address=None, email=None, phone=None):
 
     school = session.query(School).filter(School.name == school_name).one_or_none()
     if school:
@@ -32,10 +32,8 @@ def get_or_create_position(session, admin_position):
 
 @app.route('/user', methods=['GET'])
 def get_user():
-    username = ""
-    
-    if request.args.get('username') != None:
-        username = request.args.get('username')
+
+    username = request.args.get('username', "")
     
     Session, engine = dbconnect(db_options)
     session = Session()
@@ -74,7 +72,7 @@ def create_user():
         school_id=get_or_create_school(session, j.get('schoolName'), j.get('schoolAddress')).id,
         email=j.get('email')
     )
-    print user
+
     session.add(user)
     session.flush()
     session.commit()

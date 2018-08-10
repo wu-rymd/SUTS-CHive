@@ -85,7 +85,7 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 	$scope.signingUp = true;
     }
     
-    $scope.login = function(username, password) {
+    $scope.login = function() {
 	$scope.loggedIn = true;
     }
     
@@ -94,7 +94,7 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     //$.getJSON('http://localhost:5000/')
     //}
 
-    $scope.successLogin = function(username, password){
+    $scope.successLogin = function(username){
 
 
 	$.getJSON('http://localhost:5000/user', function(data) {

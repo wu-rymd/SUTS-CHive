@@ -36,7 +36,7 @@
             </div>
             <div class="bottom-half" ng-show="!loggedIn && !signingUp">
               <div id="buttons" >
-                <button id="signIn" type="button" ng-click="login(blah, lbah)" class="btn btn-outline-primary">Sign in</button>
+                <button id="signIn" type="button" ng-click="login()" class="btn btn-outline-primary">Sign in</button>
                 <button id="signUp" type="button" ng-click="signUp()" class="btn btn-outline-primary">Sign up</button>
               </div>
               <p id="swipe-message"> or search below! </p>
@@ -62,7 +62,7 @@
 
     		  <div class="signin">
 
-    		    <button id="signIn" type="button" class="btn btn-outline-primary button-blk" ng-click="successLogin(loggedUser, 'blah')">Sign in</button> <br>
+    		    <button id="signIn" type="button" class="btn btn-outline-primary button-blk" ng-click="successLogin(loggedUser)">Sign in</button> <br>
 		    <button  class="btn btn-outline-primary button-blk" onclick="window.location.href=''">Back</button>
 
     		  </div>
