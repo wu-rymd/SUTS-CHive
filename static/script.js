@@ -180,16 +180,16 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 		for (var i=0;i<data.length;i++){
 
 		    
-		    if (data[i].email == email) {
-			console.log("email match found");
-			$scope.formmsg = "E-mail already registered."
+		    if (data[i].username == username) {
+			console.log("username match found");
+			$scope.formmsg = "That username already exists."
 			$scope.$apply();
 			return;
 		    }
 
-		    else if (data[i].username == username) {
-			console.log("username match found");
-			$scope.formmsg = "That username already exists."
+		    else if (data[i].email == email) {
+			console.log("email match found");
+			$scope.formmsg = "E-mail already registered."
 			$scope.$apply();
 			return;
 		    }
@@ -199,30 +199,36 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 
 		
 		// end bug
-		
+
+
+
 
 		$.ajax({
-		    url: 'http://localhost:5000/user?first_name=' + firstName + '&last_name=' + lastName + '&username=' + username + '&email=' + email + '&schoolName=' + school + '&schoolAddress=' + schoolAddress,
+		    url: 'http://localhost:5000/user',
 		    type: 'POST',
-		    contentType: "application/json",
+		    contentType: 'application/json',
+		    data: JSON.stringify({
+			first_name: firstName,
+			last_name: lastName,
+			username: username,
+			email: email,
+			schoolName: school,
+			schoolAddress: schoolAddress,
+		    }),
 		    crossDomain: true,
 		    success: function() {
 			console.log("SUCCESS");
-			$scope.formmsg = "Account successfully created";
+			$scope.formmsg = "Account successfully created!";
 			$scope.$apply();
 		    },
 		    error: function() {
 			console.log("ERROR");
-			$scope.formmsg = "Error creating account";
+			$scope.formmsg = "Error creating account.";
 			$scope.$apply();
 		    }
 		});
 				
 		
-		
-		// TODO create entry in UserToSchoolMapping
-		
-
 		
 
 	    }); // end getJSON call

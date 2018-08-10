@@ -50,7 +50,8 @@ def get_user():
                 'id': u.id,
                 'username': u.username,
                 'first': u.first_name,
-                'last': u.last_name
+                'last': u.last_name,
+                'email': u.email,
             }
         )
     #users = map(lambda u: dict(u), users)
@@ -61,8 +62,7 @@ def get_user():
 def create_user():
     if request.mimetype != 'application/json':
         raise Exception('Content-Type is not "application/json".')
-    # j = request.get_json()
-    j = request.args
+    j = request.get_json()
     Session, engine = dbconnect(db_options)
     session = Session()
     user = User(
