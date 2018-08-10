@@ -20,3 +20,11 @@ curl -H 'Content-Type: application/json' -d '{"name":"some school","address":"12
 # get schools
 curl http://localhost:5000/schools
 ```
+
+
+seed database with data:
+```bash
+./scripts/seed.sh
+```
+
+_note: make sure you have [jq](https://stedolan.github.io/jq/download/) installed_

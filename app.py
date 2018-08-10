@@ -11,7 +11,7 @@ app = Flask(__name__)
 db_options = {'db_file': 'my.db'}
 
 
-def get_or_create_school(session, school_name, address, email, phone):
+def get_or_create_school(session, school_name, address=None, email=None, phone=None):
 
     school = session.query(School).filter(School.name == school_name).one_or_none()
     if school:
@@ -49,6 +49,19 @@ def get_user():
     #users = map(lambda u: dict(u), users)
     return jsonify(ret_users)
 
+@app.route('/subscribe', methods=['POST'])
+def add_user_to_club():
+    user_id = request.args.get('user_id')
+    club_id = request.args.get('club_id')
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    mapping = UserClubPositionMapping(user_id=user_id, club_id=club_id)
+    session.add(mapping)
+    session.commit()
+    return jsonify({
+        'id': mapping.id
+    })
+
 
 @app.route('/user', methods=['POST'])
 def create_user():
@@ -61,7 +74,6 @@ def create_user():
         first_name=j.get('first_name'),
         last_name=j.get('last_name'),
         username=j.get('username'),
-        password=hashString(j.get('password')),
         school_id=get_or_create_school(session, j.get('school')).id,
         email=j.get('email')
     )
@@ -245,7 +257,7 @@ def create_school():
     return jsonify(
         {
             'id': school_id,
-            'name': j.get('school_name'),
+            'name': j.get('name'),
             'address': j.get('address'),
             'email': j.get('email'),
             'phone': j.get('phone')
@@ -310,7 +322,7 @@ def get_message():
     response = Response(json.dumps(ret_messages))
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
-  
+
 @app.route('/position', methods=['POST'])
 def create_position():
     if request.mimetype != 'application/json':

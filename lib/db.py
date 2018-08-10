@@ -23,9 +23,9 @@ class School(Base):
     __tablename__ = 'school'
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False, unique=True)
-    address = Column(String(500), nullable=False)
-    email = Column(String(100), nullable=False)
-    phone = Column(String(11), nullable=False)
+    address = Column(String(500), nullable=True)
+    email = Column(String(100), nullable=True)
+    phone = Column(String(11), nullable=True)
     created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
 
 
@@ -41,7 +41,6 @@ class User(Base):
     created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
 
     school = relationship(School)
-
 
 class Club(Base):
     __tablename__ = 'club'
@@ -70,7 +69,6 @@ class UserToClubMapping(Base):
     user = relationship(User)
     club = relationship(Club)
 
-
 class UserToSchoolMapping(Base):
     __tablename__ = 'user_to_school_mapping'
     id = Column(Integer, primary_key=True)
@@ -92,16 +90,6 @@ class UserClubPositionMapping(Base):
     user = relationship(User)
     club = relationship(Club)
     position = relationship(Position)
-
-class SchoolToClubMapping(Base):
-    __tablename__ = 'school_to_club_mapping'
-    id = Column(Integer, primary_key=True)
-    school_id = Column(Integer, ForeignKey('school.id'))
-    club_id = Column(Integer, ForeignKey('club.id'))
-    created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
-
-    school = relationship(School)
-    club = relationship(Club)
 
 class Message(Base):
     __tablename__ = 'message'
