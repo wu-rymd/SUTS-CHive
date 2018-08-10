@@ -59,16 +59,6 @@ class Position(Base):
     position_type = Column(String(100), nullable=False, unique=True)
     created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
 
-class UserToClubMapping(Base):
-    __tablename__ = 'user_to_club_mapping'
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    club_id = Column(Integer, ForeignKey('club.id'))
-    created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
-
-    user = relationship(User)
-    club = relationship(Club)
-
 class UserToSchoolMapping(Base):
     __tablename__ = 'user_to_school_mapping'
     id = Column(Integer, primary_key=True)
@@ -84,7 +74,7 @@ class UserClubPositionMapping(Base):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
     club_id = Column(Integer, ForeignKey('club.id'))
-    position_id = Column(Integer, ForeignKey('position.id'))
+    position_id = Column(Integer, ForeignKey('position.id'), nullable=True)
     created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
 
     user = relationship(User)

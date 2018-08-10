@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template, Response, send_from_directory
-from lib.db import dbconnect, db_create, School, User, Club, UserToClubMapping, Message, Position, UserClubPositionMapping
+from lib.db import dbconnect, db_create, School, User, Club, Message, Position, UserClubPositionMapping
 
 import json
 import logging
@@ -31,7 +31,7 @@ def get_or_create_position(session, admin_position):
     return position.id
 
 def userClubs(session, user_id):
-    club_ids = session.query(UserToClubMapping).filter(UserToClubMapping.user_id == user_id).all()
+    club_ids = session.query(UserClubPositionMapping).filter(UserClubPositionMapping.user_id == user_id).all()
     return club_ids
 
 @app.route('/user', methods=['GET'])
@@ -317,7 +317,7 @@ def create_message():
 
 @app.route('/message', methods=['GET'])
 def get_message():
-    if (request.arg.get('club_id')):
+    if (request.args.get('club_id')):
         club_id = request.args.get('club_id')
         Session, engine = dbconnect(db_options)
         session = Session()
@@ -335,26 +335,25 @@ def get_message():
         response = Response(json.dumps(ret_messages))
         response.headers['Access-Control-Allow-Origin'] = '*'
         return response
-    elif (request.arg.get('user_id')):
+    elif (request.args.get('user_id')):
         Session, engine = dbconnect(db_options)
         session = Session()
-        messages = session.query(Message).all()
-        print (messages)
+        #print (messages)
         user_id = request.args.get('user_id')
         print (user_id)
         ret_messages = []
-        allClubs = userClubs(user_id)
+        allClubs = userClubs(session,user_id)
         print (allClubs)
         for c in allClubs:
+            messages = session.query(Message).filter(Message.club_id == c.id).all()
             for m in messages:
-                if (c == m.club_id):
-                    ret_messages.append(
-                        {
-                            'id': m.id,
-                            'club_id': m.club_id,
+                ret_messages.append(
+                    {
+                        'id': m.id,
+                        'club_id': m.club_id,
                             'message': m.message
-                        }
-                    )
+                    }
+                )
         response = Response(json.dumps(ret_messages))
         response.headers['Access-Control-Allow-Origin'] = '*'
         return response
