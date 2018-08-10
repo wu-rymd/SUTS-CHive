@@ -48,7 +48,7 @@
 
     		  <!-- Username -->
     		  <div class="username">
-    		    <span class="icon" ><img src="img/email.png" style="width:80%;"></span><input type="text" name="username" placeholder="username" autofocus>
+    		    <span class="icon" ><img src="img/email.png" style="width:80%;"></span><input ng-model="loggedUser" type="text" name="username" placeholder="username" autofocus>
     		  </div>
 
     		  <!-- Password -->
@@ -62,7 +62,7 @@
 
     		  <div class="signin">
 
-    		    <button id="signIn" type="button" class="btn btn-outline-primary button-blk" ng-click="successLogin(blah, lbah)">Sign in</button> <br>
+    		    <button id="signIn" type="button" class="btn btn-outline-primary button-blk" ng-click="successLogin(loggedUser, 'blah')">Sign in</button> <br>
 		    <button  class="btn btn-outline-primary button-blk" onclick="window.location.href=''">Back</button>
 
     		  </div>
