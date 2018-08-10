@@ -1,3 +1,6 @@
+// access logged in user_id from other .js files
+var loggedInID;
+
 var app = angular.module('chiveApp', []);
 app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     $scope.highSchools = [];
@@ -6,6 +9,11 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     $scope.clubs = [];
     $scope.currentHighSchoolID = null;
     $scope.formmsg = "Welcome to C-Hive!";
+
+    
+    // store the logged in user_id on the clientside
+    $scope.loggedID;
+    loggedInID = $scope.loggedID;
 
 
     $scope.scrollTo = function(selectorString) {
@@ -102,6 +110,11 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 	    for (var i = 0; i < data.length; i++) {
 
 		if (data[i].username == username) {
+
+		    // store the logged in user_id on the clientside
+		    $scope.loggedID = data[i].id;
+		    loggedInID = $scope.loggedID;
+		    
 		    $scope.inExperience= true;
 		    $scope.$apply();
 		    return;
