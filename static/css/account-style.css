@@ -1,0 +1,69 @@
+/* CSS file for Account Page */
+/* All decorations are independent */
+
+body {
+    margin: 20px;
+}
+
+.container-fluid {
+    margin-bottom: 15px;
+    font-size: 30px;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    min-height: 30px;
+}
+
+.container-fluid:first-of-type {
+    border: none;
+}
+
+.container-fluid:last-of-type {
+    padding: 15px;
+}
+
+
+.greetUser {
+    display: grid;
+    
+    grid-template-columns: 90% 10%;
+    grid-template-rows: 100%;
+
+    align-items: center;
+}
+
+img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+
+.card {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+}
+
+.card-text {
+    font-size: 25px;
+}
+
+
+body > p {
+    margin: 30px 15px 15px;
+}
+
+p {
+    margin: 15px;
+}
+
+
+pre {
+    display: inline;
+    font-weight: bold;
+}
+
+
+.createClub {
+    display: block;
+    margin: auto;
+}
+
