@@ -15,7 +15,7 @@ python ./app.py
 
 ```bash
 # create school
-curl -H 'Content-Type: application/json' -d '{"name":"some school","address":"123 park"}' -X POST http://localhost:5000/schools
+curl -H 'Content-Type: application/json' -d '{"name":"some school","address":"123 park","email":"","phone":""}' -X POST http://localhost:5000/schools
 
 # get schools
 curl http://localhost:5000/schools

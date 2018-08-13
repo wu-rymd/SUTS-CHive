@@ -1,0 +1,98 @@
+/* CSS file for create club page */
+/* All decorations are independent */
+
+body {
+    margin: 0;
+}
+
+
+#screen {
+    display: grid;
+
+    width: 100vw;
+    height: 100vh;
+
+    grid-template-columns: 1% 98% 1%;
+    grid-template-rows: 1% 98% 1%;
+
+    place-items: center;
+
+}
+
+
+#container {
+    grid-column-start: 2;
+    grid-row-start: 2;
+
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    place-items: center;
+    grid-template-columns: auto 70% auto;
+    grid-template-rows: auto 10% 2% 5% 5% 5% 1% 5% 1% 5% 1% 5% 3% 3% 1% 3% auto;
+}
+
+
+#logo {
+    grid-column-start: 2;
+    grid-row-start: 2;
+}
+
+img {
+    max-height: 100%;
+}
+
+
+#message {
+    grid-column-start: 2;
+    grid-row-start: 4;
+}
+
+#nameField {
+    grid-column-start: 2;
+    grid-row-start: 6;
+}
+
+#schoolNameField {
+    grid-column-start: 2;
+    grid-row-start: 8;
+}
+
+
+#schoolAddressField {
+    grid-column-start: 2;
+    grid-row-start: 10;
+}
+
+
+#descriptionField {
+    grid-column-start: 2;
+    grid-row-start: 12;
+}
+
+input {
+    width: 100%;
+}
+
+#button1 {
+    grid-column-start: 2;
+    grid-row-start: 14;
+}
+
+.button1 {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+
+#button2 {
+    grid-column-start: 2;
+    grid-row-start: 16;
+}
+
+p {
+    font-family: Montserrat;
+    text-align: center;
+    font-size: 50px;
+}
