@@ -5,6 +5,7 @@ import json
 import logging
 import hashlib
 import os
+from lib.calendar import create_calendar
 
 app = Flask(__name__)
 
@@ -168,13 +169,15 @@ def create_club():
     if request.mimetype != 'application/json':
         raise Exception('Content-Type is not "application/json".')
     j = request.get_json()
+    calendar_id = create_calendar(j.get('name'))
     Session, engine = dbconnect(db_options)
     session = Session()
     club = Club(
+        calendar_id=calendar_id,
         name=j.get('name'),
         school_id=j.get('school_id'),
         description=j.get('description'),
-        img_type = j.get('img_type')
+        img_type=j.get('img_type')
     )
     session.add(club)
     session.flush()
