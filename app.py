@@ -1,19 +1,26 @@
-from flask import Flask, request, jsonify, render_template, Response, send_from_directory
+from flask import Flask, request, jsonify, render_template, Response, send_from_directory, session
+from flask_session import Session
 from lib.db import dbconnect, db_create, School, User, Club, UserToClubMapping, Message, Position, UserClubPositionMapping
 
 import json
 import logging
-import hashlib
 import os
 
 app = Flask(__name__)
 
+
+# config for Flask-Session
+SESSION_TYPE = 'filesystem'
+app.secret_key = '046b48a135cb6d14905c4bbd632bba23f4e56084877851e1bc2711d607a87d99'
+app.config.from_object(__name__)
+Session(app)
+
 db_options = {'db_file': 'my.db'}
 
+# must be "" or else IntegrityError: (sqlite3.IntegrityError) NOT NULL constraint failed
+def get_or_create_school(session, school_name, address="", email="", phone=""):
 
-def get_or_create_school(session, school_name, address=None, email=None, phone=None):
-
-    school = session.query(School).filter(School.name == school_name).one_or_none()
+    school = session.query(School).filter(School.address == address).one_or_none()
     if school:
         return school
     school = School(name=school_name, address=address, email = email, phone = phone)
@@ -42,19 +49,21 @@ def get_user():
         users = session.query(User).filter(User.username == username).all()
     else:
         users = session.query(User).all()
-    
+        
     ret_users = []
     for u in users:
         ret_users.append(
             {
                 'id': u.id,
                 'username': u.username,
-                'first': u.first_name,
-                'last': u.last_name,
+                'first_name': u.first_name,
+                'last_name': u.last_name,
                 'email': u.email,
+                'school_id': u.school_id,
+                'created_on': u.created_on,
             }
         )
-    #users = map(lambda u: dict(u), users)
+        #users = map(lambda u: dict(u), users)
     return jsonify(ret_users)
 
 @app.route('/subscribe', methods=['POST'])
@@ -117,8 +126,8 @@ def modify_user():
             matchingUser.school_id=j.get('school_id')
         if j.get('email') != None:
             matchingUser.email=j.get('email')
-        session.flush()
-        session.commit()
+            session.flush()
+            session.commit()
         return jsonify(
             {
                 'id': matchingUser.id
@@ -154,6 +163,30 @@ def delete_user():
         return response
 
 
+# purposeful for matching club ID to other club attributes; debugging
+@app.route('/clubs', methods=['GET'])
+def all_clubs():
+
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    clubs = session.query(Club).all()
+    ret_clubs = []
+    for c in clubs:
+        ret_clubs.append(
+            {
+                'id': c.id,
+                'name': c.name,
+                'description': c.description,
+                'school_id': c.school_id,
+            }
+        )
+
+    response = jsonify(ret_clubs)
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
+
+
+# query using school_id
 @app.route('/club', methods=['GET'])
 def get_club():
 
@@ -184,12 +217,21 @@ def create_club():
     j = request.get_json()
     Session, engine = dbconnect(db_options)
     session = Session()
-    club = Club(
-        name=j.get('name'),
-        school_id=j.get('school_id'),
-        description=j.get('description'),
-        img_type = j.get('img_type')
-    )
+
+    if j.get('img_type') != None:
+        club = Club(
+            name=j.get('name'),
+            school_id=get_or_create_school(session, j.get('schoolName'), j.get('schoolAddress')).id,
+            description=j.get('description'),
+            img_type = j.get('img_type')
+        )
+    else:
+        club = Club(
+            name=j.get('name'),
+            school_id=get_or_create_school(session, j.get('schoolName'), j.get('schoolAddress')).id,
+            description=j.get('description'),
+            img_type="",
+        )
     session.add(club)
     session.flush()
     session.commit()
@@ -260,7 +302,7 @@ def create_school():
     j = request.get_json()
     Session, engine = dbconnect(db_options)
     session = Session()
-    school_id = get_or_create_school(session, j['name'], j['address'], j['email'], j['address']).id
+    school_id = get_or_create_school(session, j['name'], j['address'], j['email'], j['phone']).id
     session.commit()
     return jsonify(
         {
@@ -282,6 +324,7 @@ def get_schools():
     formatted_schools = []
     for s in schools:
         formatted_schools.append({
+            'id': s.id,
             'name': s.name,
             'address': s.address,
             'email': s.email,
@@ -289,7 +332,7 @@ def get_schools():
         })
     response = Response(json.dumps(formatted_schools))
     response.headers['Access-Control-Allow-Origin'] = '*'
-    return response
+    return response;
 
 @app.route('/message', methods=['POST'])
 def create_message():
@@ -327,8 +370,8 @@ def get_message():
                 'message': m.message
             }
         )
-    response = Response(json.dumps(ret_messages))
-    response.headers['Access-Control-Allow-Origin'] = '*'
+        response = Response(json.dumps(ret_messages))
+        response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
 @app.route('/position', methods=['POST'])
@@ -357,8 +400,8 @@ def get_positions():
         formatted_positions.append({
             'position_type': p.position_type
         })
-    response = Response(json.dumps(formatted_positions))
-    response.headers['Access-Control-Allow-Origin'] = '*'
+        response = Response(json.dumps(formatted_positions))
+        response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
 @app.route('/adminuser', methods=['POST'])
@@ -382,6 +425,8 @@ def create_admin():
         }
     )
 
+
+
 @app.route('/adminuser', methods=['GET'])
 def get_admins():
     Session, engine = dbconnect(db_options)
@@ -400,9 +445,9 @@ def get_admins():
                     'username': u.username,
                     'school_id': u.school_id,
                     'email': u.email
-        })
-    response = Response(json.dumps(formatted_admins))
-    response.headers['Access-Control-Allow-Origin'] = '*'
+                })
+                response = Response(json.dumps(formatted_admins))
+                response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
 @app.route('/')
@@ -411,6 +456,137 @@ def index():
         os.path.join(os.path.abspath(os.path.dirname(__file__)), 'static'),
         'index.html'
     )
+
+
+
+
+
+# Subscribing/unsubscribing user from club
+
+@app.route('/subscriptions', methods=['GET'])
+def subscriptions():    
+    Session, engine = dbconnect(db_options)
+    session = Session()
+
+    subscriptions = session.query(UserToClubMapping).all()
+    
+    ret_subs = []
+    for s in subscriptions:
+        ret_subs.append(
+            {
+                'id': s.id,
+                'user_id': s.user_id,
+                'club_id': s.club_id,
+                'created_on': s.created_on,
+            }
+        )
+        #users = map(lambda u: dict(u), users)
+    return jsonify(ret_subs)
+
+
+@app.route('/subscribe', methods=['POST'])
+def subscribe():
+    if request.mimetype != 'application/json':
+        raise Exception('Content-Type is not "application/json".')
+    j = request.get_json()
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    link = UserToClubMapping(
+        user_id=j.get('user_id'),
+        club_id=j.get('club_id'),
+    )
+
+    session.add(link)
+    session.flush()
+    session.commit()
+    return jsonify(
+        {
+            'user_id': link.user_id,
+            'club_id': link.club_id,
+        }
+    )
+
+@app.route('/unsubscribe', methods=['DELETE'])
+def unsubscribe():
+    if request.mimetype != 'application/json':
+        raise Exception('Content-Type is not "application/json".')
+    j = request.get_json()
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    userID = j.get('user_id')
+    clubID = j.get('club_id')
+    # comma separated list of bool expr are AND
+    matchingLink = session.query(UserToClubMapping).filter(UserToClubMapping.user_id == userID, UserToClubMapping.club_id == clubID).one_or_none()
+    if matchingLink:
+        session.delete(matchingLink)
+        session.flush()
+        session.commit()
+        return jsonify(
+            {
+                'user_id': matchingLink.user_id,
+                'club_id': matchingLink.club_id,
+            }
+        )
+    else:
+        response = jsonify( {'message': 'Subscription between user ID and club ID not found'} )
+        response.status_code = 404
+        return response
+
+
+
+
+
+
+
+# Flask-Session routes
+
+@app.route('/setLogin', methods=['POST'])
+def set():
+
+    if request.mimetype != 'application/json':
+        raise Exception('Content-Type is not "application/json".')
+    j = request.get_json()
+
+    session['loggedinID'] = j.get('id', "")
+    session['loggedinFirstName'] = j.get('first_name', "")
+    session['loggedinLastName'] = j.get('last_name', "")
+    session['loggedinUsername'] = j.get('username', "")
+    session['loggedinSchoolId'] = j.get('school_id', "")
+    session['loggedinEmail'] = j.get('email', "")
+    session['loggedinCreatedOn'] = j.get('created_on', "")
+
+
+    
+    return jsonify([
+        {
+            'loggedinID': session['loggedinID'],
+            'loggedinFirstName': session['loggedinFirstName'],
+            'loggedinLastName': session['loggedinLastName'],
+            'loggedinUsername': session['loggedinUsername'],
+            'loggedinSchoolId': session['loggedinSchoolId'],
+            'loggedinEmail': session['loggedinEmail'],
+            'loggedinCreatedOn': session['loggedinCreatedOn'],
+        }
+    ])
+
+
+@app.route('/getLogin', methods=['GET'])
+def get():
+    try:
+        return jsonify(
+            {
+                'loggedinID': session['loggedinID'],
+                'loggedinFirstName': session['loggedinFirstName'],
+                'loggedinLastName': session['loggedinLastName'],
+                'loggedinUsername': session['loggedinUsername'],
+                'loggedinSchoolId': session['loggedinSchoolId'],
+                'loggedinEmail': session['loggedinEmail'],
+                'loggedinCreatedOn': session['loggedinCreatedOn'],
+            }
+        )
+    except:
+        return jsonify( {'message': 'Not logged in'} )
+
 
 if __name__ == '__main__':
     db_create(db_options)

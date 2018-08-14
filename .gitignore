@@ -8,3 +8,6 @@
 *.db
 server/venv
 venv
+
+# Session file
+flask_session/*
