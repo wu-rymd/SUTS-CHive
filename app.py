@@ -34,6 +34,10 @@ def userClubs(session, user_id):
     club_ids = session.query(UserClubPositionMapping).filter(UserClubPositionMapping.user_id == user_id).all()
     return club_ids
 
+def clubMessages(session, club_id):
+    messages = session.query(Message).filter(Message.club_id == club_id).all()
+    return messages 
+
 @app.route('/user', methods=['GET'])
 def get_user():
 
@@ -317,13 +321,13 @@ def create_message():
 
 @app.route('/message', methods=['GET'])
 def get_message():
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    ret_messages = []
+
     if (request.args.get('club_id')):
         club_id = request.args.get('club_id')
-        Session, engine = dbconnect(db_options)
-        session = Session()
-        messages = session.query(Message).filter(Message.club_id == club_id).all()
-        #print (messages)
-        ret_messages = []
+        messages = clubMessages(session, club_id)       
         for m in messages:
             ret_messages.append(
                 {
@@ -332,31 +336,23 @@ def get_message():
                     'message': m.message
                 }
             )
-        response = Response(json.dumps(ret_messages))
-        response.headers['Access-Control-Allow-Origin'] = '*'
-        return response
     elif (request.args.get('user_id')):
-        Session, engine = dbconnect(db_options)
-        session = Session()
-        #print (messages)
         user_id = request.args.get('user_id')
-        print (user_id)
-        ret_messages = []
         allClubs = userClubs(session,user_id)
-        print (allClubs)
         for c in allClubs:
-            messages = session.query(Message).filter(Message.club_id == c.id).all()
+            messages = clubMessages(session, club_id)
             for m in messages:
                 ret_messages.append(
                     {
                         'id': m.id,
                         'club_id': m.club_id,
-                            'message': m.message
+                        'message': m.message
                     }
                 )
-        response = Response(json.dumps(ret_messages))
-        response.headers['Access-Control-Allow-Origin'] = '*'
-        return response
+
+    response = jsonify(ret_messages)        
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 
 
 @app.route('/position', methods=['POST'])
