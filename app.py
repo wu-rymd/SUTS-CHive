@@ -32,10 +32,17 @@ def get_or_create_position(session, admin_position):
 
 @app.route('/user', methods=['GET'])
 def get_user():
-    username = request.args.get('username')
+
+    username = request.args.get('username', "")
+    
     Session, engine = dbconnect(db_options)
     session = Session()
-    users = session.query(User).filter(User.username == username).all()
+
+    if username != "":
+        users = session.query(User).filter(User.username == username).all()
+    else:
+        users = session.query(User).all()
+    
     ret_users = []
     for u in users:
         ret_users.append(
@@ -43,7 +50,8 @@ def get_user():
                 'id': u.id,
                 'username': u.username,
                 'first': u.first_name,
-                'last': u.last_name
+                'last': u.last_name,
+                'email': u.email,
             }
         )
     #users = map(lambda u: dict(u), users)
@@ -75,8 +83,10 @@ def create_user():
         last_name=j.get('last_name'),
         username=j.get('username'),
         school_id=get_or_create_school(session, j.get('school')).id,
+        school_id=get_or_create_school(session, j.get('schoolName'), j.get('schoolAddress')).id,
         email=j.get('email')
     )
+
     session.add(user)
     session.flush()
     session.commit()
@@ -103,8 +113,6 @@ def modify_user():
             matchingUser.last_name=j.get('last_name')
         if j.get('username') != None:
             matchingUser.username=j.get('username')
-        if j.get('password') != None:
-            matchingUser.password=hashString(j.get('password'))
         if j.get('school_id') != None:
             matchingUser.school_id=j.get('school_id')
         if j.get('email') != None:

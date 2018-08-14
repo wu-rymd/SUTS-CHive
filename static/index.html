@@ -36,7 +36,7 @@
             </div>
             <div class="bottom-half" ng-show="!loggedIn && !signingUp">
               <div id="buttons" >
-                <button id="signIn" type="button" ng-click="login(blah, lbah)" class="btn btn-outline-primary">Sign in</button>
+                <button id="signIn" type="button" ng-click="login()" class="btn btn-outline-primary">Sign in</button>
                 <button id="signUp" type="button" ng-click="signUp()" class="btn btn-outline-primary">Sign up</button>
               </div>
               <p id="swipe-message"> or search below! </p>
@@ -48,7 +48,7 @@
 
     		  <!-- Username -->
     		  <div class="username">
-    		    <span class="icon" ><img src="img/email.png" style="width:80%;"></span><input type="text" name="username" placeholder="username" autofocus>
+    		    <span class="icon" ><img src="img/email.png" style="width:80%;"></span><input ng-model="loggedUser" type="text" name="username" placeholder="username" autofocus>
     		  </div>
 
     		  <!-- Password -->
@@ -62,7 +62,8 @@
 
     		  <div class="signin">
 
-    		    <button id="signIn" type="button" class="btn btn-outline-primary button-blk" ng-click="successLogin(blah, lbah)">Sign in</button> <br>
+
+    		<button id="signIn" type="button" class="btn btn-outline-primary button-blk" ng-click="successLogin(loggedUser)">Sign in</button> <br>
 		    <button  class="btn btn-outline-primary button-blk" onclick="window.location.href=''">Back</button>
 
     		  </div>
@@ -135,8 +136,10 @@
 		  <!--<div class="col-sm-12 controls">
 		      <a href="#" class="btn btn-success" >Sign up</a>
 		  </div>-->
-		  <input id="buttons" type="button" ng-click="register(regfirst, reglast, regusername, regemail, regpassword, regpassword2, regschool, regschooladdress)" value="Submit">
-		  <button onclick="window.location.href=''">Back</button>
+
+		  
+		  <input id="buttons" class="btn btn-outline-primary button-blk" type="button" ng-click="register(regfirst, reglast, regusername, regemail, regpassword, regpassword2, regschool, regschooladdress)" value="Submit"> <br>
+		  <button class="btn btn-outline-primary button-blk" onclick="window.location.href=''">Back</button>
 		</div>
 		
 	      </div>
