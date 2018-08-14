@@ -22,8 +22,8 @@ def db_create(options):
 class School(Base):
     __tablename__ = 'school'
     id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
-    address = Column(String(500), nullable=False, unique=True)
+    name = Column(String(250), nullable=False, unique=True)
+    address = Column(String(500), nullable=False)
     email = Column(String(100), nullable=False)
     phone = Column(String(11), nullable=False)
     created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
@@ -50,6 +50,9 @@ class Club(Base):
     school_id = Column(Integer, ForeignKey('school.id'))
     description = Column(String(1024), nullable=False)
     img_type = Column(String(100), nullable=True)
+    category = Column(String(100), nullable=False)
+    location = Column(String(256), nullable=False)
+    usualTime = Column(String(256), nullable=False)
     created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
 
     school = relationship(School)

@@ -43,21 +43,43 @@
 	      <input type="text" name="clubName" placeholder="Club name" class="form-control input-lg" ng-model="clubName">
 	    </div>
 
-	    <div id="schoolNameField" class="input-group input-group-lg"> 
-	      <input type="text" name="schoolName" placeholder="School name" class="form-control input-lg" ng-model="schoolName">
-	    </div>
-
-
-	    <div id="schoolAddressField" class="input-group input-group-lg"> 
-	      <input type="text" name="schoolAddress" placeholder="School address" class="form-control input-lg" ng-model="schoolAddress">
-	    </div>
-
-	    <div id="descriptionField" class="input-group input-group-lg">
+	    <div id="descriptionField" class="input-group input-group-lg"> 
 	      <input type="text" name="description" placeholder="Short description" class="form-control input-lg" ng-model="description">
 	    </div>
 
+	    <div id="categoryField">
+	      
+	      <select id="category" ng-model="category">
+		<option value="" selected disabled> Choose a category... </option>
+		<option value="Athletics"> Athletics </option>
+		<option value="Computer Science"> Computer Science </option>
+		<option value="Community Service"> Community Service </option>
+		<option value="Cultural/Religious"> Cultural/Religious </option>
+		<option value="Education"> Education </option>
+		<option value="Engineering"> Engineering </option>
+		<option value="Gaming"> Gaming </option>
+		<option value="Government"> Government </option>
+		<option value="Hobbies"> Hobbies </option>
+		<option value="Music/Arts"> Music/Arts </option>
+		<option value="Publications"> Publications </option>
+		<option value="Science"> Science </option>
+		<option value="Youth Activism"> Youth Activism </option> 
+	      </select>
+
+	    </div>
+
+	    
+	    <div id="locationField" class="input-group input-group-lg">
+	      <input type="text" name="location" placeholder="Usual meeting place" class="form-control input-lg" ng-model="location">
+	    </div>
+	    
+	    <div id="timeField" class="input-group input-group-lg">
+	      <input type="text" name="time" placeholder="Usual meeting time" class="form-control input-lg" ng-model="usualTime">
+	    </div>
+	    
+
 	    <div id="button1" class="btn-group-vertical">
-	      <div class="btn btn-outline-primary button-blk button1" ng-click="createClub(clubName, schoolName, schoolAddress, description)"> Submit </div>
+	      <div class="btn btn-outline-primary button-blk button1" ng-click="createClub(clubName, description, category, location, usualTime)"> Submit </div>
 	    </div>
 
 

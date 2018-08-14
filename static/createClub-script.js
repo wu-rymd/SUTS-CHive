@@ -1,5 +1,4 @@
 // JavaScript file for create club page
-// Independent file
 
 
 
@@ -8,17 +7,19 @@ app.controller('createClubControl', function($scope) {
 
     $scope.message = "Register your club here!";
 
-    $scope.createClub = function(clubName, schoolName, schoolAddress, description) {
+    $scope.createClub = function(clubName, description, category, location, usualTime) {
 
 	// are all fields filled in?
 	if (clubName == undefined ||
 	    clubName == "" ||
-	    schoolName == undefined ||
-	    schoolName == "" ||
-	    schoolAddress == undefined ||
-	    schoolAddress == "" ||
 	    description == undefined ||
-	    description == "") {
+	    description == "" ||
+	    category == undefined ||
+	    category == "" ||
+	    location == undefined ||
+	    location == "" ||
+	    usualTime == undefined ||
+	    usualTime == "") {
 	    
 	    $scope.message = "All fields required."
 	}
@@ -28,18 +29,11 @@ app.controller('createClubControl', function($scope) {
 	// check w/ database to see if valid registration...
 	else {
 
-	    var matchSchoolId;
+	    var attendSchoolId;
 	    var getOut = false;
-	    $.getJSON('http://localhost:5000/schools', function(data) {
-		console.log("request returned");
-		for (var i=0;i<data.length;i++){
+	    $.getJSON('http://localhost:5000/getLogin', function(data) {
 
-		    if (data[i].name == schoolName && data[i].address == schoolAddress) {
-			matchSchoolId = data[i].id;
-			break;
-		    }
-
-		} // end for loop
+		attendSchoolId = data.loggedinSchoolId;
 
 	    })
 		.done( function(data) {
@@ -47,18 +41,14 @@ app.controller('createClubControl', function($scope) {
 		    $.getJSON('http://localhost:5000/clubs', function(data) {
 			for (var i = 0; i < data.length; i++) {
 
-			    console.log(data[i].name);
-			    console.log(clubName);
-			    console.log(data[i].school_id);
-			    console.log(matchSchoolId);
-			    if (data[i].name == clubName && data[i].school_id == matchSchoolId){
+			    if (data[i].name == clubName && data[i].school_id == attendSchoolId){
 				getOut = true;
 				$scope.message = "That club already exists!";
 				$scope.$apply();
 				return;
 			    }
 
-		
+		 
 			}  // end for loop
 
 		    })
@@ -74,9 +64,11 @@ app.controller('createClubControl', function($scope) {
 				contentType: 'application/json',
 				data: JSON.stringify({
 				    name : clubName,
-				    schoolName : schoolName,
-				    schoolAddress : schoolAddress,
-				    description : description,
+				    school_id: attendSchoolId,
+				    description: description,
+				    category: category,
+				    location: location,
+				    usualTime: usualTime,
 				}),
 				crossDomain: true,
 				success: function() {
