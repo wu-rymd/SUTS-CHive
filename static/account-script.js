@@ -6,6 +6,7 @@
 var app = angular.module('accountApp', []);
 app.controller('accountControl', function($scope, $window) {
     $scope.loggedID;
+    $scope.loggedSchoolId;
     $scope.clubs = [];
 
     $.getJSON('http://localhost:5000/getLogin', function(data) {
@@ -17,6 +18,7 @@ app.controller('accountControl', function($scope, $window) {
 		$.getJSON('http://localhost:5000/schools', function(schoolData) {
 		    for (var i = 0; i < schoolData.length; i++) {
 			if (schoolData[i].id == data.loggedinSchoolId) {
+			    $scope.loggedSchoolId = schoolData[i].id;
 			    $('#schoolName').html("You attend <b>" + schoolData[i].name + "</b>");
 			    break;
 			}
@@ -72,7 +74,7 @@ app.controller('accountControl', function($scope, $window) {
 			clubIDs.push(data[i].club_id);
 		}
 
-
+		console.log('a');
 	    })
 		.done( function(data) {
 
@@ -83,7 +85,7 @@ app.controller('accountControl', function($scope, $window) {
 		    }
 
 		    
-		    $.getJSON('http://localhost:5000/clubs', function(data) {
+		    $.getJSON('http://localhost:5000/club?school_id=' + $scope.loggedSchoolId, function(data) {
 
 			for (var i = 0; i < clubIDs.length; i++) {
 			    for (var j = 0; j < data.length; j++) {
@@ -98,7 +100,8 @@ app.controller('accountControl', function($scope, $window) {
 
 
 
-		});
+		    console.log('b');
+		})
 
 	});
     
@@ -106,7 +109,7 @@ app.controller('accountControl', function($scope, $window) {
     $scope.unsubscribe = function(userId, clubId) {
 
 	
-	// remove link btwn userID and clubID in UserToClub mapping table
+	// remove link btwn userID and clubID in UserClubPosition mapping table
 	$.ajax({
 	    url: 'http://localhost:5000/unsubscribe',
 	    type: 'DELETE',
@@ -116,6 +119,7 @@ app.controller('accountControl', function($scope, $window) {
 		club_id: clubId,
 	    }),
 	    crossDomain: true,
+	    success: function() { console.log("SUCCESS"); },
 	});
 
 

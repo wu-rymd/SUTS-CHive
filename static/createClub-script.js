@@ -10,17 +10,12 @@ app.controller('createClubControl', function($scope) {
     $scope.createClub = function(clubName, description, category, location, usualTime) {
 
 	// are all fields filled in?
-	if (clubName == undefined ||
-	    clubName == "" ||
-	    description == undefined ||
-	    description == "" ||
-	    category == undefined ||
-	    category == "" ||
-	    location == undefined ||
-	    location == "" ||
-	    usualTime == undefined ||
-	    usualTime == "") {
-	    
+	if ( clubName.$invalid ||
+	     description.$invalid ||
+	     category.$invalid ||
+	     location.$invalid ||
+	     usualTime.$invalid ) {
+	   
 	    $scope.message = "All fields required."
 	}
 
@@ -37,17 +32,24 @@ app.controller('createClubControl', function($scope) {
 
 	    })
 		.done( function(data) {
-		    
-		    $.getJSON('http://localhost:5000/clubs', function(data) {
+
+		    // check if already exists - look in attending school
+		    $.getJSON('http://localhost:5000/club?school_id=' + attendSchoolId, function(data) {
 			for (var i = 0; i < data.length; i++) {
 
-			    if (data[i].name == clubName && data[i].school_id == attendSchoolId){
+			    // any matching club names at this school?
+			    if (data[i].name == clubName){
+
+				// remove following block after club pages complete
+
 				getOut = true;
 				$scope.message = "That club already exists!";
 				$scope.$apply();
+
+				// TODO redirect to existing club page
+				
 				return;
 			    }
-
 		 
 			}  // end for loop
 
@@ -79,6 +81,8 @@ app.controller('createClubControl', function($scope) {
 
 			    
 			})});
+
+	    // --> TODO redirect to newly created club page
 		
 	} // end else
 

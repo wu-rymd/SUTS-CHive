@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template, Response, send_from_directory, session
 from flask_session import Session
-from lib.db import dbconnect, db_create, School, User, Club, UserToClubMapping, Message, Position, UserClubPositionMapping
+from lib.db import dbconnect, db_create, School, User, Club, Message, Position, UserClubPositionMapping
 
 import json
 import logging
@@ -17,8 +17,7 @@ Session(app)
 
 db_options = {'db_file': 'my.db'}
 
-# must be "" or else IntegrityError: (sqlite3.IntegrityError) NOT NULL constraint failed
-def get_or_create_school(session, school_name, address="", email="", phone=""):
+def get_or_create_school(session, school_name, address, email=None, phone=None):
 
     school = session.query(School).filter(School.address == address).one_or_none()
     if school:
@@ -83,7 +82,6 @@ def create_user():
     )
 
     session.add(user)
-    session.flush()
     session.commit()
     return jsonify(
         {
@@ -112,8 +110,7 @@ def modify_user():
             matchingUser.school_id=j.get('school_id')
         if j.get('email') != None:
             matchingUser.email=j.get('email')
-            session.flush()
-            session.commit()
+        session.commit()
         return jsonify(
             {
                 'id': matchingUser.id
@@ -136,7 +133,6 @@ def delete_user():
     matchingUser = session.query(User).filter(User.id == userID).one_or_none()
     if matchingUser:
         session.delete(matchingUser)
-        session.flush()
         session.commit()
         return jsonify(
             {
@@ -147,33 +143,6 @@ def delete_user():
         response = jsonify( {'message': 'User not found'} )
         response.status_code = 404
         return response
-
-
-# purposeful for matching club ID to other club attributes; debugging
-@app.route('/clubs', methods=['GET'])
-def all_clubs():
-
-    Session, engine = dbconnect(db_options)
-    session = Session()
-    clubs = session.query(Club).all()
-    ret_clubs = []
-    for c in clubs:
-        ret_clubs.append(
-            {
-                'id': c.id,
-                'name': c.name,
-                'description': c.description,
-                'school_id': c.school_id,
-                'category': c.category,
-                'location': c.location,
-                'usualTime': c.usualTime,
-                'img_type': c.img_type,
-            }
-        )
-
-    response = jsonify(ret_clubs)
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    return response
 
 
 # query using school_id
@@ -212,28 +181,16 @@ def create_club():
     Session, engine = dbconnect(db_options)
     session = Session()
 
-    if j.get('img_type') != None:
-        club = Club(
-            name=j.get('name'),
-            school_id=j.get('school_id'),
-            description=j.get('description'),
-            category=j.get('category'),
-            location=j.get('location'),
-            usualTime=j.get('usualTime'),
-            img_type=j.get('img_type')
-        )
-    else:
-        club = Club(
-            name=j.get('name'),
-            school_id=j.get('school_id'),
-            description=j.get('description'),
-            category=j.get('category'),
-            location=j.get('location'),
-            usualTime=j.get('usualTime'),
-            img_type=None
-        )
+    club = Club(
+        name=j.get('name'),
+        school_id=j.get('school_id'),
+        description=j.get('description'),
+        category=j.get('category'),
+        location=j.get('location'),
+        usualTime=j.get('usualTime'),
+        img_type=j.get('img_type', None)
+    )
     session.add(club)
-    session.flush()
     session.commit()
     return jsonify(
         {
@@ -267,7 +224,6 @@ def modify_club():
         if j.get('img_type') != None:
             matchingclub.img_type=j.get('img_type')
 
-        session.flush()
         session.commit()
         return jsonify(
             {
@@ -290,7 +246,6 @@ def delete_club():
     matchingClub = session.query(Club).filter(Club.id == clubID).one_or_none()
     if matchingClub:
         session.delete(matchingClub)
-        session.flush()
         session.commit()
         return jsonify(
             {
@@ -354,7 +309,6 @@ def create_message():
         message=j.get('message')
     )
     session.add(message)
-    session.flush()
     session.commit()
     return jsonify(
         {
@@ -378,8 +332,8 @@ def get_message():
                 'message': m.message
             }
         )
-        response = Response(json.dumps(ret_messages))
-        response.headers['Access-Control-Allow-Origin'] = '*'
+    response = Response(json.dumps(ret_messages))
+    response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
 @app.route('/position', methods=['POST'])
@@ -408,8 +362,8 @@ def get_positions():
         formatted_positions.append({
             'position_type': p.position_type
         })
-        response = Response(json.dumps(formatted_positions))
-        response.headers['Access-Control-Allow-Origin'] = '*'
+    response = Response(json.dumps(formatted_positions))
+    response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
 @app.route('/adminuser', methods=['POST'])
@@ -425,7 +379,6 @@ def create_admin():
         position_id =j.get('position_id')
     )
     session.add(admin)
-    session.flush()
     session.commit()
     return jsonify(
         {
@@ -454,8 +407,8 @@ def get_admins():
                     'school_id': u.school_id,
                     'email': u.email
                 })
-                response = Response(json.dumps(formatted_admins))
-                response.headers['Access-Control-Allow-Origin'] = '*'
+    response = Response(json.dumps(formatted_admins))
+    response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
 @app.route('/')
@@ -466,9 +419,6 @@ def index():
     )
 
 
-
-
-
 # Subscribing/unsubscribing user from club
 
 @app.route('/subscriptions', methods=['GET'])
@@ -476,7 +426,7 @@ def subscriptions():
     Session, engine = dbconnect(db_options)
     session = Session()
 
-    subscriptions = session.query(UserToClubMapping).all()
+    subscriptions = session.query(UserClubPositionMapping).all()
     
     ret_subs = []
     for s in subscriptions:
@@ -485,6 +435,7 @@ def subscriptions():
                 'id': s.id,
                 'user_id': s.user_id,
                 'club_id': s.club_id,
+                'position_id': s.position_id,
                 'created_on': s.created_on,
             }
         )
@@ -499,18 +450,19 @@ def subscribe():
     j = request.get_json()
     Session, engine = dbconnect(db_options)
     session = Session()
-    link = UserToClubMapping(
+    link = UserClubPositionMapping(
         user_id=j.get('user_id'),
         club_id=j.get('club_id'),
+        position_id=j.get('position_id')
     )
 
     session.add(link)
-    session.flush()
     session.commit()
     return jsonify(
         {
             'user_id': link.user_id,
             'club_id': link.club_id,
+            'position_id': link.position_id
         }
     )
 
@@ -524,26 +476,20 @@ def unsubscribe():
     userID = j.get('user_id')
     clubID = j.get('club_id')
     # comma separated list of bool expr are AND
-    matchingLink = session.query(UserToClubMapping).filter(UserToClubMapping.user_id == userID, UserToClubMapping.club_id == clubID).one_or_none()
-    if matchingLink:
-        session.delete(matchingLink)
-        session.flush()
-        session.commit()
-        return jsonify(
-            {
-                'user_id': matchingLink.user_id,
-                'club_id': matchingLink.club_id,
-            }
-        )
-    else:
+    matchingLink = session.query(UserClubPositionMapping).filter(UserClubPositionMapping.user_id == userID, UserClubPositionMapping.club_id == clubID).one_or_none()
+    if not matchingLink:
         response = jsonify( {'message': 'Subscription between user ID and club ID not found'} )
-        response.status_code = 404
+        response.status_code = 202
         return response
-
-
-
-
-
+    session.delete(matchingLink)
+    session.commit()
+    return jsonify(
+        {
+            'user_id': matchingLink.user_id,
+            'club_id': matchingLink.club_id,
+            'position_id': matchingLink.position_id
+        }
+    )
 
 
 # Flask-Session routes
@@ -563,17 +509,10 @@ def setLogin():
     session['loggedinEmail'] = j.get('email', "")
     session['loggedinCreatedOn'] = j.get('created_on', "")
 
-
-    
     return jsonify([
         {
             'loggedinID': session['loggedinID'],
-            'loggedinFirstName': session['loggedinFirstName'],
-            'loggedinLastName': session['loggedinLastName'],
             'loggedinUsername': session['loggedinUsername'],
-            'loggedinSchoolId': session['loggedinSchoolId'], 
-            'loggedinEmail': session['loggedinEmail'],
-            'loggedinCreatedOn': session['loggedinCreatedOn'],
         }
     ])
 
