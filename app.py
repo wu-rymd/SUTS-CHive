@@ -340,7 +340,7 @@ def get_schools():
         })
     response = Response(json.dumps(formatted_schools))
     response.headers['Access-Control-Allow-Origin'] = '*'
-    return response;
+    return response
 
 @app.route('/message', methods=['POST'])
 def create_message():
