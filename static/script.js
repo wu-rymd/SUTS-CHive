@@ -8,7 +8,7 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     $scope.signingUp = false;
     $scope.clubs = [];
     $scope.currentHighSchoolID = null;
-    $scope.formmsg = "Welcome to C-Hive!";
+    $scope.formmsg = "Welcome to ClubHub!";
 
     
     // store the logged in user_id on the clientside
