@@ -36,11 +36,19 @@ def get_or_create_position(session, admin_position):
     session.flush()
     return position.id
 
+def userClubs(session, user_id):
+    club_ids = session.query(UserClubPositionMapping).filter(UserClubPositionMapping.user_id == user_id).all()
+    return club_ids
+
+def clubMessages(session, club_id):
+    messages = session.query(Message).filter(Message.club_id == club_id).all()
+    return messages 
+
 @app.route('/user', methods=['GET'])
 def get_user():
 
     username = request.args.get('username', "")
-    
+
     Session, engine = dbconnect(db_options)
     session = Session()
 
@@ -48,7 +56,7 @@ def get_user():
         users = session.query(User).filter(User.username == username).all()
     else:
         users = session.query(User).all()
-        
+
     ret_users = []
     for u in users:
         ret_users.append(
@@ -65,6 +73,19 @@ def get_user():
         #users = map(lambda u: dict(u), users)
     return jsonify(ret_users)
 
+@app.route('/subscribe', methods=['POST'])
+def add_user_to_club():
+    user_id = request.args.get('user_id')
+    club_id = request.args.get('club_id')
+    Session, engine = dbconnect(db_options)
+    session = Session()
+    mapping = UserClubPositionMapping(user_id=user_id, club_id=club_id)
+    session.add(mapping)
+    session.commit()
+    return jsonify({
+        'id': mapping.id
+    })
+
 
 @app.route('/user', methods=['POST'])
 def create_user():
@@ -77,6 +98,7 @@ def create_user():
         first_name=j.get('first_name'),
         last_name=j.get('last_name'),
         username=j.get('username'),
+        school_id=get_or_create_school(session, j.get('school')).id,
         school_id=get_or_create_school(session, j.get('schoolName'), j.get('schoolAddress')).id,
         email=j.get('email')
     )
@@ -318,21 +340,36 @@ def create_message():
 
 @app.route('/message', methods=['GET'])
 def get_message():
-    club_id = request.args.get('club_id')
     Session, engine = dbconnect(db_options)
     session = Session()
-    messages = session.query(Message).filter(Message.club_id == club_id).all()
-    #print (messages)
     ret_messages = []
-    for m in messages:
-        ret_messages.append(
-            {
-                'id': m.id,
-                'club_id': m.club_id,
-                'message': m.message
-            }
-        )
-    response = Response(json.dumps(ret_messages))
+
+    if (request.args.get('club_id')):
+        club_id = request.args.get('club_id')
+        messages = clubMessages(session, club_id)       
+        for m in messages:
+            ret_messages.append(
+                {
+                    'id': m.id,
+                    'club_id': m.club_id,
+                    'message': m.message
+                }
+            )
+    elif (request.args.get('user_id')):
+        user_id = request.args.get('user_id')
+        allClubs = userClubs(session,user_id)
+        for c in allClubs:
+            messages = clubMessages(session, club_id)
+            for m in messages:
+                ret_messages.append(
+                    {
+                        'id': m.id,
+                        'club_id': m.club_id,
+                        'message': m.message
+                    }
+                )
+
+    response = jsonify(ret_messages)        
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 

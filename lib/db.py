@@ -42,7 +42,6 @@ class User(Base):
 
     school = relationship(School)
 
-
 class Club(Base):
     __tablename__ = 'club'
     id = Column(Integer, primary_key=True)
@@ -74,7 +73,6 @@ class UserClubPositionMapping(Base):
     user = relationship(User)
     club = relationship(Club)
     position = relationship(Position)
-
 
 class Message(Base):
     __tablename__ = 'message'
