@@ -31,7 +31,6 @@ body {
     align-items: center;
 }
 
-
 #logout {
     grid-column-start: 3;
     grid-row-start: 1;

@@ -7,7 +7,7 @@ var app = angular.module('accountApp', []);
 app.controller('accountControl', function($scope, $window) {
     $scope.loggedID;
     $scope.loggedSchoolId;
-    $scope.loggedIn = false;
+    $scope.showLogout = true;
     $scope.clubs = [];
 
     $.getJSON('http://localhost:5000/getLogin', function(data) {
@@ -34,7 +34,7 @@ app.controller('accountControl', function($scope, $window) {
 		$('#createdOn').html("Your account was created on <pre>" + data.loggedinCreatedOn + "</pre>");
 
 		$scope.loggedID = data.loggedinID;
-		$scope.loggedIn = true;
+		$scope.showLogout = true;
 
 
 	    }
@@ -159,7 +159,7 @@ app.controller('accountControl', function($scope, $window) {
 	    },
 	});
 
-	$scope.loggedIn = false;
+	$scope.showLogout = false;
 	
     }
     

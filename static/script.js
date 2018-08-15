@@ -2,7 +2,7 @@
 var loggedInID;
 
 var app = angular.module('chiveApp', []);
-app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
+app.controller('chiveCtrl', function($scope, $window, $timeout, $http, $location, $rootScope) {
     $scope.highSchools = [];
     $scope.loggedIn = false;
     $scope.signingUp = false;
@@ -10,7 +10,7 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     $scope.currentHighSchoolID = null;
     $scope.formmsg = "Welcome to ClubHub!";
 
-    
+
     // store the logged in user_id on the clientside
     $scope.loggedID;
     loggedInID = $scope.loggedID;
@@ -130,30 +130,36 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 			    school_id: data[i].school_id,
 			    email: data[i].email,
 			    created_on: data[i].created_on, 
-	
+			    
 			}),
 			crossDomain: true,
+			success: function(){
+
+
+			    $timeout(function() {
+				$.getJSON('http://localhost:5000/getLogin', function(data) {
+
+				    if (data.loggedinID != undefined) {
+					$window.location.href = "account.html";
+				    }
+				});
+			    }, 200);
+			    return;			    
+			}
 		    });
 
-
-		    
-		    $scope.inExperience= true;
-		    $scope.$apply();
 		    return;
-		}
-	    }
 
+		} // end if
+
+	    } // end for
+	    
 	    $scope.formmsg = "Login invalid.";
 	    $scope.$apply();
 
 	}); // end json call
-	
-	$scope.inExperience = false;
     }
-
-
-
-
+    
 
     $scope.register = function(firstName, lastName, username, email, password, password2, school, schoolAddress) {
 
@@ -258,5 +264,6 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     setTimeout(function(){
 	$scope.$apply();
     }, 50);
+
 
 });
