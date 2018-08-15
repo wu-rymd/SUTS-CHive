@@ -501,25 +501,27 @@ def setLogin():
         raise Exception('Content-Type is not "application/json".')
     j = request.get_json()
 
-    session['loggedinID'] = j.get('id', "")
-    session['loggedinFirstName'] = j.get('first_name', "")
-    session['loggedinLastName'] = j.get('last_name', "")
-    session['loggedinUsername'] = j.get('username', "")
-    session['loggedinSchoolId'] = j.get('school_id', "")
-    session['loggedinEmail'] = j.get('email', "")
-    session['loggedinCreatedOn'] = j.get('created_on', "")
+    session['loggedinID'] = j.get('id', None)
+    session['loggedinFirstName'] = j.get('first_name', None)
+    session['loggedinLastName'] = j.get('last_name', None)
+    session['loggedinUsername'] = j.get('username', None)
+    session['loggedinSchoolId'] = j.get('school_id', None)
+    session['loggedinEmail'] = j.get('email', None)
+    session['loggedinCreatedOn'] = j.get('created_on', None)
+    session['message'] = j.get('message', None)
 
     return jsonify([
         {
             'loggedinID': session['loggedinID'],
             'loggedinUsername': session['loggedinUsername'],
+            'message' : session['message'],
         }
     ])
 
 
 @app.route('/getLogin', methods=['GET'])
 def getLogin():
-    try:
+    if session['loggedinID'] != None:
         return jsonify(
             {
                 'loggedinID': session['loggedinID'],
@@ -531,7 +533,7 @@ def getLogin():
                 'loggedinCreatedOn': session['loggedinCreatedOn'],
             }
         )
-    except:
+    else:
         return jsonify( {'message': 'Not logged in'} )
 
 

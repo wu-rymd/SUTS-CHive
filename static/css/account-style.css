@@ -25,10 +25,21 @@ body {
 .greetUser {
     display: grid;
     
-    grid-template-columns: 90% 10%;
+    grid-template-columns: 78% 2% 8% 2% 10%;
     grid-template-rows: 100%;
 
     align-items: center;
+}
+
+
+#logout {
+    grid-column-start: 3;
+    grid-row-start: 1;
+}
+
+#logo {
+    grid-column-start: 5;
+    grid-row-start: 1;
 }
 
 img {

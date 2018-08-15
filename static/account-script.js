@@ -7,6 +7,7 @@ var app = angular.module('accountApp', []);
 app.controller('accountControl', function($scope, $window) {
     $scope.loggedID;
     $scope.loggedSchoolId;
+    $scope.loggedIn = false;
     $scope.clubs = [];
 
     $.getJSON('http://localhost:5000/getLogin', function(data) {
@@ -33,6 +34,7 @@ app.controller('accountControl', function($scope, $window) {
 		$('#createdOn').html("Your account was created on <pre>" + data.loggedinCreatedOn + "</pre>");
 
 		$scope.loggedID = data.loggedinID;
+		$scope.loggedIn = true;
 
 
 	    }
@@ -133,10 +135,34 @@ app.controller('accountControl', function($scope, $window) {
 	if ($scope.clubs.length == 0) {
 	    $('.clubList').html("<b> Uh oh! </b>You don't seem to be following any clubs! <span class='btn btn-outline-success float-right' ng-click=''>Discover</span>");
 	}
-
-
 	
     }
+
+
+    $scope.logout = function() {
+	
+	// POST all of logged in user's info -> /set
+	$.ajax({
+	    url: 'http://localhost:5000/setLogin',
+	    type: 'POST',
+	    contentType: 'application/json',
+	    data: JSON.stringify({
+
+		message: 'Not logged in',
+		
+	    }),
+	    crossDomain: true,
+
+	    success: function() {
+		$scope.loggedIn = false;
+		$window.location.href = 'index.html';
+	    },
+	});
+
+	$scope.loggedIn = false;
+	
+    }
+    
 }); // end Angular controller
 
 

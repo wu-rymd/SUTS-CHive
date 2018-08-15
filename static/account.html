@@ -34,7 +34,10 @@
 	
 	<div class="container-fluid greetUser">
 	  <p id="greetUser"> </p>
-	  <img src="img/logo.png" onclick="window.location.href=''">
+	  <div id="logout">
+	    <span class="btn btn-outline-danger float-right" ng-show="loggedIn" ng-click="logout()">Log out</span>
+	  </div>
+	  <img id="logo" src="img/logo.png" onclick="window.location.href=''">
 	</div>
 
 	<div class="container-fluid userInfo">
