@@ -8,7 +8,7 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
     $scope.signingUp = false;
     $scope.clubs = [];
     $scope.currentHighSchoolID = null;
-    $scope.formmsg = "Welcome to C-Hive!";
+    $scope.formmsg = "Welcome to ClubHub!";
 
     
     // store the logged in user_id on the clientside
@@ -114,28 +114,6 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 		    // store the logged in user_id on the clientside
 		    $scope.loggedID = data[i].id;
 		    loggedInID = $scope.loggedID;
-
-
-		    // POST all of logged in user's info -> /set
-		    $.ajax({
-			url: 'http://localhost:5000/setLogin',
-			type: 'POST',
-			contentType: 'application/json',
-			data: JSON.stringify({
-
-			    id: data[i].id,
-			    first_name: data[i].first_name,
-			    last_name: data[i].last_name,
-			    username: data[i].username,
-			    school_id: data[i].school_id,
-			    email: data[i].email,
-			    created_on: data[i].created_on, 
-	
-			}),
-			crossDomain: true,
-		    });
-
-
 		    
 		    $scope.inExperience= true;
 		    $scope.$apply();
@@ -192,6 +170,10 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 	// check w/ database to see if valid registration...
 	else {
 	    
+
+	    
+	    // bug: this first part does not work
+
 	    
 	    $.getJSON('http://localhost:5000/user', function(data) {
 		console.log("request returned");
@@ -216,6 +198,10 @@ app.controller('chiveCtrl', function($scope, $http, $location, $rootScope) {
 
 
 		
+		// end bug
+
+
+
 
 		$.ajax({
 		    url: 'http://localhost:5000/user',
