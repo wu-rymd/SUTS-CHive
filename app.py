@@ -522,7 +522,7 @@ def setLogin():
 @app.route('/getLogin', methods=['GET'])
 def getLogin():
     if session['loggedinID'] != None:
-        return jsonify(
+        response = jsonify(
             {
                 'loggedinID': session['loggedinID'],
                 'loggedinFirstName': session['loggedinFirstName'],
@@ -533,8 +533,12 @@ def getLogin():
                 'loggedinCreatedOn': session['loggedinCreatedOn'],
             }
         )
-    else:
-        return jsonify( {'message': 'Not logged in'} )
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        return response
+
+    response = jsonify( {'message': 'Not logged in'} )
+    response.status_code = 200
+    return response
 
 db_create(db_options)
     
