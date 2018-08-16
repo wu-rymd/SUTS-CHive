@@ -139,9 +139,10 @@ app.controller('accountControl', function($scope, $location) {
 	}
 
 
-	if ($scope.clubs.length == 0) {
-	    $('.clubList').html("<b> Uh oh! </b>You don't seem to be following any clubs! <span class='btn btn-outline-success float-right' ng-click=''>Discover</span>");
-	}
+	// comment for demo
+	// if ($scope.clubs.length == 0) {
+	//     $('.clubList').html("<b> Uh oh! </b>You don't seem to be following any clubs! <span class='btn btn-outline-success float-right' ng-click=''>Discover</span>");
+	// }
 	
     }
 
