@@ -17,7 +17,7 @@ app.controller('accountControl', function($scope, $location) {
     $scope.clubs.push({name: "World Culture Club", link: "clubPage_WorldCulture.html"});
 
 
-    $.getJSON('http://localhost:5000/getLogin', function(data) {
+    $.getJSON('/getLogin', function(data) {
 
 	
 	try {
