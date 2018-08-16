@@ -536,7 +536,7 @@ def getLogin():
     else:
         return jsonify( {'message': 'Not logged in'} )
 
-
+db_create(db_options)
+    
 if __name__ == '__main__':
-    db_create(db_options)
     app.run(host='0.0.0.0', debug=True)
