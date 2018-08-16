@@ -521,7 +521,7 @@ def setLogin():
 
 @app.route('/getLogin', methods=['GET'])
 def getLogin():
-    if session['loggedinID'] != None:
+    if session.get('loggedinID') != None:
         response = jsonify(
             {
                 'loggedinID': session['loggedinID'],
