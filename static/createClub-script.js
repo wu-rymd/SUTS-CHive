@@ -26,7 +26,7 @@ app.controller('createClubControl', function($scope) {
 
 	    var attendSchoolId;
 	    var getOut = false;
-	    $.getJSON('http://localhost:5000/getLogin', function(data) {
+	    $.getJSON('/getLogin', function(data) {
 
 		attendSchoolId = data.loggedinSchoolId;
 
@@ -34,7 +34,7 @@ app.controller('createClubControl', function($scope) {
 		.done( function(data) {
 
 		    // check if already exists - look in attending school
-		    $.getJSON('http://localhost:5000/club?school_id=' + attendSchoolId, function(data) {
+		    $.getJSON('/club?school_id=' + attendSchoolId, function(data) {
 			for (var i = 0; i < data.length; i++) {
 
 			    // any matching club names at this school?
@@ -61,7 +61,7 @@ app.controller('createClubControl', function($scope) {
 			    
 			    // create club
 			    $.ajax({
-				url: 'http://localhost:5000/club',
+				url: '/club',
 				type: 'POST',
 				contentType: 'application/json',
 				data: JSON.stringify({

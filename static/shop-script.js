@@ -10,13 +10,13 @@ app.controller('shopControl', function($scope, $window) {
     $scope.shops = [];
 
     
-    $.getJSON('http://localhost:5000/getLogin', function(data) {
+    $.getJSON('/getLogin', function(data) {
 
 	
 	try {
 	    if (data.loggedinID != undefined) {
 
-		$.getJSON('http://localhost:5000/schools', function(schoolData) {
+		$.getJSON('/schools', function(schoolData) {
 		    for (var i = 0; i < schoolData.length; i++) {
 			if (schoolData[i].id == data.loggedinSchoolId) {
 			    $scope.loggedSchoolId = schoolData[i].id;
@@ -54,7 +54,7 @@ app.controller('shopControl', function($scope, $window) {
 	
 	// POST all of logged in user's info -> /set
 	$.ajax({
-	    url: 'http://localhost:5000/setLogin',
+	    url: '/setLogin',
 	    type: 'POST',
 	    contentType: 'application/json',
 	    data: JSON.stringify({

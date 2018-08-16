@@ -23,7 +23,7 @@ app.controller('accountControl', function($scope, $location) {
 	try {
 	    if (data.loggedinID != undefined) {
 
-		$.getJSON('http://localhost:5000/schools', function(schoolData) {
+		$.getJSON('/schools', function(schoolData) {
 		    for (var i = 0; i < schoolData.length; i++) {
 			if (schoolData[i].id == data.loggedinSchoolId) {
 			    $scope.loggedSchoolId = schoolData[i].id;
@@ -74,7 +74,7 @@ app.controller('accountControl', function($scope, $location) {
 	    // access UserToClub mapping table
 	    // push clubs that match user_id (var $scope.loggedID)
 
-	    $.getJSON('http://localhost:5000/subscriptions', function(data) {
+	    $.getJSON('/subscriptions', function(data) {
 
 		for (var i = 0; i < data.length; i++) {
 
@@ -94,7 +94,7 @@ app.controller('accountControl', function($scope, $location) {
 		    }
 
 		    
-		    $.getJSON('http://localhost:5000/club?school_id=' + $scope.loggedSchoolId, function(data) {
+		    $.getJSON('/club?school_id=' + $scope.loggedSchoolId, function(data) {
 
 			for (var i = 0; i < clubIDs.length; i++) {
 			    for (var j = 0; j < data.length; j++) {
@@ -120,7 +120,7 @@ app.controller('accountControl', function($scope, $location) {
 	
 	// remove link btwn userID and clubID in UserClubPosition mapping table
 	$.ajax({
-	    url: 'http://localhost:5000/unsubscribe',
+	    url: '/unsubscribe',
 	    type: 'DELETE',
 	    contentType: 'application/json',
 	    data: JSON.stringify({
@@ -150,7 +150,7 @@ app.controller('accountControl', function($scope, $location) {
 	
 	// POST all of logged in user's info -> /set
 	$.ajax({
-	    url: 'http://localhost:5000/setLogin',
+	    url: '/setLogin',
 	    type: 'POST',
 	    contentType: 'application/json',
 	    data: JSON.stringify({
