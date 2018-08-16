@@ -5,21 +5,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
     <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular.min.js" type="text/javascript"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js" type="text/javascript"></script> -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/font-awesome.css">
-    <link rel="stylesheet" href="css/clubpage-style.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.css">
+    <link rel="stylesheet" href="/static/css/clubpage-style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:500,500i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese" rel="stylesheet">
-    <script src="vendor/jquery-3.3.1.js"></script>
-    <script src="vendor/bootstrap.js"> </script>
+    <script src="/static/vendor/jquery-3.3.1.js"></script>
+    <script src="/static/vendor/bootstrap.js"> </script>
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
-    <link rel="manifest" href="icon/site.webmanifest">
-    <link rel="mask-icon" href="icon/safari-pinned-tab.svg" color="#0029a3">
-    <link rel="shortcut icon" href="icon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/icon/favicon-16x16.png">
+    <link rel="manifest" href="/static/icon/site.webmanifest">
+    <link rel="mask-icon" href="/static/icon/safari-pinned-tab.svg" color="#0029a3">
+    <link rel="shortcut icon" href="/static/icon/favicon.ico">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-config" content="icon/browserconfig.xml">
+    <meta name="msapplication-config" content="/static/icon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
   </head>
   <body>
@@ -28,26 +28,26 @@
       <div ng-controller="chiveCtrl">
         <div class="screen clubhubApp">
           <div class="clubProfile">
-            <div class="sideLogo"><img src="img/logo.png" style="width:100%;"></div>
+            <div class="sideLogo"><img src="/static/img/logo.png" style="width:100%;"></div>
             <div class="stateCategory" style="color:#8de09d; border-color:#8de09d;">
               Career Paths
             </div>
             <div class="clubPfp">
-              <img src="img/business.png" style="width:80%;">
+              <img src="/static/img/business.png" style="width:80%;">
             </div>
             <div class="addMembers">
               <button type = "button" class="btn btn-outline-primary button-blk subClk" style="color:black; border-color: black;font-size:30px;height:100%;">
                 + Add Members
             </div>
             <div class="line1">
-              <img src="img/line.png" style="width:100%;">
+              <img src="/static/img/line.png" style="width:100%;">
             </div>
             <div class="line2">
-              <img src="img/line.png" style="width:100%;">
+              <img src="/static/img/line.png" style="width:100%;">
             </div>
             <button type = "button" class="btn btn-outline-primary button-blk subClk" style="font-size:30px;height:100%;">
               <div class="subCheck">
-                <img src="img/check.png" style="width:20%;float:left;padding-left:6%;align-content:center;">
+                <img src="/static/img/check.png" style="width:20%;float:left;padding-left:6%;align-content:center;">
               </div>
               <div class="subClk" >Admin</div>
               <div class="subClk" style="display:none;" ng-show="followClub"> Follow </div>
@@ -75,15 +75,15 @@
             <div class="clubRoom">
               Location &amp; Regular Meets
             </div>
-            <div class="rmPic"> <img src="img/pin.png" style="width:60%;"></div>
+            <div class="rmPic"> <img src="/static/img/pin.png" style="width:60%;"></div>
             <div class="actualRm"> Room 503 - Fri <br> 11th Period </div>
             <div class="photos">Photos</div>
             <div class="leader">Club Lead Positions</div>
-            <div class="pres"> <img src="img/pres.png" style="width:100%;"></div>
-            <div class="vicepres"><img src="img/vicepres.png" style="width:140%;"></div>
-            <div class="sample"><img src="img/handshake.jpg" style="width:100%;"></div>
+            <div class="pres"> <img src="/static/img/pres.png" style="width:100%;"></div>
+            <div class="vicepres"><img src="/static/img/vicepres.png" style="width:140%;"></div>
+            <div class="sample"><img src="/static/img/handshake.jpg" style="width:100%;"></div>
             <div class="members">Members (15)</div>
-            <a href="clubPost.html" class="createPost"> <img src="img/pressCreate.png" style="width:200%;height:200%;"></a>
+            <a href="clubPost.html" class="createPost"> <img src="/static/img/pressCreate.png" style="width:200%;height:200%;"></a>
             <div class="edit" >
               <button type = "button" class="btn btn-outline-primary button-blk" style="color:#8de09d;border-color:#8de09d;font-size:30px;height:100%;">
                 Edit
@@ -110,12 +110,12 @@
             <span class="dot4"></span>
           </div>
           <div class="nav-bar">
-            <a class="toNewsfd" href="newsfeed.html"><img src="img/toNewsFd.png" style="height:100%;"></a>
+            <a class="toNewsfd" href="newsfeed.html"><img src="/static/img/toNewsFd.png" style="height:100%;"></a>
 
-            <a class="toCalend" href="calendar.html"><img src="img/toCalend.png" style="height:100%;"></a>
-            <a class="toSearch" href="search.html"><img src="img/toSearch.png" style="height:100%;"></a>
-            <a class="toShop" href="shop.html"><img src="img/shop.png" style="height:100%;"></a>
-            <a class="toAcc" href="account.html" ><img src="img/toAcc.png" style="height:100%;"></a>
+            <a class="toCalend" href="calendar.html"><img src="/static/img/toCalend.png" style="height:100%;"></a>
+            <a class="toSearch" href="search.html"><img src="/static/img/toSearch.png" style="height:100%;"></a>
+            <a class="toShop" href="shop.html"><img src="/static/img/shop.png" style="height:100%;"></a>
+            <a class="toAcc" href="account.html" ><img src="/static/img/toAcc.png" style="height:100%;"></a>
           </div>
 	</div>
     </div>
