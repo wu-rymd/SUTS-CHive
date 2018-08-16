@@ -16,6 +16,7 @@ def dbconnect(options):
 
 def db_create(options):
     sess, engine = dbconnect(options)
+    metadata.drop_all(engine)
     metadata.create_all(engine)
 
 
