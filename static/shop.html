@@ -30,37 +30,55 @@
     
     <div ng-app="shopApp">
       <div ng-controller="shopControl">
+	<div id="screen">
+	  <div id="scrollable">
 
-	
-	<div class="container-fluid greetUser">
-	  <p id="greetUser"> </p>
-	  <div id="logout">
-	    <span class="btn btn-outline-danger float-right" ng-show="showLogout" ng-click="logout()">Log out</span>
-	  </div>
-	  <img id="logo" src="img/logo.png" onclick="window.location.href=''">
-	</div>
+	    
+	    <div class="container-fluid greetUser">
+	      <p id="greetUser"> </p>
+	      <div id="logout">
+		<span class="btn btn-outline-danger float-right" ng-show="showLogout" ng-click="logout()">Log out</span>
+	      </div>
+	      <img id="logo" src="img/logo.png" onclick="window.location.href=''">
+	    </div>
 
-	<div class="container-fluid shopinfo">
-	  <h1> <b>Only the best deals</b> <span class="thinText"> for ClubHub users! </span> </h1>
-	  <p id="shopmsg"> We bring you the <b>best deals</b> for <b>all</b> of your extracurricular needs. <br> Browse through <b>tons of brands</b> you are already trust! <br> Use our links, shop, and your <b>discounts</b> will be <b>automatically applied</b> at checkout! <br></p>
-	  <p style="margin-top: -10px; font-size: 28px;"><b> It's that easy! </b></p>
-	</div>
+	    <div class="container-fluid shopinfo">
+	      <h1> <b>Only the best deals</b> <span class="thinText"> for ClubHub users! </span> </h1>
+	      <p id="shopmsg"> We bring you the <b>best deals</b> for <b>all</b> of your extracurricular needs. <br> Browse through <b>tons of brands</b> you are already trust! <br> Use our links, shop, and your <b>discounts</b> will be <b>automatically applied</b> at checkout! <br></p>
+	      <p style="margin-top: -10px; font-size: 28px;"><b> It's that easy! </b></p>
+	    </div>
 
 
-	<br>
+	    <br>
 
-	<div ng-repeat="shop in shops">
+	    <div ng-repeat="shop in shops">
+	      
+	      <div class="card card-block card-outline-primary" style="background: url( {{shop.image}} ) no-repeat center center;">
+		<p class="card-text" > <b>{{ shop.name }}</b> <br> {{ shop.description }} &nbsp;
+		  <span class="btn btn-outline-primary float-right" ng-click="goTo(shop.link)">Shop</span>
+		</p>
+              </div>
+
+	      
+	    </div>
+	    
+	  </div> <!-- end scrollable -->
+
+
+	  <div id="footer">
+	    <div id="active-bar">
+	      <span id="dot4"></span>
+	    </div>
+
+	    <a id="toNewsFeed" href="newsfeed.html"><img src="img/toNewsFd.png"></a>
+	    <a id="toCalendar" href="calendar.html"><img src="img/toCalend.png"></a>
+	    <a id="toSearch" href="search.html"><img src="img/toSearch.png"></a>
+	    <a id="toShop" href="shop.html"><img src="img/shop.png"></a>
+	    <a id="toAccount" href="account.html"><img src="img/toAcc.png"></a>
+	  </div> <!-- end footer -->
 	  
-	  <div class="card card-block card-outline-primary" style="background: url( {{shop.image}} ) no-repeat center center;">
-	    <p class="card-text" > <b>{{ shop.name }}</b> <br> {{ shop.description }} &nbsp;
-              <span class="btn btn-outline-primary float-right" ng-click="goTo(shop.link)">Shop</span>
-	    </p>
-          </div>
-
-	  
-	</div>
+	</div>  <!-- end screen -->
 	
-
 
 	<script src="shop-script.js"> </script>
   </body>

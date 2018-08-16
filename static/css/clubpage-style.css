@@ -1,0 +1,1017 @@
+/* 0. All screens */
+
+
+:root {
+    --margin-size: 1%;
+
+    --C-Hive-Black: #000000;
+    --C-Hive-Blue: #0241FE;
+    --C-Hive-Red: #FF3E3F;
+    --C-Hive-White: #FFFFFF;
+    --C-Hive-Yellow: #F4FF3E;
+}
+
+.screen {
+
+    /* takes full height of current window size */
+
+    height: 100vh;
+    display: grid;
+}
+
+
+.swipe {
+    place-self: center;
+}
+
+
+.logo {
+    place-self: center;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+
+p {
+    font-family: Montserrat, Helvetica, sans-serif;
+}
+
+body {
+
+    /* cannot scroll */
+    /* not on all browsers atm */
+    overflow: hidden;
+    font-family: Montserrat, Helvetica, sans-serif;
+}
+
+
+
+/* 0a. Individual screens */
+
+.splash {
+    /* background-color: pink; */
+
+    grid-template-columns: auto 50% auto;
+    grid-template-rows: auto 60% auto 3%;
+}
+
+.high-school-search {
+    /* background-color: lightblue; */
+
+    grid-template-columns: 1% 98% 1%;
+    grid-template-rows: 3% 1% 8% 1% 83% 1% 3%;
+}
+
+.club-search {
+    /* background-color: gold; */
+
+    grid-template-columns: 1% 98% 1%;
+    grid-template-rows: 3% 1% 8% 1% 83% 1% 3%;
+}
+
+
+
+
+/* 1. Items in splash screen */
+
+#container-center {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    display: grid;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 100%;
+}
+
+
+
+
+
+.top-half {
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+    display: grid;
+    justify-items: center;
+    grid-template-rows: 70% 30%;
+    grid-template-columns: 100%;
+    grid-row-gap: 30px;
+}
+
+#main-logo {
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+    justify-items: center;
+}
+
+img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+
+
+#welcome-message {
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    justify-self: center;
+    font-size: 30px;
+}
+
+
+
+
+.bottom-half {
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    display: grid;
+    grid-template-rows: 17.5% 35% 30% 17.5%;
+    grid-template-columns: 100%;
+}
+
+
+#buttons {
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    display: grid;
+    justify-items: center;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 100%;
+    grid-row-gap: 15px;
+}
+
+#signIn {
+    width: 50%;
+}
+
+#signUp {
+    width: 40%;
+}
+
+
+
+
+#swipe-message {
+    justify-self: center;
+    margin-top: 30px;
+
+    grid-row-start: 3;
+    grid-row-end: 4;
+
+    font-size: 20px;
+}
+
+
+
+
+#zero-to-one {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+}
+
+
+
+
+
+/* 2. Items in high school search screen */
+
+#one-to-zero {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+}
+
+
+#one-to-two {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 7;
+    grid-row-end: 8;
+}
+
+
+
+
+.container-search-logo {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+
+    display: grid;
+    align-items: center;
+    grid-template-rows: 100%;
+    grid-template-columns: 90% 10%;
+}
+
+.input-group {
+    padding-top: 15px;
+    width: 98%;
+}
+
+
+.container-results {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 5;
+    grid-row-end: 6;
+
+    height: 100%;
+    width: 100%;
+
+    padding: 15px;
+
+    overflow: scroll !important;
+
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}
+
+.card-text {
+    padding: 10px;
+}
+
+.card-block {
+    margin: 5px;
+}
+
+/* 3. Items in club search screen */
+
+#two-to-one {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+}
+
+.container-suggestion {
+    display: grid;
+    height: 100%;
+    grid-template-columns: auto 60% auto;
+    grid-template-rows: auto 25% auto 25% auto 25% auto;
+}
+
+
+#all-clubs {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+#newest-clubs {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+}
+
+#most-popular {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 6;
+    grid-row-end: 7;
+}
+
+
+.panel-body{
+  display:grid;
+  grid-template-rows: auto auto auto auto;
+  grid-row-gap: 10px;
+  grid-template-columns: 100%;
+  align-items:center;
+  margin:auto;
+}
+
+.username{
+    /*border-top: 0;
+    border-left:0;
+    border-right: 0;
+    color:grey;
+    */
+    /*padding-left: 3%;
+    padding-top:3%;
+    padding-bottom:2%;*/
+    grid-row-start: 1;
+    grid-row-end:2;
+    display:grid;
+    grid-template-columns: 10% 90%;
+    grid-column-gap:2%;
+}
+
+.password{
+  grid-row-start: 2;
+  grid-row-end:3;
+  display:grid;
+  grid-template-columns: 10% 90%;
+  grid-column-gap:2%;
+}
+
+.remember{
+  grid-row-start: 3;
+  grid-row-end:4;
+  display:grid;
+  justify-items: center;
+  color:grey;
+}
+
+.button-blk{
+  text-align: center;
+  border-style:solid;
+  border-color:#0241FE;
+  border-width: 1px;
+  border-radius:25px;
+  padding-top:2%;
+  padding-bottom: 2%;
+  padding-left:5%;
+  padding-right:5%;
+}
+
+.button-click:hover{
+  text-decoration:none;
+}
+
+a{
+
+}
+
+.signin{
+  display:grid;
+  justify-items: center;
+  grid-row-start: 4;
+  grid-row-end: 5;
+  place-center:center;
+  font-family:Montserrat, Helvetica, sans-serif;
+}
+
+input{
+  font-family:Montserrat, Helvetica, sans-serif;
+  border-top: 0;
+  border-left:0;
+  border-right: 0;
+  color:grey;
+  padding-left: 3%;
+  padding-top:3%;
+  padding-bottom:2%;
+}
+
+.addMembers{
+  grid-column-start: 12;
+  grid-column-end:17;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+
+.clubProfile{
+  overflow: scroll;
+  display:grid;
+  grid-template-rows:2% 5% 2% 5% 5% 5% 9% 2% 5% 2% 4% 2% 15% 5% 5% 5% 5% 5% 5% 3% 5%;
+  grid-template-columns: 6.5% 6% 6% 6.5% 6.5% 6% 6.5% 6% 6% 6.5% 6.5% 6% 6.5% 6% 6% 6.5%;
+  grid-column-start:2;
+  grid-column-end:3;
+}
+
+.sideLogo{
+  grid-column-start:1;
+  grid-column-end:3;
+  grid-row-start:2;
+  grid-row-end: 5;
+  display:grid;
+  align-content: center;
+}
+
+.clubPfp{
+  grid-column-start:7;
+  grid-column-end:11;
+  grid-row-start:4;
+  grid-row-end: 7;
+}
+
+.stateCategory{
+  grid-column-start: 6;
+  grid-column-end: 12;
+  grid-row-start:2;
+  grid-row-end:3;
+  font-size:30px;
+  display:grid;
+  align-content: center;
+  border-style: solid;
+  border-color: grey;
+  border-radius: 30px;
+  margin-right:auto;
+  margin-left:auto;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.line1{
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start:5;
+  grid-row-end:6;
+  display:grid;
+  align-content: center;
+}
+
+.line2{
+  grid-column-start: 11;
+  grid-column-end: 17;
+  grid-row-start:5;
+  grid-row-end:6;
+  display:grid;
+  align-content: center;
+}
+
+.subClk{
+  grid-column-end:17;
+  grid-column-start: 11;
+  grid-row-start:6;
+  grid-row-end:7;
+  width:100%;
+}
+
+.createDate{
+  grid-column-start: 1;
+  grid-column-end:7;
+  grid-row-start:6;
+  grid-row-end:7;
+  font-size:30px;
+  display: grid;
+  align-content: center;
+  border-style: solid;
+  border-color: #c4c8ce;
+  border-radius:50px;
+  text-align:center;
+
+}
+
+.edit{
+  grid-column-start: 14;
+  grid-column-end:17;
+  grid-row-start:2;
+  grid-row-end:3;
+  font-size:30px;
+  text-align:center;
+  display:grid;
+  align-content: center;
+  color:#4286f4;
+
+}
+
+.createPost{
+  position: fixed;
+  bottom: 15%;
+  right: 5%;
+  width:120px;
+  height: 120px;
+  z-index: 999;
+
+}
+
+.clubName{
+  grid-row-start:7;
+  grid-row-end:8;
+  grid-column-start: 1;
+  grid-column-end:18;
+  font-size:50px;
+  display: grid;
+  align-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.highSchool{
+  grid-column-start: 1;
+  grid-column-end:18;
+  grid-row-start:8;
+  grid-row-end:9;
+  font-size:30px;
+  display: grid;
+  align-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.faqbtn{
+  grid-row-start:10;
+  grid-row-end:11;
+  grid-column-start: 1;
+  grid-column-end: 18;
+  font-size:30px;
+  display: grid;
+  align-content: center;
+
+}
+
+.clubForm{
+  display:grid;
+  grid-template-rows:3% 10% 5% 10% 5% 15% 10% 10% 10% 2% 5% 5% 3% 5%;
+  grid-column-start:2;
+  grid-column-end:3;
+
+}
+
+.faqtrans{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.clubDes{
+  grid-row-start: 12;
+  grid-row-end: 14;
+  grid-column-start: 1;
+  grid-column-end:18;
+  border-style: solid;
+  border-color:#c4c8ce;
+  padding:1.5%;
+  border-radius: 10px;
+  font-size:28px;
+  width:100%;
+  text-align: center;
+  color:black;
+}
+
+.clubRoom{
+  grid-row-start: 14;
+  grid-row-end: 15;
+  grid-column-start: 1;
+  grid-column-end:9;
+  font-size:30px;
+  display:grid;
+  align-content: flex-end;
+}
+
+.rmPic{
+  grid-row-start: 15;
+  grid-row-end: 17;
+  grid-column-start: 1;
+  grid-column-end:3;
+  display:grid;
+  align-content: center;
+}
+
+.actualRm{
+  padding:2%;
+  border-style:solid;
+  border-color:#c4c8ce;
+  grid-row-start:15;
+  grid-row-end:17;
+  grid-column-start: 3;
+  grid-column-end:8;
+  font-size:30px;
+  display:grid;
+  align-content: center;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.photos{
+  grid-row-start: 14;
+  grid-row-end: 15;
+  grid-column-start: 9;
+  grid-column-end:18;
+  font-size:30px;
+  display:grid;
+  align-content: flex-end;
+}
+
+.leader{
+  grid-row-start: 17;
+  grid-row-end: 18;
+  grid-column-start: 1;
+  grid-column-end:9;
+  font-size:30px;
+  display:grid;
+  align-content: flex-end;
+}
+
+.pres{
+  grid-row-start: 18;
+  grid-row-end: 20;
+  grid-column-start: 1;
+  grid-column-end:3;
+  font-size:30px;
+  display:grid;
+  align-content: center;
+}
+
+.vicepres{
+  grid-row-start: 18;
+  grid-row-end: 20;
+  grid-column-start: 4;
+  grid-column-end:7;
+  font-size:30px;
+  display:grid;
+  align-content: center;
+}
+
+.sample{
+  grid-row-start: 15;
+  grid-row-end: 19;
+  grid-column-start: 9;
+  grid-column-end:18;
+  border-radius: 5px;
+  background-color: #c4c8ce;
+
+}
+
+.members{
+  grid-row-start: 19;
+  grid-row-end: 20;
+  grid-column-start: 9;
+  grid-column-end:18;
+  font-size:30px;
+  display:grid;
+  align-content:flex-end;
+}
+
+.clubhubApp{
+  grid-template-columns: auto 90% auto;
+  grid-template-rows: 90% 1% 1% 7% 1%;
+}
+
+.active-bar{
+  grid-row-start:2;
+  grid-row-end:3;
+  grid-column-start: 1;
+  grid-column-end:4;
+  display:grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+
+}
+
+.dot4{
+  grid-column-start:5;
+  grid-column-end:6;
+  height: 19px;
+  width: 19px;
+  background-color: #599adb;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.nav-bar{
+  grid-row-start:4;
+  grid-row-end:5;
+  grid-column-start: 1;
+  grid-column-end:4;
+  display:grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  width:100%;
+  bottom: 1%;
+}
+
+.toNewsfd{
+  grid-column-start: 1;
+  grid-column-end:2;
+  border-right-style: solid;
+  border-color:#e0e1e2;
+}
+
+.toSearch{
+  grid-column-start: 3;
+  grid-column-end:4;
+  border-right-style: solid;
+  border-color:#e0e1e2;
+}
+
+.toCalend{
+  grid-column-start: 2;
+  grid-column-end:3;
+  border-right-style: solid;
+  border-color:#e0e1e2;
+}
+
+.toShop{
+  grid-column-start: 4;
+  grid-column-end:5;
+  border-right-style: solid;
+  border-color:#e0e1e2;
+}
+.toAcc{
+  grid-column-start: 5;
+  grid-column-end:6;
+}
+.heading{
+  grid-row-start:2;
+  grid-row-end:3;
+  font-size:72px;
+
+}
+.subhead{
+  grid-row-start:3;
+  grid-row-end:4;
+  font-size: 30px;
+  margin-left:5%;
+}
+
+.enterClub{
+  grid-row-start:4;
+  grid-row-end:5;
+  display:grid;
+  grid-template-columns: 10% 80% 10%;
+  grid-column-gap:2%;
+  font-size:25px;
+}
+
+.formLogo{
+  display:grid;
+  grid-template-rows: 15% 70% 15%;
+
+}
+
+.fIcon{
+  grid-row-start:2;
+  grid-row-end:3;
+  display:grid;
+  align-content: center;
+
+}
+
+.cInfo{
+  grid-row-start:5;
+  grid-row-end:6;
+  font-size:200%;
+  display:grid;
+  align-content: flex-end;
+}
+
+.addPhoto{
+  grid-row-start: 6;
+  grid-row-end:7;
+  display:grid;
+  grid-template-columns: 5% 20% auto auto;
+  grid-column-gap: 3%;
+}
+
+.picture{
+  display:grid;
+  align-content:center;
+  grid-column-start:2;
+  grid-column-end: 3;
+
+}
+
+.upload{
+  display:grid;
+  align-content:center;
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+.clubCategory{
+  grid-row-start:7;
+  grid-row-end: 8;
+  display:grid;
+  grid-template-columns: 10% 80% 10%;
+}
+
+.roomNum{
+  grid-row-start:8;
+  grid-row-end: 9;
+  display:grid;
+  grid-template-columns: 10% 80% 10%;
+  font-size:25px;
+}
+
+.description{
+  grid-row-start:9;
+  grid-row-end: 10;
+  display:grid;
+  grid-template-columns: 10% 80% 10%;
+  font-size:25px;
+}
+
+.selectCategory{
+  grid-column-start: 2;
+  grid-column-end: 3;
+
+}
+
+select{
+  width:100%;
+  height:90%;
+  border-radius: 20px;
+  font-size:25px;
+  color:grey;
+  padding-left:2%;
+
+}
+
+.leadPsn{
+  grid-row-start:11;
+  grid-row-end: 12;
+  display:grid;
+  grid-template-columns: 25% 10% auto auto;
+}
+
+.firstHead{
+  grid-column-start:1;
+  grid-column-end:2;
+  font-size:30px;
+  display:grid;
+  align-content: center;
+}
+
+.leadOptions{
+  grid-row-start: 12;
+  grid-row-end: 13;
+  display:grid;
+  grid-template-columns: 10% auto auto 10%;
+}
+.addLeader {
+  grid-column-start:2;
+  grid-column-end:3;
+  display:grid;
+  align-content: center;
+  padding-left:3%;
+}
+
+.addVice{
+  grid-column-start:3;
+  grid-column-end:4;
+  display:grid;
+  align-content: center;
+  padding-left:3%;
+}
+
+.create{
+  grid-row-start: 14;
+  grid-row-end: 15;
+  display:grid;
+  grid-template-columns: 30% auto 30%;
+}
+
+.toBeSubmitted{
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.bck{
+  font-size:30px;
+  display:grid;
+  align-content: center;
+
+}
+
+.makePost{
+  grid-column-start:2;
+  grid-column-end:3;
+  display:grid;
+  grid-template-rows: 7% 10% 5% 5% auto 7%;
+}
+
+.clubMsg{
+  grid-column-start: 1;
+  grid-column-end:17;
+  grid-row-start: 22;
+  grid-row-end:23;
+  font-size:40px;
+  display:block;
+
+}
+
+.eventOpt{
+  grid-row-start:5;
+  grid-row-end: 6;
+  display:grid;
+  grid-template-rows: 10% 5% 10% 5% auto;
+}
+
+
+.postTitle{
+  display:grid;
+  grid-template-columns: 15% 20% 50% 15%;
+}
+
+.clubPffp{
+  grid-column-start: 2;
+  grid-column-end:3;
+}
+
+.clbName{
+  grid-column-start:2;
+  grid-column-start:3;
+  font-size:40px;
+  display:grid;
+  align-content: center;
+  text-align: center;
+}
+
+.lne{
+  grid-row-start:3;
+  grid-row-end: 4;
+  display:grid;
+  align-content: center;
+}
+.textInput{
+  grid-row-start:5;
+  grid-row-end: 6;
+}
+.postInput{
+  width:100%;
+  height:100%;
+  align-content: flex-start;
+  padding:3%;
+  font-size:30px;
+  border:none;
+  border-bottom: solid;
+  border-color:grey;
+}
+.diffIcons{
+  grid-row-start:6;
+  grid-row-end: 7;
+  display:grid;
+  grid-template-columns: 8% 8% 8% 8% auto 20%;
+  grid-column-gap: 2%;
+  align-content: center;
+}
+.restart{
+  grid-column-start: 1;
+  grid-column-end:2;
+}
+.dIcons{
+  height:100%;
+  align-content: center;
+}
+
+.pst{
+  grid-column-start: 6;
+  grid-column-end: 7;
+}
+
+.selectOpt{
+  display: grid;
+  grid-template-columns: 50% 50%;
+
+}
+
+.nextToSlct{
+  grid-column-start: 1;
+  grid-column-end:2;
+}
+
+.ttle{
+  grid-row-start:1;
+  grid-row-end: 2;
+}
+
+.setting{
+  grid-row-start:3;
+  grid-row-end: 4;
+  display:grid;
+  grid-template-columns: 49% 49%;
+  grid-column-gap: 2%;
+}
+
+.evtLocation{
+  grid-column-start:1;
+  grid-column-end: 2;
+}
+
+.evtTime{
+  grid-column-start:2;
+  grid-column-end:3;
+}
+
+.evtdetail{
+  grid-row-start:5;
+  grid-row-end: 6;
+  width:100%;
+  height:100%;
+  font-size:30px;
+}
+
+.evtTitle{
+  width:100%;
+  height:100%;
+  font-size:30px;
+}
+.headMsg{
+  padding-bottom:3%;
+}
+.msg{
+  width:100%;
+  font-size:30px;
+  border-style: solid;
+  border-width:15px;
+  border-color:#8ab2f2;
+  padding:2%;
+  margin-bottom:2%;
+
+}

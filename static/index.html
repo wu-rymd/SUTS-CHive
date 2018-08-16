@@ -156,6 +156,35 @@
             <i class="fa fa-chevron-down fa-2x"></i>
           </div>
         </div>
+
+
+	<div class="screen high-school-search">
+          <div class="swipe" id="one-to-zero" ng-click="scrollTo('.splash')">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </div>
+          <div class="container-search-logo">
+            <div class="search" id="search-high-school">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="searchbar-high-school" placeholder="Search for your high school...">
+                <div class="input-group-append" ng-click="populateHighSchools()">
+                  <span class="input-group-text"><i id="icon" class="fa fa-search"> </i></span>
+                </div>
+              </div>
+            </div>
+            <div class="logo">
+              <img src="img/logo.png">
+            </div>
+          </div>
+          <div class="container-results" id="highSchoolResults" >
+            <div ng-repeat="school in highSchools">
+              <div class="card card-block card-outline-primary" >
+		<p class="card-text" > <b>{{ school.name }}</b> <br> {{ school.address }} &nbsp;
+                  <span class="btn btn-outline-primary float-right" ng-click="highSchoolSelect(school.id)">Select</span>
+		</p>
+              </div>
+            </div>
+          </div>
+        </div>
 	
 	
         <div class="screen club-search">

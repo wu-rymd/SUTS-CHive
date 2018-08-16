@@ -2,7 +2,26 @@
 /* All decorations are independent */
 
 body {
-    margin: 20px;
+    margin: 0;
+}
+
+#screen {
+    height: 100vh;
+    width: 100vw;
+    
+    display: grid;
+    grid-template-columns: 1% 98% 1%;
+    grid-template-rows: 1% 90% 1% 7% 1%;
+}
+
+#scrollable {
+    grid-column-start: 2;
+    grid-column-end: 3;
+
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    overflow: scroll;
 }
 
 .container-fluid {
@@ -19,6 +38,10 @@ body {
 
 .container-fluid:last-of-type {
     padding: 15px;
+}
+
+.shopinfo {
+    background-color: #F8F8F8;
 }
 
 
@@ -77,4 +100,88 @@ h1, p {
 #shopmsg {
     font-size: 25px;
     color: rgb(128,128,128);
+}
+
+
+
+
+#footer {
+    border-top: 1px solid gray;
+    padding-top: 5px;
+    
+    grid-column-start: 2;
+    grid-column-end: 3;
+
+    grid-row-start: 4;
+    grid-row-end: 5;
+
+    display: grid;
+
+    justify-items: center;
+
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 20% 8% 72%;
+}
+
+#active-bar {
+    grid-column-start: 4;
+    grid-column-end: 5;
+
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+#dot4 {
+    height: 19px;
+    width: 19px;
+    background-color: #599adb;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#toNewsFeed {
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+#toCalendar {
+    grid-column-start: 2;
+    grid-column-end: 3;
+
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+
+#toSearch {
+    grid-column-start: 3;
+    grid-column-end: 4;
+
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+#toShop {
+    grid-column-start: 4;
+    grid-column-end: 5;
+
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+#toAccount {
+    grid-column-start: 5;
+    grid-column-end: 6;
+
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+div > a > img {
+    height: 100%;
 }

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> ClubHub | QuizBowl Club Page </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular.min.js" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js" type="text/javascript"></script> -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/clubpage-style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,500i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese" rel="stylesheet">
+    <script src="vendor/jquery-3.3.1.js"></script>
+    <script src="vendor/bootstrap.js"> </script>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
+    <link rel="manifest" href="icon/site.webmanifest">
+    <link rel="mask-icon" href="icon/safari-pinned-tab.svg" color="#0029a3">
+    <link rel="shortcut icon" href="icon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-config" content="icon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+  <body>
+    <script src="script.js"> </script>
+    <div ng-app="chiveApp">
+      <div ng-controller="chiveCtrl">
+        <div class="screen clubhubApp">
+          <div class="clubProfile">
+            <div class="sideLogo"><img src="img/logo.png" style="width:100%;"></div>
+            <div class="stateCategory" style="border-color:#8ab2f2; color:#8ab2f2">
+              Games
+            </div>
+            <div class="clubPfp">
+              <img src="img/qBowl.png" style="width:80%;">
+            </div>
+            <div class="line1">
+              <img src="img/line.png" style="width:100%;">
+            </div>
+            <div class="line2">
+              <img src="img/line.png" style="width:100%;">
+            </div>
+            <button type = "button" class="btn btn-outline-primary button-blk subClk" style="font-size:30px;height:100%;">
+              <div class="subCheck">
+                <img src="img/check.png" style="width:20%;float:left;padding-left:6%;align-content:center;">
+              </div>
+              <div class="subClk"> Followed </div>
+            </button>
+            <div class="createDate">
+              Created 2018
+            </div>
+            <div class="clubName">
+              QuizBowl
+            </div>
+            <div class="highSchool">
+              Club at Stuy Science High School
+            </div>
+            <a href="faqPage" class="faqbtn">
+              <button type = "button" class="btn btn-outline-primary button-blk faqtrans" style="font-size:30px;">
+                FAQ Of Our Club
+              </button>
+            </a>
+            <div class="clubDes">
+              The club aims to be able to have a productive battle of knowledge between our
+              club members in all fields that that consider to know relatively well. High school
+              Jeopardy just for you!
+
+            </div>
+            <div class="clubRoom">
+              Location &amp; Regular Meets
+            </div>
+            <div class="rmPic"> <img src="img/pin.png" style="width:60%;"></div>
+            <div class="actualRm"> Room 202 - Wed <br> 11th Period </div>
+            <div class="photos">Photos</div>
+            <div class="leader">Club Lead Positions</div>
+            <div class="pres"> <img src="img/pres.png" style="width:100%;"></div>
+            <div class="vicepres"><img src="img/vicepres.png" style="width:140%;"></div>
+            <div class="sample"><img src="img/qComp.jpg" style="width:100%;"></div>
+            <div class="members">Members (20)</div>
+
+
+            <div class="clubMsg">
+              <div class="headMsg">Messages &amp; Posts </div>
+              <div class="msg">
+                <div><div style="padding-bottom:1%;"><strong>QuizBowl Club</strong></div>
+                Tomorrow's theme for our QuizBowl is Biology topics. If your good at them (or bad at them), study now
+                because it's your time to shine! <br></div>
+                <div style="text-align:right;padding-top:1%;">-Tuesday, 3/15 2:30PM-</div>
+
+              </div>
+              <div class="msg">
+                <div><div style="padding-bottom:1%;"><strong>QuizBowl Club</strong></div>
+                Hey guys! Just want to remind you that tomorrow there isn't a ROOM MEETING, however, we'll be at the
+                Club Food Fair tomorrow. To all the members who have volunteered to help make food to support funds for our club,
+                thank you so much!
+                 <br></div>
+                <div style="text-align:right;padding-top:1%;">-Thursday, 3/10 3:30PM-</div>
+              </div>
+              <div class="msg">
+                <div><div style="padding-bottom:1%;"><strong>QuizBowl Club</strong></div>
+                Hey! The next week we meet our topic will be specifically Metoerology so we prepared weather forecasters!
+                 <br></div>
+                <div style="text-align:right;padding-top:1%;">-Thursday, 2/28 1:30PM-</div>
+              </div>
+              <div class="msg">
+                <div><div style="padding-bottom:1%;"><strong>QuizBowl Club</strong></div>
+                Hey! We are QuizBowl! As we realized more and more students are using this game, we decided to make our club, hence
+                this club is for people like you that know/want to know random trivia and compete with each other to win!<br>
+                We therefore scheduled our first meet on next Wednesday after tenth, so be sure to make it!
+                 <br></div>
+                <div style="text-align:right;padding-top:1%;">-Thursday, 2/18 1:30PM-</div>
+              </div>
+            </div>
+
+          </div>
+          <div class="active-bar">
+            <span class="dot4"></span>
+          </div>
+          <div class="nav-bar">
+            <a class="toNewsfd" href="newsfeed.html"><img src="img/toNewsFd.png" style="height:100%;"></a>
+
+            <a class="toCalend" href="calendar.html"><img src="img/toCalend.png" style="height:100%;"></a>
+            <a class="toSearch" href="search.html"><img src="img/toSearch.png" style="height:100%;"></a>
+            <a class="toShop" href="shop.html"><img src="img/shop.png" style="height:100%;"></a>
+            <a class="toAcc" href="account.html" ><img src="img/toAcc.png" style="height:100%;"></a>
+          </div>
+	</div>
+    </div>
+  </body>
+</html>

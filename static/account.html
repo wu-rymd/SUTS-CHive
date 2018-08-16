@@ -31,40 +31,60 @@
     <div ng-app="accountApp">
       <div ng-controller="accountControl">
 
-	
-	<div class="container-fluid greetUser">
-	  <p id="greetUser"> </p>
-	  <div id="logout">
-	    <span class="btn btn-outline-danger float-right" ng-show="showLogout" ng-click="logout()">Log out</span>
-	  </div>
-	  <img id="logo" src="img/logo.png" onclick="window.location.href=''">
-	</div>
+	<div id="screen">
+	  <div id="scrollable">
+	    
+	    <div class="container-fluid greetUser">
+	      <p id="greetUser"> </p>
+	      <div id="logout">
+		<span class="btn btn-outline-danger float-right" ng-show="showLogout" ng-click="logout()">Log out</span>
+	      </div>
+	      <img id="logo" src="img/logo.png" onclick="window.location.href=''">
+	    </div>
 
-	<div class="container-fluid userInfo">
-	  <p id="fullName"></p>
-	  <p id="username"></p>
-	  <p id="schoolName"></p>
-	  <p id="email"></p>
-	  <p id="createdOn"></p>
-	</div>
+	    <div class="container-fluid userInfo">
+	      <p id="fullName"></p>
+	      <p id="username"></p>
+	      <p id="schoolName"></p>
+	      <p id="email"></p>
+	      <p id="createdOn"></p>
+	    </div>
 
-	<p> <b>You are currently subscribed to the following clubs:</b> </p>
+	    <p> <b>You are currently subscribed to the following clubs:</b> </p>
 
-	
-	<div class="container-fluid clubList">
-	  <div ng-repeat="club in clubs">
-	    <div class="card card-block card-outline-primary" >
-	      <p class="card-text" > <b>{{ club.name }}</b>
-		<span class="btn btn-outline-danger float-right" ng-click="unsubscribe(loggedID, club.id)">Unsubscribe</span>
-	      </p>
-            </div>
-	  </div>
+	    
+	    <div class="container-fluid clubList">
+	      <div ng-repeat="club in clubs">
+		<a href="{{club.link}}">
+		<div class="card card-block card-outline-primary">
+		  <p class="card-text"> <b>{{ club.name }}</b>
+		    <span class="btn btn-outline-danger float-right" ng-click="unsubscribe(loggedID, club.id)">Unsubscribe</span>
+		  </p>
+		</div>
+		</a>
+	      </div>
+	      
+	    </div> <!-- end list of clubs container -->
+
+	    <button class="createClub btn btn-primary" onclick="window.location.href='/static/createClub.html'">Create a club!</button>
+
+	  </div> <!-- end scrollable -->
+
+
 	  
-	</div> <!-- end list of clubs container -->
+	  <div id="footer">
+	    <div id="active-bar">
+	      <span id="dot4"></span>
+	    </div>
 
-	<button class="createClub btn btn-primary" onclick="window.location.href='/static/createClub.html'">Create a club!</button>
-	<!-- TODO navigation bar -->
-
+	    <a id="toNewsFeed" href="newsfeed.html"><img src="img/toNewsFd.png"></a>
+	    <a id="toCalendar" href="calendar.html"><img src="img/toCalend.png"></a>
+	    <a id="toSearch" href="search.html"><img src="img/toSearch.png"></a>
+	    <a id="toShop" href="shop.html"><img src="img/shop.png"></a>
+	    <a id="toAccount" href="account.html"><img src="img/toAcc.png"></a>
+	  </div> <!-- end footer -->
+	  
+	</div> <!-- end screen -->
 
       </div> <!-- end Angular app -->
     </div> <!-- end Angular controller -->

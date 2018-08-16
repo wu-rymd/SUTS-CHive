@@ -4,11 +4,18 @@
 
 
 var app = angular.module('accountApp', []);
-app.controller('accountControl', function($scope, $window) {
+app.controller('accountControl', function($scope, $location) {
     $scope.loggedID;
     $scope.loggedSchoolId;
     $scope.showLogout = true;
     $scope.clubs = [];
+
+    $scope.clubs.push({name: "American Sign Language Club", link: "clubPage_ALS.html"});
+    $scope.clubs.push({name: "Youths About Business Club", link: "clubPage_business.html"});
+    $scope.clubs.push({name: "Mental Health Association", link: "clubPage_MHA.html"});
+    $scope.clubs.push({name: "QuizBowl Club", link: "clubPage_QuizBowl.html"});
+    $scope.clubs.push({name: "World Culture Club", link: "clubPage_WorldCulture.html"});
+
 
     $.getJSON('http://localhost:5000/getLogin', function(data) {
 
@@ -162,7 +169,7 @@ app.controller('accountControl', function($scope, $window) {
 	$scope.showLogout = false;
 	
     }
-    
+
 }); // end Angular controller
 
 
