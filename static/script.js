@@ -39,7 +39,7 @@ app.controller('chiveCtrl', function($scope, $window, $timeout, $http, $location
 	console.log('TODO');
 	$('.highSchoolResults').fadeOut(500);
 	$scope.highSchools = [];
-	$.getJSON('http://localhost:5000/schools', function(data) {
+	$.getJSON('/schools', function(data) {
 	    for (var i = 0; i < data.length; i++) {
 		console.log(data[i]);
 		$scope.highSchools.push({name: data[i].name, address: data[i].address, id: i});
@@ -61,7 +61,7 @@ app.controller('chiveCtrl', function($scope, $window, $timeout, $http, $location
 	var searchVal = $("#searchbar-club").val();
 	// show that we can get the high school id
 	console.log($scope.currentHighSchoolID);
-	$.getJSON('http://localhost:5000/club?school_id=1', function(data) {
+	$.getJSON('/club?school_id=1', function(data) {
 	    for (var i = 0; i < data.length; i++) {
 		console.log(data[i]);
 		if (data[i].school_id === 1) {
@@ -99,7 +99,7 @@ app.controller('chiveCtrl', function($scope, $window, $timeout, $http, $location
     
     //$scope.populateFeed = function(userID) {
     //$scope.feed = [];
-    //$.getJSON('http://localhost:5000/')
+    //$.getJSON('/')
     //}
 
     $scope.successLogin = function(username){
