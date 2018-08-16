@@ -162,7 +162,7 @@ app.controller('accountControl', function($scope, $location) {
 
 	    success: function() {
 		$scope.loggedIn = false;
-		$window.location.href = 'index.html';
+		$window.location.href = '/static/index.html';
 	    },
 	});
 
