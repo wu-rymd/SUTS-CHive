@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html>
-  
+
   <head>
     <title> ClubHub | Create Club </title>
-    <script src="vendor/angular.js"></script>
+    <script src="/static/vendor/angular.js"></script>
     <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular.min.js" type="text/javascript"></script>
 	 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js" type="text/javascript"></script> -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/font-awesome.css">
-    <link rel="stylesheet" href="css/createClub-style.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.css">
+    <link rel="stylesheet" href="/static/css/createClub-style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:500,500i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese" rel="stylesheet">
-    <script src="vendor/jquery-3.3.1.js"></script>
-    <script src="vendor/bootstrap.js"> </script>
+    <script src="/static/vendor/jquery-3.3.1.js"></script>
+    <script src="/static/vendor/bootstrap.js"> </script>
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="512x512"  href="icon/android-chrome-512x512.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="icon/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
-    <link rel="manifest" href="icon/site.webmanifest">
-    <link rel="mask-icon" href="icon/safari-pinned-tab.svg" color="#0029a3">
-    <link rel="shortcut icon" href="icon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="512x512"  href="/static/icon/android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/static/icon/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/icon/favicon-16x16.png">
+    <link rel="manifest" href="/static/icon/site.webmanifest">
+    <link rel="mask-icon" href="/static/icon/safari-pinned-tab.svg" color="#0029a3">
+    <link rel="shortcut icon" href="/static/icon/favicon.ico">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-config" content="icon/browserconfig.xml">
+    <meta name="msapplication-config" content="/static/icon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
   </head>
-  
+
   <body>
 
-    
+
     <div ng-app="createClubApp">
       <div ng-controller="createClubControl">
 
@@ -36,7 +36,7 @@
 	  <div id="container">
 
 	    <div id="logo">
-	      <img src="img/logo.png">
+	      <img src="/static/img/logo.png">
 	    </div>
 
 	    <p id="message" ng-bind="message"></p>
@@ -45,12 +45,12 @@
 	      <input type="text" name="clubName" placeholder="Club name" class="form-control input-lg" ng-model="clubName">
 	    </div>
 
-	    <div id="descriptionField" class="input-group input-group-lg"> 
+	    <div id="descriptionField" class="input-group input-group-lg">
 	      <input type="text" name="description" placeholder="Short description" class="form-control input-lg" ng-model="description">
 	    </div>
 
 	    <div id="categoryField">
-	      
+
 	      <select id="category" ng-model="category">
 		<option value="" selected disabled> Choose a category... </option>
 		<option value="Athletics"> Athletics </option>
@@ -65,20 +65,20 @@
 		<option value="Music/Arts"> Music/Arts </option>
 		<option value="Publications"> Publications </option>
 		<option value="Science"> Science </option>
-		<option value="Youth Activism"> Youth Activism </option> 
+		<option value="Youth Activism"> Youth Activism </option>
 	      </select>
 
 	    </div>
 
-	    
+
 	    <div id="locationField" class="input-group input-group-lg">
 	      <input type="text" name="location" placeholder="Usual meeting place" class="form-control input-lg" ng-model="location">
 	    </div>
-	    
+
 	    <div id="timeField" class="input-group input-group-lg">
 	      <input type="text" name="time" placeholder="Usual meeting time" class="form-control input-lg" ng-model="usualTime">
 	    </div>
-	    
+
 
 	    <div id="button1" class="btn-group-vertical">
 	      <div class="btn btn-outline-primary button-blk button1" ng-click="createClub(clubName, description, category, location, usualTime)"> Submit </div>
@@ -89,7 +89,7 @@
 	      <div class="btn btn-outline-primary button-blk button2" onclick="window.location.href='/static/account.html'"> Back </div>
 	    </div>
 
-	    
+
 	  </div> <!-- end content container -->
 	</div> <!-- end screen div -->
 
@@ -97,10 +97,10 @@
       </div> <!-- end Angular app -->
     </div> <!-- end Angular controller -->
 
-    
+
 
     <script src="script.js"> </script>
     <script src="createClub-script.js"> </script>
   </body>
-  
+
 </html>
