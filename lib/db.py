@@ -60,7 +60,10 @@ class Club(Base):
 class Position(Base):
     __tablename__ = 'position'
     id = Column(Integer, primary_key=True)
-    position_type = Column(String(100), nullable=False, unique=True)
+    position_type = Column(String(100), nullable=False)
+    # this was being weird
+    # uncomment when fixed
+    #position_type = Column(String(100), nullable=False, unique=True)
     created_on = Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
 
 class UserClubPositionMapping(Base):
