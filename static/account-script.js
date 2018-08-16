@@ -88,10 +88,10 @@ app.controller('accountControl', function($scope, $location) {
 		.done( function(data) {
 
 
-		    
-		    if (clubIDs.length == 0) {
-			$('.clubList').html("<b> Uh oh! </b>You don't seem to be following any clubs! <span class='btn btn-outline-success float-right' ng-click=''>Discover</span>");
-		    }
+		    // comment for demo
+		    // if (clubIDs.length == 0) {
+		    // 	$('.clubList').html("<b> Uh oh! </b>You don't seem to be following any clubs! <span class='btn btn-outline-success float-right' ng-click=''>Discover</span>");
+		    // }
 
 		    
 		    $.getJSON('/club?school_id=' + $scope.loggedSchoolId, function(data) {
