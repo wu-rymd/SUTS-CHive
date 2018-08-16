@@ -105,7 +105,7 @@ app.controller('chiveCtrl', function($scope, $window, $timeout, $http, $location
     $scope.successLogin = function(username){
 
 
-	$.getJSON('http://localhost:5000/user', function(data) {
+	$.getJSON('/user', function(data) {
 
 	    for (var i = 0; i < data.length; i++) {
 
@@ -118,7 +118,7 @@ app.controller('chiveCtrl', function($scope, $window, $timeout, $http, $location
 
 		    // POST all of logged in user's info -> /set
 		    $.ajax({
-			url: 'http://localhost:5000/setLogin',
+			url: '/setLogin',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify({
@@ -137,7 +137,7 @@ app.controller('chiveCtrl', function($scope, $window, $timeout, $http, $location
 
 
 			    $timeout(function() {
-				$.getJSON('http://localhost:5000/getLogin', function(data) {
+				$.getJSON('/getLogin', function(data) {
 
 				    if (data.loggedinID != undefined) {
 					$window.location.href = "account.html";
@@ -199,7 +199,7 @@ app.controller('chiveCtrl', function($scope, $window, $timeout, $http, $location
 	else {
 	    
 	    
-	    $.getJSON('http://localhost:5000/user', function(data) {
+	    $.getJSON('/user', function(data) {
 		console.log("request returned");
 		for (var i=0;i<data.length;i++){
 
@@ -224,7 +224,7 @@ app.controller('chiveCtrl', function($scope, $window, $timeout, $http, $location
 		
 
 		$.ajax({
-		    url: 'http://localhost:5000/user',
+		    url: '/user',
 		    type: 'POST',
 		    contentType: 'application/json',
 		    data: JSON.stringify({
