@@ -1,6 +1,6 @@
 // JavaScript file for Account Page
 // Dependencies: script.js
-// References logged in user_id (var loggedInID)
+// References logged in user_id (/getLogin)
 
 
 var app = angular.module('accountApp', []);
