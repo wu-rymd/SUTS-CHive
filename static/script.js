@@ -140,7 +140,7 @@ app.controller('chiveCtrl', function($scope, $window, $timeout, $http, $location
 				$.getJSON('/getLogin', function(data) {
 
 				    if (data.loggedinID != undefined) {
-					$window.location.href = "/static/account.html";
+					$window.location.href = "/static/newsfeed.html";
 				    }
 				});
 			    }, 200);
