@@ -853,7 +853,7 @@ select{
 .create{
   grid-row-start: 14;
   grid-row-end: 15;
-  display:grd;
+  display:grid;
   grid-template-columns: 30% auto 30%;
 }
 
