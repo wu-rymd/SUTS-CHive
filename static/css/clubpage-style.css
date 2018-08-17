@@ -853,7 +853,7 @@ select{
 .create{
   grid-row-start: 14;
   grid-row-end: 15;
-  display:grid;
+  display:grd;
   grid-template-columns: 30% auto 30%;
 }
 
@@ -1014,4 +1014,20 @@ select{
   padding:2%;
   margin-bottom:2%;
 
+}
+
+.clubDes {
+    padding-bottom: 5px;
+    border-bottom: 5px solid lightgray;
+}
+
+
+.headMsg {
+    padding-top: 25px;
+    border-top: 5px solid lightgray;
+}
+
+
+.clubName, .clubRoom, .photos, .leader, .members {
+    font-weight: bold;
 }

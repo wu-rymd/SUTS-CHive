@@ -96,6 +96,8 @@ app.controller('accountControl', function($scope, $location) {
 		    
 		    $.getJSON('/club?school_id=' + $scope.loggedSchoolId, function(data) {
 
+
+			
 			for (var i = 0; i < clubIDs.length; i++) {
 			    for (var j = 0; j < data.length; j++) {
 				if ( data[j].id == clubIDs[i] ) {
