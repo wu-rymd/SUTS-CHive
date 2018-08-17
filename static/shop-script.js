@@ -11,43 +11,26 @@ app.controller('shopControl', function($scope, $window) {
 
     
     $.getJSON('/getLogin', function(data) {
+	
+    	$('#greetUser').html("<b> Hello, " + data.loggedinFirstName + "! </b>");
 
-	try {
-	    if (data.loggedinID != undefined) {
+	$('#fullName').html("Your name is <b>" + data.loggedinFirstName + " " + data.loggedinLastName + "</b>");
+	$('#username').html("Your username is <b>" + data.loggedinUsername + "</b>");
+	$('#email').html("Your e-mail is <pre>" + data.loggedinEmail + "</pre>");
+	$('#createdOn').html("Your account was created on <pre>" + data.loggedinCreatedOn + "</pre>");
 
-		$.getJSON('/schools', function(schoolData) {
-		    for (var i = 0; i < schoolData.length; i++) {
-			if (schoolData[i].id == data.loggedinSchoolId) {
-			    $scope.loggedSchoolId = schoolData[i].id;
-			    $('#schoolName').html("You attend <b>" + schoolData[i].name + "</b>");
-			    break;
-			}
-		    }
-		});
+	$scope.loggedID = data.loggedinID;
+	$scope.showLogout = true;
 
-    		$('#greetUser').html("<b> Hello, " + data.loggedinFirstName + "! </b>");
-
-	    }
-
-	    else {
-    		$('#greetUser').html("You are not signed in. Contact an administrator for help. <br> &mdash; ClubHub Team");
-		$('#greetUser').parent().nextAll().remove();
-		return;
-	    }
-	}
-
-	catch(err) {
-    	    $('#greetUser').html("You are not signed in. Contact an administrator for help. <br> &mdash; ClubHub Team");
+	
+    })
+    
+	.fail ( function() {
+	    $('#greetUser').html("You are not signed in. Contact an administrator for help. <br> &mdash; ClubHub Team");
 	    $('#greetUser').parent().nextAll().remove();
-
-    	    console.log(err.message);
 	    return;
-	}
-
-    });
-
-
-
+	});
+    
 
     $scope.logout = function() {
 
@@ -80,7 +63,7 @@ app.controller('shopControl', function($scope, $window) {
 
     $scope.shops.push({ name: "Custom Ink - Get $5 off your $100 order!",
 		        description: "Custom Ink is the t-shirt printing expert for your team, school, company, or any occasion.",
-		        link: "https://www.customink.com?referral=af469e1211",
+		        link: "/static/img/ci.html",
 			image: "/static/img/custominklogo.jpg",
 		      });
     $scope.shops.push({ name: "Cafepress - 15% off your entire order!",

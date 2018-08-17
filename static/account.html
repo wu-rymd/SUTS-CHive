@@ -56,7 +56,7 @@
 	    <div class="container-fluid clubList">
 	      <div ng-repeat="club in clubs">
 		<a href="{{club.link}}">
-		<div class="card card-block card-outline-primary">
+		<div class="card card-block card-outline-primary" style="border-color: {{club.color}}; border-width: 3px;">
 		  <p class="card-text"> <b>{{ club.name }}</b>
 		    <span class="btn btn-outline-danger float-right" ng-click="unsubscribe(loggedID, club.id)">Unsubscribe</span>
 		  </p>

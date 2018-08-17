@@ -11,29 +11,17 @@ app.controller('calendarControl', function($scope, $window) {
     
     $.getJSON('/getLogin', function(data) {
 
-	try {
-	    if (data.loggedinID != undefined) {
+    	$('#greetUser').html("<b> Hello, " + data.loggedinFirstName + "! </b>");
+    })
 
-    		$('#greetUser').html("<b> Hello, " + data.loggedinFirstName + "! </b>");
+	.fail( function() {
 
-	    }
-
-	    else {
-    		$('#greetUser').html("You are not signed in. Contact an administrator for help. <br> &mdash; ClubHub Team");
-		$('#greetUser').parent().nextAll().remove();
-		return;
-	    }
-	}
-
-	catch(err) {
     	    $('#greetUser').html("You are not signed in. Contact an administrator for help. <br> &mdash; ClubHub Team");
 	    $('#greetUser').parent().nextAll().remove();
 
     	    console.log(err.message);
 	    return;
-	}
-
-    });
+	});
 
 
 

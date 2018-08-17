@@ -10,17 +10,15 @@ app.controller('accountControl', function($scope, $location) {
     $scope.showLogout = true;
     $scope.clubs = [];
 
-    $scope.clubs.push({name: "American Sign Language Club", link: "clubPage_ALS.html"});
-    $scope.clubs.push({name: "Youths About Business Club", link: "clubPage_business.html"});
-    $scope.clubs.push({name: "Mental Health Association", link: "clubPage_MHA.html"});
-    $scope.clubs.push({name: "QuizBowl Club", link: "clubPage_QuizBowl.html"});
-    $scope.clubs.push({name: "World Culture Club", link: "clubPage_WorldCulture.html"});
+    $scope.clubs.push({name: "American Sign Language Club", link: "clubPage_ALS.html", color: "#8c6aa0"});
+    $scope.clubs.push({name: "Youths About Business Club", link: "clubPage_business.html", color: "#8de09d"});
+    $scope.clubs.push({name: "Mental Health Association", link: "clubPage_MHA.html", color: "#f78374"});
+    $scope.clubs.push({name: "QuizBowl Club", link: "clubPage_QuizBowl.html", color: "#8ab2f2"});
+    $scope.clubs.push({name: "World Culture Club", link: "clubPage_WorldCulture.html", color: "gold"});
 
 
     $.getJSON('/getLogin', function(data) {
 
-	
-	try {
 	    if (data.loggedinID != undefined) {
 
 		$.getJSON('/schools', function(schoolData) {
@@ -31,17 +29,29 @@ app.controller('accountControl', function($scope, $location) {
 			    break;
 			}
 		    }
-		});
+		})
+		    .done( function() {
+
+
+    			$('#greetUser').html("<b> Hello, " + data.loggedinFirstName + "! </b>");
+
+			$('#fullName').html("Your name is <b>" + data.loggedinFirstName + " " + data.loggedinLastName + "</b>");
+			$('#username').html("Your username is <b>" + data.loggedinUsername + "</b>");
+			$('#email').html("Your e-mail is <pre>" + data.loggedinEmail + "</pre>");
+			$('#createdOn').html("Your account was created on <pre>" + data.loggedinCreatedOn + "</pre>");
+
+			$scope.loggedID = data.loggedinID;
+			$scope.showLogout = true;
+
+			
+		    })
 		
-    		$('#greetUser').html("<b> Hello, " + data.loggedinFirstName + "! </b>");
-
-		$('#fullName').html("Your name is <b>" + data.loggedinFirstName + " " + data.loggedinLastName + "</b>");
-		$('#username').html("Your username is <b>" + data.loggedinUsername + "</b>");
-		$('#email').html("Your e-mail is <pre>" + data.loggedinEmail + "</pre>");
-		$('#createdOn').html("Your account was created on <pre>" + data.loggedinCreatedOn + "</pre>");
-
-		$scope.loggedID = data.loggedinID;
-		$scope.showLogout = true;
+		    .fail ( function() {
+			$('#greetUser').html("You are not signed in. Contact an administrator for help. <br> &mdash; ClubHub Team");
+			$('#greetUser').parent().nextAll().remove();
+			return;
+		    });
+		
 
 
 	    }
@@ -51,15 +61,6 @@ app.controller('accountControl', function($scope, $location) {
 		$('#greetUser').parent().nextAll().remove();
 		return;
 	    }
-	}
-
-	catch(err) {
-    	    $('#greetUser').html("You are not signed in. Contact an administrator for help. <br> &mdash; ClubHub Team");
-	    $('#greetUser').parent().nextAll().remove();
-	    
-    	    console.log(err.message);
-	    return;
-	}
 	
     })
 	.done( function(data) {
