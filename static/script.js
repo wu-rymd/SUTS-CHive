@@ -16,6 +16,34 @@ app.controller('chiveCtrl', function($scope, $window, $timeout, $http, $location
     loggedInID = $scope.loggedID;
 
 
+
+
+
+
+
+    $.ajax({
+	url: '/user',
+	type: 'POST',
+	contentType: 'application/json',
+	data: JSON.stringify({
+	    first_name: "RAYMOND",
+	    last_name: "WU",
+	    username: "rwu123",
+	    email: "foo@bar.com",
+	    schoolName: "Stuy Science High School",
+	    schoolAddress: "123 Park Lane",
+	}),
+	crossDomain: true,
+
+    });
+
+
+
+
+
+
+    
+
     $scope.scrollTo = function(selectorString) {
 	
 	
