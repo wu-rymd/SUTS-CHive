@@ -4,7 +4,7 @@
     <title> ClubHub | Mental Health Association Club Page </title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
     <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular.min.js" type="text/javascript"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js" type="text/javascript"></script> -->
+	 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js" type="text/javascript"></script> -->
     <link rel="stylesheet" href="/static/css/bootstrap.css">
     <link rel="stylesheet" href="/static/css/font-awesome.css">
     <link rel="stylesheet" href="/static/css/clubpage-style.css">
@@ -26,93 +26,106 @@
     <script src="script.js"> </script>
     <div ng-app="chiveApp">
       <div ng-controller="chiveCtrl">
-        <div class="screen clubhubApp">
-          <div class="clubProfile">
-            <div class="sideLogo"><img src="/static/img/logo.png" style="width:100%;"></div>
-            <div class="stateCategory" style="color:#f78374; border-color:#f78374;">
-              Youth Activism
-            </div>
-            <div class="clubPfp">
-              <img src="/static/img/mentalHealth.jpg" style="width:80%;">
-            </div>
-            <div class="addMembers">
-              <button type = "button" class="btn btn-outline-primary button-blk subClk" style="color:black; border-color: black;font-size:30px;height:100%;">
-                + Add Members
-            </div>
-            <div class="line1">
-              <img src="/static/img/line.png" style="width:100%;">
-            </div>
-            <div class="line2">
-              <img src="/static/img/line.png" style="width:100%;">
-            </div>
-            <button type = "button" class="btn btn-outline-primary button-blk subClk" style="font-size:30px;height:100%;">
-              <div class="subCheck">
-                <img src="/static/img/check.png" style="width:20%;float:left;padding-left:6%;align-content:center;">
-              </div>
-              <div class="subClk" >Admin</div>
-              <div class="subClk" style="display:none;" ng-show="followClub"> Follow </div>
-              <div class="subClk" style="display:none;" ng-show="!followClub"> Followed </div>
-            </button>
-            <div class="createDate">
-              Created 2014
-            </div>
-            <div class="clubName">
-              Mental Health Association (MHA)
-            </div>
-            <div class="highSchool">
-              Club at Stuy Science High School
-            </div>
-            <a href="faqPage" class="faqbtn">
-              <button type = "button" class="btn btn-outline-primary button-blk faqtrans" style="border-color:#f78374;color:#f78374;font-size:30px;height:100%;">
-                FAQ Of Our Club
-              </button>
-            </a>
-            <div class="clubDes">
-              Our club's goal is to help people achieve mental and emotional wellbeing
-              with dignity and respect. We wish to remove the revolting stigma that surrounds mental illness
-              and promote mental wellness instead.
+	<div id="screen">
+          <div class="screen clubhubApp">
+            <div class="clubProfile">
+	      <div class="sideLogo"><img src="/static/img/logo.png" style="width:100%;"></div>
+	      <div class="stateCategory" style="color:#f78374; border-color:#f78374;">
+		Youth Activism
+	      </div>
+	      <div class="clubPfp">
+		<img src="/static/img/mentalHealth.jpg" style="width:80%;">
+	      </div>
+	      <div class="addMembers">
+		<button type = "button" class="btn btn-outline-primary button-blk subClk" style="color:black; border-color: black;font-size:30px;height:100%;">
+                  + Add Members
+	      </div>
+	      <div class="line1">
+		<img src="/static/img/line.png" style="width:100%;">
+	      </div>
+	      <div class="line2">
+		<img src="/static/img/line.png" style="width:100%;">
+	      </div>
+	      <button type = "button" class="btn btn-outline-primary button-blk subClk" style="font-size:30px;height:100%;">
+		<div class="subCheck">
+                  <img src="/static/img/check.png" style="width:20%;float:left;padding-left:6%;align-content:center;">
+		</div>
+		<div class="subClk" >Admin</div>
+		<div class="subClk" style="display:none;" ng-show="followClub"> Follow </div>
+		<div class="subClk" style="display:none;" ng-show="!followClub"> Followed </div>
+	      </button>
+	      <div class="createDate">
+		Created 2014
+	      </div>
+	      <div class="clubName">
+		Mental Health Association (MHA)
+	      </div>
+	      <div class="highSchool">
+		Club at Stuy Science High School
+	      </div>
+	      <a href="faqPage" class="faqbtn">
+		<button type = "button" class="btn btn-outline-primary button-blk faqtrans" style="border-color:#f78374;color:#f78374;font-size:30px;height:100%;">
+                  FAQ Of Our Club
+		</button>
+	      </a>
+	      <div class="clubDes">
+		Our club's goal is to help people achieve mental and emotional wellbeing
+		with dignity and respect. We wish to remove the revolting stigma that surrounds mental illness
+		and promote mental wellness instead.
 
-            </div>
-	    
-            <div class="clubRoom">
-              Location &amp; Regular Meets
-            </div>
-            <div class="rmPic"> <img src="/static/img/pin.png" style="width:60%;"></div>
-            <div class="actualRm"> Room 505 - Mon<br> 11th Period </div>
-            <div class="photos">Photos</div>
-            <div class="leader">Club Lead Positions</div>
-            <div class="pres"> <img src="/static/img/pres.png" style="width:100%;"></div>
-            <div class="vicepres"><img src="/static/img/vicepres.png" style="width:140%;"></div>
-            <div class="sample"></div>
-            <div class="members">Members (15)</div>
-            <a href="clubPost.html" class="createPost"> <img src="/static/img/pressCreate.png" style="width:200%;height:200%;"></a>
-            <div class="edit" >
-              <button type = "button" class="btn btn-outline-primary button-blk" style="color:#f78374;border-color:#f78374;font-size:30px;height:100%;">
-                Edit
-            </div>
-            <div class="clubMsg">
-              <div class="headMsg">Messages &amp; Posts </div>
-              <div class="msg" style="border-color:#f78374;">
-                <div><div style="padding-bottom:1%;"><strong>Mental Health Association</strong></div>
-                Hey! Welcome to our club page! Here, we will be keeping updates for you regularly on our club and
-                remind you of meetings and topics of discussion! Thanks for joining, the support is amazing! <br></div>
-                <div style="text-align:right;padding-top:1%;">-Tuesday, 3/19 4:30PM-</div>
+	      </div>
+	      
+	      <div class="clubRoom">
+		Location &amp; Regular Meets
+	      </div>
+	      <div class="rmPic"> <img src="/static/img/pin.png" style="width:60%;"></div>
+	      <div class="actualRm"> Room 505 - Mon<br> 11th Period </div>
+	      <div class="photos">Photos</div>
+	      <div class="leader">Club Lead Positions</div>
+	      <div class="pres"> <img src="/static/img/pres.png" style="width:100%;"></div>
+	      <div class="vicepres"><img src="/static/img/vicepres.png" style="width:140%;"></div>
+	      <div class="sample"><img src="/static/img/mentalHealthClub.jpg" style="width:100%;"></div>
+	      <div class="members">Members (15)</div>
+	      <div class="edit" >
+		<button type = "button" class="btn btn-outline-primary button-blk" style="color:#f78374;border-color:#f78374;font-size:30px;height:100%;">
+                  Edit
+	      </div>
+	      <div class="clubMsg">
+		<div class="headMsg">Messages &amp; Posts </div>
+		<div class="msg" style="border-color:#f78374;">
+                  <div><div style="padding-bottom:1%;"><strong>Mental Health Association</strong></div>
+                    Hey! Welcome to our club page! Here, we will be keeping updates for you regularly on our club and
+                    remind you of meetings and topics of discussion! Thanks for joining, the support is amazing! <br></div>
+                  <div style="text-align:right;padding-top:1%;">-Tuesday, 3/19 4:30PM-</div>
 
-              </div>
+		</div>
+	      </div>
             </div>
-          </div>
-          <div class="active-bar">
-            <span class="dot4"></span>
-          </div>
-          <div class="nav-bar">
-            <a class="toNewsfd" href="newsfeed.html"><img src="/static/img/toNewsFd.png" style="height:100%;"></a>
+	  </div>
 
-            <a class="toCalend" href="calendar.html"><img src="/static/img/toCalend.png" style="height:100%;"></a>
-            <a class="toSearch" href="search.html"><img src="/static/img/toSearch.png" style="height:100%;"></a>
-            <a class="toShop" href="shop.html"><img src="/static/img/shop.png" style="height:100%;"></a>
-            <a class="toAcc" href="account.html" ><img src="/static/img/toAcc.png" style="height:100%;"></a>
-          </div>
+
+
+
+
+	  <div id="footer">
+	    <div id="active-bar">
+	      <span id="dot4"></span>
+	    </div>
+
+	    <a id="toNewsFeed" href="newsfeed.html"><img src="/static/img/toNewsFd.png"></a>
+	    <a id="toCalendar" href="calendar.html"><img src="/static/img/toCalend.png"></a>
+	    <a id="toSearch" href="search.html"><img src="/static/img/toSearch.png"></a>
+	    <a id="toShop" href="shop.html"><img src="/static/img/shop.png"></a>
+	    <a id="toAccount" href="account.html"><img src="/static/img/toAcc.png"></a>
+	  </div> <!-- end footer -->
+
+
+
+
+
+
 	</div>
       </div>
+    </div>
   </body>
 </html>
