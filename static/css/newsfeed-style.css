@@ -186,6 +186,8 @@ h1 {
 
 
 #mainLogo {
+    grid-column: 2 / 3;
+    grid-row: 1 / 4;
     max-height: 100%;
     max-width: 100%;
 } 
