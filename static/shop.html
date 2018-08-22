@@ -53,10 +53,16 @@
 
 	    <div ng-repeat="shop in shops">
 
-	      <div class="card card-block card-outline-primary" style="background: url( {{shop.image}} ) no-repeat center center;">
-		<p class="card-text" > <b>{{ shop.name }}</b> <br> {{ shop.description }} &nbsp;
+	       <img src="{{shop.bigImage}}" style="width: 100%;">
+
+
+	       <!-- style="background: url( '{{shop.image}}' ) no-repeat center center; background-size: auto 100%;" -->
+	      <div class="card card-block card-outline-primary card-columns">
+		<p class="card-text"> <b>{{ shop.name }}</b> <br> {{ shop.description }} &nbsp;
 		  <span class="btn btn-outline-primary float-right" ng-click="goTo(shop.link)">Shop</span>
 		</p>
+
+		
               </div>
 
 

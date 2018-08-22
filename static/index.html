@@ -34,12 +34,12 @@
               <div class="logo" id="main-logo">
                 <img src="/static/img/logo.png">
               </div>
-              <p id="welcome-message" ng-bind="formmsg"> Welcome to ClubHub! </p>
+              <p id="welcome-message" ng-bind="formmsg"> <b>Welcome to ClubHub!</b></p>
             </div>
             <div class="bottom-half" ng-show="!loggedIn && !signingUp">
               <div id="buttons" >
-                <button id="signIn" type="button" ng-click="login()" class="btn btn-outline-primary">Sign in</button>
-                <button id="signUp" type="button" ng-click="signUp()" class="btn btn-outline-primary">Sign up</button>
+                <button id="signIn" type="button" ng-click="login()" class="btn btn-primary">Sign in</button>
+                <button id="signUp" type="button" ng-click="signUp()" class="btn btn-primary">Sign up</button>
               </div>
               <p id="swipe-message"> or search below! </p>
             </div>
@@ -65,8 +65,8 @@
     		  <div class="signin">
 
 
-    		<button id="signIn" type="button" class="btn btn-outline-primary button-blk" ng-click="successLogin(loggedUser)">Sign in</button> <br>
-		    <button  class="btn btn-outline-primary button-blk" onclick="window.location.href=''">Back</button>
+    		<button id="signIn" type="button" class="btn btn-primary button-blk" ng-click="successLogin(loggedUser)">Sign in</button> <br>
+		    <button  class="btn btn-primary button-blk" onclick="window.location.href=''">Back</button>
 
     		  </div>
 
@@ -140,8 +140,8 @@
 		  </div>-->
 
 
-		  <input id="buttons" class="btn btn-outline-primary button-blk" type="button" ng-click="register(regfirst, reglast, regusername, regemail, regpassword, regpassword2, regschool, regschooladdress)" value="Submit"> <br>
-		  <button class="btn btn-outline-primary button-blk" onclick="window.location.href=''">Back</button>
+		  <input id="buttons" class="btn btn-primary button-blk" type="button" ng-click="register(regfirst, reglast, regusername, regemail, regpassword, regpassword2, regschool, regschooladdress)" value="Submit"> <br>
+		  <button class="btn btn-primary button-blk" onclick="window.location.href=''">Back</button>
 		</div>
 
 	      </div>
@@ -153,7 +153,7 @@
 
 
           <div class="swipe" id="zero-to-one" ng-click="scrollTo('.high-school-search')">
-            <i class="fa fa-chevron-down fa-2x"></i>
+            <i class="fa fa-chevron-down fa-2x" style="color: #FFFFFF;"></i>
           </div>
         </div>
 
